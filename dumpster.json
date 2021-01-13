@@ -1,0 +1,97 @@
+[
+	{
+		"SearchTerms": ["GTX"],
+		"PriceMargin": 50,
+		"MinPrice": 0,
+		"MaxPrice": 30,
+		"categories": [128, 772, 29324001, 29659001],
+		"criteria": [
+			{
+				"tags": ["GPU", "Nvidia", "2x6", "gtx 580", "5xx", "dumpster"],
+				"Contains_AND": ["580"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 30
+			},
+			{
+				"tags": ["GPU", "Nvidia", "2x6", "gtx 570", "5xx", "dumpster"],
+				"Contains_AND": ["570"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 25
+			},
+			{
+				"tags": ["GPU", "Nvidia", "2x6", "gtx 560", "5xx", "dumpster"],
+				"Contains_AND": ["560"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 15
+			},
+			{
+				"tags": ["GPU", "Nvidia", "2x6", "gtx 480", "4xx", "dumpster"],
+				"Contains_AND": ["480"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 25
+			},
+			{
+				"tags": ["GPU", "Nvidia", "2x6", "gtx 470", "4xx", "dumpster"],
+				"Contains_AND": ["470"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 15
+			}
+		]
+	},
+	{
+		"SearchTerms": ["HD"],
+		"PriceMargin": 11,
+		"MinPrice": 0,
+		"MaxPrice": 50,
+		"categories": [128, 772, 29324001, 29659001],
+		"criteria": [
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 7990", "7xxx", "dumpster"],
+				"Contains_AND": ["7990"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 50
+			},
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 7970", "7xxx", "dumpster"],
+				"Contains_AND": ["7970"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 30
+			},
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 7950", "7xxx", "dumpster"],
+				"Contains_AND": ["7950"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 25
+			},
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 6990", "6xxx", "dumpster"],
+				"Contains_AND": ["6990"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 45
+			},
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 6970", "6xxx", "dumpster"],
+				"Contains_AND": ["6970"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 25
+			},
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 6950", "6xxx", "dumpster"],
+				"Contains_AND": ["6950"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 20
+			}
+		]
+	}
+]
