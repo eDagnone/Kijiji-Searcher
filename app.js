@@ -160,7 +160,7 @@ function RunSearches(searches, callback){
 						//console.log(params)  
 
 						kijiji.search(params, options).then(ads => {
-							console.log("Results = " + ads.length)
+							//console.log("Results = " + ads.length)
 							if (ads.length >= options.minResults) {
 								console.log("\nWARNING: Some ads unscraped in the following area:" + util.inspect(ads[0], {showHidden: false, depth: null}) + "\n\n" + util.inspect(ads[ads.length - 1], {showHidden: false, depth: null}));
 							}
