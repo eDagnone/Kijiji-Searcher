@@ -11,6 +11,6 @@ Dependancies:
 Running:
 
   1. Change search parameters in Searches.json
-  2. Within app.js, Choose which json file you want to use
-  3. Run the following command: node <path to script>\app.js
+  2. Within app.js, Choose which json file you want to use, and the locations you want to search (Currently set to the GTA)
+  3. Run the following command in batch or powershell: node <path to script>\app.js
   
