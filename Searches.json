@@ -1,0 +1,164 @@
+[
+	{
+		"SearchTerms": ["i3"],
+		"PriceMargin": 51,
+		"MinPrice": 50,
+		"MaxPrice": 150,
+		"categories": [128, 772, 29324001, 29659001],
+		"criteria": [
+			{ 
+				"tags": ["CPU", "Intel", "i3", "6xxx", "mid", "high", "Skylake"],
+				"Contains_AND": ["i3"],
+				"Contains_OR": ["6098", "6100", "6300", "6320", "Skylake", "Sky lake", "6th gen", "sixth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 100
+			},
+			{ 
+				"tags": ["CPU", "Intel", "i3", "7xxx", "High", "Kaby Lake"],
+				"Contains_AND": ["i3"],
+				"Contains_OR": ["7100", "7300", "7320", "7350", "Kaby Lake", "Kaby-lake", "7th gen", "seventh gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 110
+			},
+			{
+				"tags": ["CPU", "Intel", "i3", "8xxx", "mid", "Coffee Lake"],
+				"Contains_AND": ["i3"],
+				"Contains_OR": ["8100", "8300", "8350", "Coffee Lake", "8th gen", "eigth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 130
+			},
+			{
+				"tags": ["CPU", "Intel", "i3", "9xxx", "mid", "Coffee Lake"],
+				"Contains_AND": ["i3"],
+				"Contains_OR": ["9100", "9300", "9320", "9350", "Coffee Lake", "9th gen", "ninth gen", "nineth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 140
+			},
+			{
+				"tags": ["CPU", "Intel", "i3", "10xxx", "mid", "Comet Lake"],
+				"Contains_AND": ["i3"],
+				"Contains_OR": ["10100", "10300", "10320", "9350", "Comet Lake", "10th gen", "tenth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 150
+			}
+		]
+	},
+	{
+		"SearchTerms": ["i5"],
+		"PriceMargin": 40,
+		"MinPrice": 80,
+		"MaxPrice": 200,
+		"categories": [128, 772, 29324001, 29659001],
+		"criteria": [
+			{ 
+				"tags": ["CPU", "Intel", "i5", "6xxx", "mid", "high", "Skylake"],
+				"Contains_AND": ["i5"],
+				"Contains_OR": ["6400", "6402", "6500", "6600", "Skylake", "Sky lake", "6th gen", "sixth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 140
+			},
+			{ 
+				"tags": ["CPU", "Intel", "i5", "7xxx", "High", "Kaby Lake"],
+				"Contains_AND": ["i5"],
+				"Contains_OR": ["7400", "7500", "7600", "7640", "Kaby Lake", "Kaby-lake", "7th gen", "seventh gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 150
+			},
+			{ 
+				"tags": ["CPU", "Intel", "i5", "8xxx", "High", "Coffee Lake"],
+				"Contains_AND": ["i5"],
+				"Contains_OR": ["8400", "8500", "8600", "Coffee Lake", "8th gen", "eigth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 175
+			},
+			{ 
+				"tags": ["CPU", "Intel", "i5", "9xxx", "High", "Coffee Lake"],
+				"Contains_AND": ["i5"],
+				"Contains_OR": ["9400", "9500", "9600", "Coffee Lake", "9th gen", "ninth gen", "nineth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 190
+			},
+			{
+				"tags": ["CPU", "Intel", "i5", "10xxx", "High", "Comet Lake"],
+				"Contains_AND": ["i5"],
+				"Contains_OR": ["10400", "10500", "10600", "Comet Lake", "10th gen", "tenth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 200
+			}
+		]
+	},
+	{
+		"SearchTerms": ["i7"],
+		"PriceMargin": 50,
+		"MinPrice": 50,
+		"MaxPrice": 450,
+		"categories": [128, 772, 29324001, 29659001],
+		"criteria": [
+			{ 
+				"tags": ["CPU", "Intel", "i7", "6xxx", "mid", "high", "Skylake"],
+				"Contains_AND": ["i7"],
+				"Contains_OR": ["6700", "6800", "6850", "6900", "6950", "Skylake", "Sky lake", "6th gen", "sixth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "fx 6800", "fx6800"],
+				"MaxPrice": 250
+			},
+			{ 
+				"tags": ["CPU", "Intel", "i7", "7xxx", "High", "Kaby Lake"],
+				"Contains_AND": ["i7"],
+				"Contains_OR": ["7700", "7740", "7800", "7820", "9800", "Kaby Lake", "Kaby-lake", "7th gen", "seventh gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 300
+			},
+			{
+				"tags": ["CPU", "Intel", "i7", "8xxx", "high", "Coffee Lake"],
+				"Contains_AND": ["i7"],
+				"Contains_OR": ["8700", "8086", "Coffee Lake", "8th gen", "eigth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 350
+			},		
+			{
+				"tags": ["CPU", "Intel", "i7", "9xxx", "High", "Coffee Lake"],
+				"Contains_AND": ["i7"],
+				"Contains_OR": ["9700", "Coffee Lake", "9th gen", "ninth gen", "nineth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 400
+			},
+			{
+				"tags": ["CPU", "Intel", "i7", "10xxx", "High", "Comet Lake"],
+				"Contains_AND": ["i7"],
+				"Contains_OR": ["10700", "Comet Lake", "10th gen", "tenth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 450
+			}
+		]
+	},
+	{
+		"SearchTerms": ["i9"],
+		"PriceMargin": 100,
+		"MinPrice": 100,
+		"MaxPrice": 550,
+		"categories": [128, 772, 29324001, 29659001],
+		"criteria": [
+			{ 
+				"tags": ["CPU", "Intel", "Intel", "i7", "7xxx", "High", "Kaby Lake"],
+				"Contains_AND": ["i9"],
+				"Contains_OR": ["7900", "7920", "7940", "7960", "7980", "Kaby Lake", "Kaby-lake", "7th gen", "seventh gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 350
+			},	
+			{
+				"tags": ["CPU", "Intel", "i9", "9xxx", "High", "Coffee Lake"],
+				"Contains_AND": ["i9"],
+				"Contains_OR": ["9820", "9900", "9920", "9940", "9960", "9980", "9990", "Coffee Lake", "9th gen", "ninth gen", "nineth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 450
+			},
+			{
+				"tags": ["CPU", "Intel", "i9", "10xxx", "High", "Comet Lake"],
+				"Contains_AND": ["i9"],
+				"Contains_OR": ["10850", "10900", "10920", "10940", "10980", "Comet Lake", "10th gen", "tenth gen"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy"],
+				"MaxPrice": 550
+			}
+		]
+	}
+]
