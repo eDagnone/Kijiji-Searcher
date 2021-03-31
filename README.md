@@ -14,7 +14,7 @@ DEPENDANCIES:
 RUNNING:
 ---------------------------------------------------
 
-Without making any changes, this will the searcher will run with when you enter the following command in batch or powershell: 
+Without making any changes, this will the searcher will run with the following command: 
 node \<path to script\>\app.js
 By default, it will return a list of CPU's in the GTA.
 
