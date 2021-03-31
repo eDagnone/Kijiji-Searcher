@@ -10,46 +10,74 @@ const { exec } = require('child_process');
 const path = require('path');
 
 
-
 //==============================================
 
 //Any searches in the json file containing these tags will be ran.
-var mytags_AND = [""]
+var mytags_AND = ["cpu"]
 var mytags_OR = [""]
-
-
-
 
 //VARIABLE SETUP
 
 //json file used:
 let rawdata = fs.readFileSync(path.resolve(__dirname, 'Searches.json'));
 
+//Set to empty array to remove city constraint
 //Cities:		"Burlington", "Hamilton", "Milton", "Oakville", "Mississauga", "Brampton", "Etobicoke", "Vaughan", "Woodbridge", "Toronto", "York", "Scarboruogh", "Markham", "Richmond Hill"
-var cities = [	"Burlington", "Hamilton", "Milton", "Oakville", "Mississauga", "Brampton", "Etobicoke", "Vaughan", "Woodbridge", "Toronto", "York", "Scarboruogh", "Markham", "Richmond Hill"]
+var cities = [ "Ancaster", "Hamilton", "Burlington", "Dundas", "Milton", "Oakville", "Mississauga", "Brampton", "Etobicoke", "Vaughan", "Maple", "Woodbridge", "Toronto", "York", "Scarborough", "Markham", "Thornhill", "Richmond Hill" ]
 
-//Kijiji Lctn:	Hamilton, 	Oakvlle/Halton,	Mississauga,	Toronto		Markham/York // 80014,		1700277,		1700276,		1700273,	1700274
-var locations = [80014,		1700277,		1700276,		1700273,	1700274];
+//If set to 1, returns all items matching search criteria, up until 2.5x the price from the json.
+var priceIrrelevant = 0
 
-//If set to 1, returns all items matching search criteria, up until the max price for the search on the json.
-var priceIrrelivent = 0
 //Open all results in a seperate tab in the web browser
-var openInBrowser = 1
+var openInBrowser = 0
 
 //When OpenInBrowser is set to 1, which browser is used?
 var browserToOpen = "chrome" //alternatives: msedge, Firefox
 
 //In the HTML file, prefix all url's with microsoft-edge: so that they open in edge
-var msedgeLinks = 0
+var msedgeLinks = 1 
 
 //Open the CSV file at program end (depreciated)
 var openSpreadsheet = 0
 
 //"Origin" for google maps links. Set this to an address or area near you.
-var startLocation = "Mississauga, ON, L5P1B2" 
+var startLocation = "Mississauga, ON L5P 1B2" 
+//Pearson: Mississauga, ON L5P 1B2
+
+var locations =[]
+for(let i = 0; i < cities.length; i++){
+	if(cities[i] == "Hamilton" || cities[i] == "Burlington" || cities[i] == "Ancaster"){
+		addLocation(80014);
+	}
+	if(cities[i] == "Oakville" || cities[i] == "Halton" || cities[i] == "Milton"){
+		addLocation(1700277);
+	}
+	if(cities[i] == "Mississauga" || cities[i] == "Brampton"){
+		addLocation(1700276);
+	}
+	if(cities[i] == "Toronto" || cities[i] == "Etobicoke" || cities[i] == "Vaughan" || cities[i] == "Maple" || cities[i] == "Woodbridge" || cities[i] == "York" || cities[i] == "Markham" || cities[i] == "Scarborough" || cities[i] =="Thornhill" || cities[i] == "Richmond Hill"){
+		addLocation(1700273);
+		addLocation(1700274);
+	}
+}
+// OVERRIDE:
+// var locations =[]
+function addLocation(areaNumber){
+	for(let j = 0; j < locations.length; j++){
+		if (locations[j] == areaNumber){
+			return
+		}
+	}
+	locations.push(areaNumber)
+}
+
+
+//If set to 1, every ad scraped will be displayed. Useful for debugging.
+var noFiltering = 0
 
 //=============================================
 //Nothing below here needs to be touched by end users
+
 
 var LinkPlatform = ""
 if (msedgeLinks) {
@@ -62,14 +90,15 @@ let importedSearches = JSON.parse(rawdata);
 
 //Figure out which searches need to be done based on tags
 var searches = [];
+var block_MaxPrices = [];
 var AND_met = 0
 var OR_met = 0
-var matched = 0
+
 SearchLoop:
 for(let i = 0; i < importedSearches.length; ++i) { //cycle all search objects
+	block_MaxPrices = [];	
 	CriteriaLoop:
 	for (let m = 0; m < importedSearches[i].criteria.length; ++m) { //cycle criteria blocks in search object
-		
 		for (let k = 0; k < mytags_AND.length; ++k){ //Cycle mytags_AND to compare
 			AND_met = 0
 			for (let j = 0; j < importedSearches[i].criteria[m].tags.length; ++j){ //Cycle tags in said block
@@ -82,28 +111,39 @@ for(let i = 0; i < importedSearches.length; ++i) { //cycle all search objects
 				continue CriteriaLoop
 			}
 		}
-		//Cycle mytags_OR to compare
+		OR_loop:
 		for (let j = 0; j < importedSearches[i].criteria[m].tags.length; ++j){ //Cycle tags in said block
 			for (let k = 0; k < mytags_OR.length; ++k){ //Cycle mytags_OR
-				if (importedSearches[i].criteria[m].tags[j].toLowerCase() == mytags_OR[k].toLowerCase() | mytags_OR[k] == ""){ //If any mytags_OR match this block tag
-					searches.push(importedSearches[i])
-					continue SearchLoop
+				if (importedSearches[i].criteria[m].tags[j].toLowerCase() == mytags_OR[k].toLowerCase() | mytags_OR[k] == "" ){ //If any mytags_OR match this block tag
+					block_MaxPrices.push(importedSearches[i].criteria[m].MaxPrice)
+					break OR_loop
 				}
 			}
 		}
+	}
+	if(block_MaxPrices.length != 0){
+		var maxSearchPrice = 0;
+		for(let j = 0; j < block_MaxPrices.length; j++){
+			if (block_MaxPrices[j] > maxSearchPrice){
+				maxSearchPrice = block_MaxPrices[j];
+			}
+		}
+		if(priceIrrelevant) { maxSearchPrice *= 2.5 }
+		importedSearches[i].MaxPrice = maxSearchPrice
+		searches.push(importedSearches[i])
 	}
 }
 	
 //Clear old files
 try {
-	fs.truncateSync("C:\\Users\\ethan\\source\\repos\\KijijiScraper\\KijijiScraper\\KijijiSearch.csv")
-	fs.truncateSync("C:\\Users\\ethan\\source\\repos\\KijijiScraper\\KijijiScraper\\KijijiSearch.html")
+	fs.truncateSync(__dirname + "KijijiSearch.csv")
+	fs.truncateSync(__dirname + "KijijiSearch.html")
 } catch(err) {
   console.error(err)
 }
 
-const stream = fs.createWriteStream("C:\\Users\\ethan\\source\\repos\\KijijiScraper\\KijijiScraper\\KijijiSearch.csv", { flags: 'a' });
-const HTMLstream = fs.createWriteStream("C:\\Users\\ethan\\source\\repos\\KijijiScraper\\KijijiScraper\\KijijiSearch.html", { flags: 'a' });
+const stream = fs.createWriteStream(__dirname + "KijijiSearch.csv", { flags: 'a' });
+const HTMLstream = fs.createWriteStream(__dirname + "KijijiSearch.html", { flags: 'a' });
 
 //Set up for new files
 HTMLstream.write(`<!DOCTYPE html>
@@ -182,17 +222,17 @@ function deleteRow(btn) {
 <table id="myTable">
   <tr>
    	<th>Del</th>
-    <th onclick="sortTable('myTable', 1)">Price</th>
-    <th onclick="sortTable('myTable', 2)">Description</th>
-	<th onclick="sortTable('myTable', 3)">City</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
   </tr>
 
 `)
 
 stream.write("BUY THIS:");
-
-
-
+console.log("Performing the following searches:\n\n")
+console.log(searches)
 RunSearches(searches, showOutput)
 
 
@@ -232,8 +272,7 @@ function showOutput(ShownAds)
 			});
 			urlList = ""
 		}
-		console.log(ShownAds[i].attributes.price + '\t' + ShownAds[i].title)
-		
+		console.log(ShownAds[i].attributes.price + '\t' + ShownAds[i].title.replace("\n", "").replace("\r", ""))
 		var CityPostalCode = ShownAds[i].attributes.location.replace(/ON, Canada,/g, 'ON,')
 		var Index = CityPostalCode.indexOf(", ON")
 		var PostalCode = CityPostalCode.substr(Index + 5).replace(/ /g, "").substr(0,6) 
@@ -254,10 +293,17 @@ function showOutput(ShownAds)
 		stream.write(',"' + ShownAds[i].date + '"');
 		
 		HTMLstream.write('\n<tr>\n\t<td><input type="button" value="X" onclick="deleteRow(this)"/></td>')
+		if(ShownAds[i].images !== undefined){ 
+			HTMLstream.write('\n\t<td><a href="'+ShownAds[i].images[0]+ '"><img src="' + ShownAds[i].images[0] + '" alt="No Image" height="300" style="max-width:400px"></a></td>')
+		}
+		else{
+			HTMLstream.write('\n\t<td>No Image</td>')
+		}
+		
 		HTMLstream.write('\n\t<td>' + ShownAds[i].attributes.price + '</td>')
-		HTMLstream.write("\n\t<td><a href=" + LinkPlatform + ShownAds[i].url + ">" + ShownAds[i].title + "</a><br>")
+		HTMLstream.write("\n\t<td><a href=" + LinkPlatform + ShownAds[i].url + ' target="_blank" rel="noopener noreferrer">' + ShownAds[i].title + "</a><br>")
 		HTMLstream.write(ShownAds[i].description + "</pre></td>")
-		HTMLstream.write('\n\t<td><a style="color:black; text-decoration:none" href=' + mapsURL + ">"+ pre + ", ON " + PostalCode + '</a></td>\n</tr>')
+		HTMLstream.write('\n\t<td><a style="color:black; text-decoration:none" href=' + mapsURL + '" target="_blank" rel="noopener noreferrer">' + pre + ", ON " + PostalCode + '</a></td>\n</tr>')
 	}
 	//console.log("\n" + urlList.trim() + "\n")
 	if(!(ShownAds.length)){
@@ -295,8 +341,8 @@ function RunSearches(searches, callback){
 
 	for (let si = 0; si < searches.length; ++si) {
 		var options = {
-			minResults: 100,
-			maxResults: 100 
+			minResults: -1,
+			maxResults: -1
 		};
 
 		var params = {
@@ -322,97 +368,107 @@ function RunSearches(searches, callback){
 						params.locationId = locations[LocIndex];
 
 						kijiji.search(params, options).then(ads => {
-							console.log("Results += " + ads.length)
-							if (ads.length >= options.minResults) {
-								console.log("\nWARNING: Some ads unscraped in the following area:" + util.inspect(ads[0], {showHidden: false, depth: null}) + "\n\n" + util.inspect(ads[ads.length - 1], {showHidden: false, depth: null}));
+							if(ads.length != 0){
+								console.log("Scraped " + ads.length)
 							}
 							AdsScanned += ads.length
 							AdLoop:
 							for (let i = 0; i < ads.length; ++i) 
 							{
-								var adText = ads[i].title.toLowerCase() + " " + ads[i].description.toLowerCase();								
-								var loc = ads[i].attributes.location
-								//console.log(adText);
-								City_CriteriaMet = 0
-								if (cities.length != 0) {
-									for (let j = 0; j < cities.length; ++j) {
-										if (loc.includes(cities[j])) {
-											City_CriteriaMet = 1
-										}
-									}
-								}
-								if (!City_CriteriaMet){
-									continue AdLoop
-								}
-								//Duplicates
-								for (let j = 0; j < ShownAds.length; ++j) {
-									if (ShownAds[j].url == ads[i].url | (ShownAds[j].title == ads[i].title & ShownAds[j].description == ads[i].description)) {
-										continue AdLoop
-									}
-								}
-
-								CriteriaLoop:
-								for (ci = 0; ci < searches[si].criteria.length; ++ci)
-								{
-									if (searches[si].criteria[ci].MaxPrice < ads[i].attributes.price & !priceIrrelivent) {
-										continue CriteriaLoop
-									}
+								if(!noFiltering){
+									var adText = ads[i].title.toLowerCase() + " " + ads[i].description.toLowerCase();								
+									var loc = ads[i].attributes.location
+									//console.log(adText);
 									
-									var AND_CriteriaMet = 1
-									var OR_CriteriaMet = 0
-									var NOR_CriteriaMet = 1
-									var OR_tagMet = 0
-									
-									TagLoop:
-									for (let j = 0; j < searches[si].criteria[ci].tags.length; ++j) {
-										for (let k = 0; k < mytags_OR.length; ++k){
-											if(searches[si].criteria[ci].tags[j].toLowerCase() == mytags_OR[k].toLowerCase() | mytags_OR[k] == ""){
-												OR_tagMet = 1
-												break TagLoop
+									City_CriteriaMet = 0
+									if (cities.length != 0) {
+										for (let j = 0; j < cities.length; ++j) {
+											if (loc.includes(cities[j])) {
+												City_CriteriaMet = 1
 											}
 										}
+										if (!City_CriteriaMet){
+											//console.log(ads[i].price + "\t " + ads[i].title + " city Faild: " + loc)
+											continue AdLoop
+										}
 									}
-									if (!(OR_tagMet)){
-										continue CriteriaLoop 
+									
+									//Duplicates
+									for (let j = 0; j < ShownAds.length; ++j) {
+										if (ShownAds[j].url == ads[i].url | (ShownAds[j].title == ads[i].title & ShownAds[j].description == ads[i].description)) {
+											continue AdLoop
+										}
 									}
-									for (let k = 0; k < mytags_AND.length; ++k){
-										var AND_tagMet = 0
+									//Undefined Prices
+									
+
+									CriteriaLoop:
+									for (ci = 0; ci < searches[si].criteria.length; ++ci)
+									{
+										//Price is too large, or undefined.
+										if ((searches[si].criteria[ci].MaxPrice < ads[i].attributes.price & !priceIrrelevant) || ads[i].attributes.price == undefined) {
+											continue CriteriaLoop
+										}
+										
+										var AND_CriteriaMet = 1
+										var OR_CriteriaMet = 0
+										var NOR_CriteriaMet = 1
+										var OR_tagMet = 0
+										
+										TagLoop:
 										for (let j = 0; j < searches[si].criteria[ci].tags.length; ++j) {
-											if(searches[si].criteria[ci].tags[j].toLowerCase() == mytags_AND[k].toLowerCase() | mytags_AND[k] == "") {
-												AND_tagMet = 1
+											for (let k = 0; k < mytags_OR.length; ++k){
+												if(searches[si].criteria[ci].tags[j].toLowerCase() == mytags_OR[k].toLowerCase() | mytags_OR[k] == ""){
+													OR_tagMet = 1
+													break TagLoop
+												}
+											}
+										}
+										if (!(OR_tagMet)){
+											continue CriteriaLoop 
+										}
+										for (let k = 0; k < mytags_AND.length; ++k){
+											var AND_tagMet = 0
+											for (let j = 0; j < searches[si].criteria[ci].tags.length; ++j) {
+												if(searches[si].criteria[ci].tags[j].toLowerCase() == mytags_AND[k].toLowerCase() | mytags_AND[k] == "") {
+													AND_tagMet = 1
+													break
+												}
+											}
+											if (!AND_tagMet){
+												continue CriteriaLoop
+											}
+										}
+
+										
+										for (let j = 0; j < searches[si].criteria[ci].Contains_AND.length; ++j) {
+											if (!(adText.includes(searches[si].criteria[ci].Contains_AND[j].toLowerCase()))) {
+												AND_CriteriaMet = 0
 												break
 											}
 										}
-										if (!AND_tagMet){
-											continue CriteriaLoop
+										for (let j = 0; j < searches[si].criteria[ci].Contains_OR.length; ++j) {
+											if ((adText.includes(searches[si].criteria[ci].Contains_OR[j].toLowerCase()))) {
+												OR_CriteriaMet = 1
+												break
+											}
 										}
-									}
+										for (let j = 0; j < searches[si].criteria[ci].Contains_NOR.length; ++j) {
+											if ((adText.includes(searches[si].criteria[ci].Contains_NOR[j].toLowerCase()))) {
+												NOR_CriteriaMet = 0
+												break
+											}
+										}									
 
-									
-									for (let j = 0; j < searches[si].criteria[ci].Contains_AND.length; ++j) {
-										if (!(adText.includes(searches[si].criteria[ci].Contains_AND[j].toLowerCase()))) {
-											AND_CriteriaMet = 0
-											break
+										//console.log(AND_CriteriaMet + " " + OR_CriteriaMet + " " + NOR_CriteriaMet + " " + "\t" + ads[i].title)
+										if (AND_CriteriaMet && OR_CriteriaMet && NOR_CriteriaMet) {
+											ShownAds.push(ads[i]);
+											break CriteriaLoop
 										}
 									}
-									for (let j = 0; j < searches[si].criteria[ci].Contains_OR.length; ++j) {
-										if ((adText.includes(searches[si].criteria[ci].Contains_OR[j].toLowerCase()))) {
-											OR_CriteriaMet = 1
-											break
-										}
-									}
-									for (let j = 0; j < searches[si].criteria[ci].Contains_NOR.length; ++j) {
-										if ((adText.includes(searches[si].criteria[ci].Contains_NOR[j].toLowerCase()))) {
-											NOR_CriteriaMet = 0
-											break
-										}
-									}									
-
-									//console.log(AND_CriteriaMet + " " + OR_CriteriaMet + " " + NOR_CriteriaMet + " " + "\t" + ads[i].title)
-									if (AND_CriteriaMet && OR_CriteriaMet && NOR_CriteriaMet) {
-										ShownAds.push(ads[i]);
-										break CriteriaLoop
-									}
+								}
+								else {
+									ShownAds.push(ads[i]);
 								}
 							}
 							searchesDone++
