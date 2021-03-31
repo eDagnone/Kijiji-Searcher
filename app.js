@@ -136,14 +136,14 @@ for(let i = 0; i < importedSearches.length; ++i) { //cycle all search objects
 	
 //Clear old files
 try {
-	fs.truncateSync(__dirname + "KijijiSearch.csv")
-	fs.truncateSync(__dirname + "KijijiSearch.html")
+	fs.truncateSync(path.resolve(__dirname, 'KijijiSearch.csv'))
+	fs.truncateSync(path.resolve(__dirname, 'KijijiSearch.html'))
 } catch(err) {
   console.error(err)
 }
 
-const stream = fs.createWriteStream(__dirname + "KijijiSearch.csv", { flags: 'a' });
-const HTMLstream = fs.createWriteStream(__dirname + "KijijiSearch.html", { flags: 'a' });
+const stream = fs.createWriteStream(path.resolve(__dirname, 'KijijiSearch.csv'), { flags: 'a' });
+const HTMLstream = fs.createWriteStream(path.resolve(__dirname, 'KijijiSearch.html'), { flags: 'a' });
 
 //Set up for new files
 HTMLstream.write(`<!DOCTYPE html>
