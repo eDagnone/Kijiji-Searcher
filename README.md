@@ -2,15 +2,15 @@
 Scrapes ads from Kijiji that match certian parameters. Output those ads to a CSV and to an HTML file. 
 Additionally, it can open each ad in an individual broser tab so that you can easily browse them.
 
-===================================================
-Dependancies:
+
+DEPENDANCIES:
 ---------------------------------------------------
 
   - Node.js
   - fs (https://www.npmjs.com/package/fs)
   - kijiji-scraper (https://www.npmjs.com/package/kijiji-scraper)
 
-===================================================
+
 RUNNING:
 ---------------------------------------------------
 
@@ -18,7 +18,7 @@ Without making any changes, this will the searcher will run with when you enter 
 node \<path to script\>\app.js
 By default, it will return a list of CPU's in the GTA.
 
-===================================================
+
 PERSONALIZATION:
 ---------------------------------------------------
 
