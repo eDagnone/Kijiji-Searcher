@@ -573,7 +573,7 @@ function RunSearches(searches, callback){
 	}
 }
 
-//Stage 2: Sort by description. Also, append full description to ad.
+//Stage 2: Filter by description. Also, append full description to ad.
 function descSort(ads2, callback){
 	//Get Full Description
 	ShownAds2 = [];
