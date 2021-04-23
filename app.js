@@ -15,20 +15,10 @@ const { exec } = require('child_process');
 const path = require('path');
 
 
-
-
-// GETS ENTIRE DESCRIPTION! IMPLEMENT THIS!
-kijiji.Ad.Get("https://www.kijiji.ca/v-desktop-computers/barrie/looking-for-a-graphics-card-for-gaming/1561561638").then(ad => {
-    // Use the ad object
-    console.log(util.inspect(ad, true, null, true));
-}).catch(console.error);
-
-
-
 //==============================================
 
 //Any searches in the json file containing these tags will be ran.
-var mytags_AND = ["ssd"] 
+var mytags_AND = ["PSU"]
 var mytags_OR = [""]
 
 //VARIABLE SETUP
@@ -50,7 +40,10 @@ var openInBrowser = 0
 var browserToOpen = "chrome" //alternatives: msedge, Firefox
 
 //In the HTML file, prefix all url's with microsoft-edge: so that they open in edge
-var msedgeLinks = 0 
+var msedgeLinks = 0
+
+//What to filter on. Set to title, shortDescription, longDescription 
+var filter = 'longDescription'
 
 //Open the CSV file at program end (depreciated)
 var openSpreadsheet = 0
@@ -131,9 +124,13 @@ for(let i = 0; i < importedSearches.length; ++i) { //cycle all search objects
 			for (let k = 0; k < mytags_OR.length; ++k){ //Cycle mytags_OR
 				if (importedSearches[i].criteria[m].tags[j].toLowerCase() == mytags_OR[k].toLowerCase() | mytags_OR[k] == "" ){ //If any mytags_OR match this block tag
 					block_MaxPrices.push(importedSearches[i].criteria[m].MaxPrice)
+					OR_met = 1
 					break OR_loop
 				}
 			}
+		}
+		if (!OR_met){
+			
 		}
 	}
 	if(block_MaxPrices.length !== 0){
@@ -143,7 +140,10 @@ for(let i = 0; i < importedSearches.length; ++i) { //cycle all search objects
 				maxSearchPrice = block_MaxPrices[j];
 			}
 		}
-		if(priceIrrelevant) { maxSearchPrice *= 2.5 }
+		if(priceIrrelevant) { 
+			maxSearchPrice *= 2.5
+		}
+		
 		importedSearches[i].MaxPrice = maxSearchPrice
 		searches.push(importedSearches[i])
 	}
@@ -305,7 +305,7 @@ function showDivs(divObject, n) {
 stream.write("BUY THIS:");
 console.log("Performing the following searches:\n\n")
 console.log(searches)
-RunSearches(searches, showOutput)
+RunSearches(searches, descSort)
 
 
 
@@ -315,6 +315,10 @@ RunSearches(searches, showOutput)
 
 function showOutput(ShownAds)
 {	
+		if(!(ShownAds.length)){
+		console.log("Didn't find any ads.")
+	}
+	
 	//Sort items by price
 	if (ShownAds.length >= 2) {
 		var temp
@@ -358,14 +362,19 @@ function showOutput(ShownAds)
 		var apiLocation = ShownAds[i].attributes.location.replace(/ /g, "%2C").replace(/,/g, "")
 		var mapsURL = "https://www.google.com/maps/dir/?api=1&origin=" + apiStartLocation + "&destination=" + apiLocation
 		
+		//Generate CSV
 		stream.write('\n"' + ShownAds[i].attributes.price + '","' + ShownAds[i].title + '"');
 		stream.write(',"' + ShownAds[i].url + '"');
 		stream.write(',"' + ShownAds[i].attributes.location + '"');
-		stream.write(',"' + ShownAds[i].description.replace("...", "") + '"');
+		stream.write(',"' + ShownAds[i].fullDescription.replace("...", "") + '"');
 		stream.write(',"' + ShownAds[i].date + '"');
 		
-		HTMLstream.write('\n<tr>\n\t<td><input type="button" value="X" onclick="deleteRow(this)"/></td>')
-		if(ShownAds[i].images !== undefined){
+		
+		//Generate HTML
+		HTMLstream.write('\n<tr>\n\t<td><input type="button" value="X" onclick="deleteRow(this)"/></td>') //X button
+		
+		//Images
+		if(ShownAds[i].images !== undefined){ 
 			if(ShownAds[i].images.length == 0){
 				HTMLstream.write('\n\t<td>No Image</td>')
 			}
@@ -385,25 +394,25 @@ function showOutput(ShownAds)
 			HTMLstream.write('\n\t<td>Images array undefined.</td>')
 		}
 		
-		HTMLstream.write('\n\t<td>' + ShownAds[i].attributes.price + '</td>')
-		HTMLstream.write("\n\t<td><a href=" + LinkPlatform + ShownAds[i].url + ' target="_blank" rel="noopener noreferrer">' + ShownAds[i].title + "</a><br>")
-		HTMLstream.write(ShownAds[i].description + "</td>")
+		HTMLstream.write('\n\t<td>' + ShownAds[i].attributes.price + '</td>') //Price
+		HTMLstream.write("\n\t<td><a href=" + LinkPlatform + ShownAds[i].url + ' target="_blank" rel="noopener noreferrer">' + ShownAds[i].title + "</a><br>") //title
+		HTMLstream.write((ShownAds[i].fullDescription).replace(/(\r\n|\n|\r)/gm, '<br>\n') + "</td>") //Description
 		HTMLstream.write('\n\t<td><a style="color:black; text-decoration:none" href=' + mapsURL + '" target="_blank" rel="noopener noreferrer">' + pre + ", ON " + PostalCode + '</a></td>\n</tr>')
 	}
 	//console.log("\n" + urlList.trim() + "\n")
-	if(!(ShownAds.length)){
-		console.log("Didn't find any ads.")
-	}
+	
+	//Open the HTML or CSV file
 	stream.close(() => {
 		if (openSpreadsheet) {
-			exec("start " + 'C:\\Users\\ethan\\source\\repos\\KijijiScraper\\KijijiScraper\\KijijiSearch.csv');
+			exec("start " + path.resolve(__dirname, 'KijijiSearch.csv'));
 		}
 	});
 	HTMLstream.write("\n</table></body>\n" + endScript + '\n</html>');
 	
 	HTMLstream.close(() => {
-		exec("start " + 'C:\\Users\\ethan\\source\\repos\\KijijiScraper\\KijijiScraper\\KijijiSearch.html');
+		exec("start " + path.resolve(__dirname, 'KijijiSearch.html'));
 	});
+	console.log("");
 }
 
 //====================================================================================
@@ -413,6 +422,8 @@ function RunSearches(searches, callback){
 	var numSearches = 0
 	var searchesDone = 0
 	var AdsScanned = 0
+	var evaluatedAds = [];
+	
 	
 	for (let i = 0; i < searches.length; ++i) {
 		if ((searches[i].MaxPrice - searches[i].MinPrice) % searches[i].PriceMargin == 0) {
@@ -451,42 +462,43 @@ function RunSearches(searches, callback){
 					params.categoryId = searches[si].categories[categoryIndex];
 					for (let LocIndex = 0; LocIndex < locations.length; ++LocIndex) {
 						params.locationId = locations[LocIndex];
-
+						
+						
+						
+						
+						//Search
 						kijiji.search(params, options).then(ads => {
 							if(ads.length != 0){
 								console.log("Scraped " + ads.length)
 							}
 							AdsScanned += ads.length
+
 							AdLoop:
 							for (let i = 0; i < ads.length; ++i) //For all ads scraped
 							{
-								if(!noFiltering){
-									var adText = ads[i].title.toLowerCase() + " " + ads[i].description.toLowerCase();								
-									var loc = ads[i].attributes.location
-									//console.log(adText);
-									
-									City_CriteriaMet = 0
-									if (cities.length != 0) { 
-										for (let j = 0; j < cities.length; ++j) { //For cities searched for
-											if (loc.includes(cities[j])) {
-												City_CriteriaMet = 1
-											}
-										}
-										if (!City_CriteriaMet){
-											//console.log(ads[i].price + "\t " + ads[i].title + " city Faild: " + loc)
-											continue AdLoop;
-										}
-									}
-									
+								var added = 0;
+								if(!noFiltering){								
 									//Duplicates
-									for (let j = 0; j < ShownAds.length; ++j) {
-										if (ShownAds[j].url == ads[i].url || (ShownAds[j].title == ads[i].title & ShownAds[j].description == ads[i].description)) {
+									for (let j = 0; j < evaluatedAds.length; ++j) {
+										if (evaluatedAds[j].url == ads[i].url || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].description == ads[i].description) || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].attributes.location == ads[i].attributes.location)){
 											continue AdLoop;
 										}
 									}
-									
-									
+									evaluatedAds.push(ads[i]);
+							
+									var loc = ads[i].attributes.location
 
+									City_CriteriaMet = 0
+									for (let j = 0; j < cities.length; ++j) { //For cities searched for
+										if (loc.includes(cities[j])) {
+											City_CriteriaMet = 1
+										}
+									}
+									if (!City_CriteriaMet && cities.length != 0){
+										continue AdLoop;
+									}
+
+									
 									CriteriaLoop: //For all criteria blocks in the json file
 									for (ci = 0; ci < searches[si].criteria.length; ++ci)
 									{
@@ -522,46 +534,34 @@ function RunSearches(searches, callback){
 												continue CriteriaLoop
 											}
 										}
-
-										//OR criteria
-										var OR_CriteriaMet = 0
-										for (let j = 0; j < searches[si].criteria[ci].Contains_OR.length; ++j) {
-											if ((adText.includes(searches[si].criteria[ci].Contains_OR[j].toLowerCase()))) { //OR criteria met
-												OR_CriteriaMet = 1
-												break
-											}
-										}
-										if (!(OR_CriteriaMet)){
-											continue CriteriaLoop
-										}
-
 										
-										//And Criteria
-										for (let j = 0; j < searches[si].criteria[ci].Contains_AND.length; ++j) {
-											if (!(adText.includes(searches[si].criteria[ci].Contains_AND[j].toLowerCase()))) { //AND criteria not met
+										//NOR with title and/or shortDescription
+										var adContent = ads[i].title
+										if(filter != "title"){
+											adContent += ads[i].description
+										}
+										adContent = adContent.toLowerCase()
+											
+										for (let k = 0; k < searches[si].criteria[ci].Contains_NOR.length; ++k){ //For all tags searched for											
+											if (adContent.includes(searches[si].criteria[ci].Contains_NOR[k].toLowerCase())) { //NOR Criteria not met
 												continue CriteriaLoop
 											}
 										}
-										//Nor criteria
-										for (let j = 0; j < searches[si].criteria[ci].Contains_NOR.length; ++j) {
-											if ((adText.includes(searches[si].criteria[ci].Contains_NOR[j].toLowerCase()))) { //NOR Criteria not met
-												continue CriteriaLoop
-											}
-										}
+										
+										ads[i].criteriaBlock = searches[si].criteria[ci]
 										ShownAds.push(ads[i]);
 										continue AdLoop
 									}
 								}
-								else {
-									console.log("Here")
+								else { //noFiltering
 									ShownAds.push(ads[i]);
 								}
 							}
 							searchesDone++
 							if (searchesDone == numSearches) {
 								console.log("Ads scanned:\t" + AdsScanned)
-								console.log("Ads found:\t" + ShownAds.length + "\n")
-								callback(ShownAds)
+								console.log("Filter 1:\t" + ShownAds.length)
+								callback(ShownAds, showOutput)
 							}
 						}).catch(console.error);
 					}
@@ -570,6 +570,103 @@ function RunSearches(searches, callback){
 				params.maxPrice += searches[si].PriceMargin
 			} 
 		}
+	}
+}
+
+//Stage 2: Sort by description. Also, append full description to ad.
+function descSort(ads2, callback){
+	//Get Full Description
+	ShownAds2 = [];
+	numFinished = 0;
+	
+	
+	
+	if(filter == 'shortDescription' || filter == 'title'){
+		filterLoop:
+		for(let ci = 0; ci < ads2.length; ci++){
+			var adText = ads2[ci].title
+			if(filter == 'shortDescription'){
+				adText += ads2[ci].description;
+			}
+			adText = adText.toLowerCase()
+			var OR_CriteriaMet = 0
+			for (let j = 0; j < ads2[ci].criteriaBlock.Contains_OR.length; ++j) {
+				if ((adText.includes(ads2[ci].criteriaBlock.Contains_OR[j].toLowerCase()))) { //OR criteria met
+					OR_CriteriaMet = 1
+					break
+				}
+			}
+			if(!OR_CriteriaMet){ //OR criteria not met
+				ads2.splice(ci, 1);
+				ci--
+				continue filterLoop
+			}
+			//And Criteria
+			for (let j = 0; j < ads2[ci].criteriaBlock.Contains_AND.length; ++j) {
+				if (!(adText.includes(ads2[ci].criteriaBlock.Contains_AND[j].toLowerCase()))) { //AND criteria not met
+					ads2.splice(ci, 1);
+					ci--
+					continue filterLoop
+				}
+			}
+			//Nor criteria
+			for (let j = 0; j < ads2[ci].criteriaBlock.Contains_NOR.length; ++j) {
+				if ((adText.includes(ads2[ci].criteriaBlock.Contains_NOR[j].toLowerCase()))) { //NOR Criteria not met
+					ads2.splice(ci, 1);
+					ci--
+					console.log("This should never trigger")
+					continue filterLoop
+				}
+			}
+		}
+	}
+	
+	
+	for(let ci = 0; ci < ads2.length; ci++){ //For all ads at stage 2:
+		kijiji.Ad.Get(ads2[ci].url).then(ad => {
+			ads2[ci].fullDescription = ad.description //Change description
+			
+			if(filter == 'longDescription'){
+				var adText = (ads2[ci].title + ads2[ci].fullDescription).toLowerCase();
+				
+				//OR criteria
+				var OR_CriteriaMet = 0
+				for (let j = 0; j < ads2[ci].criteriaBlock.Contains_OR.length; ++j) {
+					if ((adText.includes(ads2[ci].criteriaBlock.Contains_OR[j].toLowerCase()))) { //OR criteria met
+						OR_CriteriaMet = 1
+						break
+					}
+				}
+				//And Criteria
+				var AND_CriteriaMet = 1
+				for (let j = 0; j < ads2[ci].criteriaBlock.Contains_AND.length; ++j) {
+					if (!(adText.includes(ads2[ci].criteriaBlock.Contains_AND[j].toLowerCase()))) { //AND criteria not met
+						AND_CriteriaMet = 0
+						break
+					}
+				}
+				//Nor criteria
+				var NOR_CriteriaMet = 1
+				for (let j = 0; j < ads2[ci].criteriaBlock.Contains_NOR.length; ++j) {
+					if ((adText.includes(ads2[ci].criteriaBlock.Contains_NOR[j].toLowerCase()))) { //NOR Criteria not met
+						NOR_CriteriaMet = 0;
+						break
+					}
+				}
+				if(OR_CriteriaMet && AND_CriteriaMet && NOR_CriteriaMet){
+					ShownAds2.push(ads2[ci]);
+				}
+			}
+			else{
+				ShownAds2.push(ads2[ci]);
+			}
+			
+			numFinished++;
+			if (numFinished == ads2.length){
+				console.log("Filter 2:\t" + ShownAds2.length + "\n")
+				callback(ShownAds2)
+			}
+		}).catch(console.error);
 	}
 }
 
