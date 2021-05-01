@@ -3,56 +3,67 @@
 		"SearchTerms": ["GT"],
 		"PriceMargin": 51,
 		"MinPrice": 0,
-		"MaxPrice": 50,
 		"categories": [128, 772, 29324001, 29659001],
 		"criteria": [	
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gt 440", "4xx", "dumpster", "dx11"],
-				"Contains_AND": ["440"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"filter": "full",
+				"Contains_OR": ["(gt(x)?|Nvidia)\\W*440", "440\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 10
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gt 545", "5xx", "dumpster", "dx11"],
-				"Contains_AND": ["545"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"filter": "full",
+				"Contains_OR": ["(gt(x)?|Nvidia)\\W*545", "545\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 10
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gt 640", "6xx", "dumpster"],
+				"filter": "full",
 				"Contains_AND": ["640"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x)?|Nvidia)\\W*640", "640\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 10
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gt 645", "6xx", "dumpster"],
+				"filter": "full",
 				"Contains_AND": ["645"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x)?|Nvidia)\\W*645", "645\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 15
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gt 730", "7xx", "dumpster"],
+				"filter": "full",
 				"Contains_AND": ["730"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x)?|Nvidia)\\W*730", "730\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 20
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gt 740", "7xx", "dumpster"],
+				"filter": "full",
 				"Contains_AND": ["740"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x)?|Nvidia)\\W*740", "740\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 25
 			},
 			{
-				"tags": ["GPU", "Nvidia", "low power", "gt", "10xx"],
+				"tags": ["GPU", "Nvidia", "low power", "gt", "10xx", "low"],
+				"filter": "full",
 				"Contains_AND": ["1030"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x)?|Nvidia)\\W*440", "440\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 90
 			}
 		]
@@ -61,14 +72,15 @@
 		"SearchTerms": ["GTS"],
 		"PriceMargin": 51,
 		"MinPrice": 0,
-		"MaxPrice": 50,
 		"categories": [128, 772, 29324001, 29659001],
 		"criteria": [
 			{
-				"tags": ["GPU", "Nvidia", "1x6", "gts 450", "4xx", "dumpster"],
+				"tags": ["GPU", "Nvidia", "1x6", "gts 450", "4xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["450"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*450", "450\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 10
 			}
 		]
@@ -81,318 +93,398 @@
 		"criteria": [
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 450", "4xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["450"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*450", "450\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 10
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 460", "4xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["460"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*460", "460\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 15
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 465", "4xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["465"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*465", "465\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 15
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 470", "4xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["470"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
-				"MaxPrice": 15
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*470", "470\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 20
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 480", "4xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["480"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*480", "480\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 25
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "gtx 550", "5xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["550"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*550", "550\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 15
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "gtx 555", "5xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["555"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*555", "555\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 15
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 560", "5xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["560"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*560", "560\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 15
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 570", "5xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["570"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*570", "570\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 25
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 580", "5xx", "low", "dx11"],
+				"filter": "full",
 				"Contains_AND": ["580"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
-				"MaxPrice": 30
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*580", "580\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 40
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gt 640", "6xx", "dumpster"],
+				"filter": "full",
 				"Contains_AND": ["640"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*640", "640\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 10
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gtx 645", "6xx", "low"],
+				"filter": "full",
 				"Contains_AND": ["645"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*645", "645\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],				
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 30
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gtx 650", "6xx", "low"],
+				"filter": "full",
 				"Contains_AND": ["650"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*650", "650\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 40
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "gtx 650", "6xx", "low"],
+				"filter": "full",
 				"Contains_AND": ["650", "TI"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*650\\W*TI", "650\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 45
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 660", "6xx", "low"],
+				"filter": "title",
 				"Contains_AND": ["660"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*660", "660\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 60
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 660", "6xx", "low"],
+				"filter": "title",
 				"Contains_AND": ["660", "TI"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*660\\W*TI", "660\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],				
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 65
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 670", "6xx", "low"],
+				"filter": "title",
 				"Contains_AND": ["670"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "670M"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*670", "670\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],				
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 75
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 680", "6xx", "low"],
+				"filter": "title",
 				"Contains_AND": ["680"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "waterblock", "water block", "6800"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*680", "680\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "waterblock", "water block", "6800", "to a gtx680", "to a GTX680"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 90
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x6", "gtx 690", "6xx", "low", "mid"],
+				"filter": "title",
 				"Contains_AND": ["690"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "waterblock", "water block", "6900"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*690", "690\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "waterblock", "water block"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 90
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gtx 730", "7xx", "dumpster"],
+				"filter": "full",
 				"Contains_AND": ["730"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*730", "730\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 20
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gtx 740", "7xx", "dumpster"],
+				"filter": "full",
 				"Contains_AND": ["740"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*740", "740\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 25
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gtx 750", "7xx", "low"],
+				"filter": "full",
 				"Contains_AND": ["750"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*750", "750\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 50
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gtx 750", "7xx", "low"],
+				"filter": "full",
 				"Contains_AND": ["750", "TI"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*750\\W*TI", "750\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 50
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "1x8", "gtx 760", "7xx", "low"],
+				"filter": "title",
 				"Contains_AND": ["760"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*760", "760\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 70
 			},
 			{
-				"tags": ["GPU", "Nvidia", "1x6", "1x8", "gtx 760", "7xx", "low"],
+				"tags": ["GPU", "Nvidia", "1x6", "1x8", "gtx 760ti", "7xx", "low"],
+				"filter": "title",
 				"Contains_AND": ["760", "TI"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*760\\W*TI", "760\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 80
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6 1x8", "gtx 770", "7xx", "low", "mid"],
+				"filter": "title",
 				"Contains_AND": ["770"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*770", "770\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 90
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x8", "gtx 780", "7xx", "mid", "high"],
-				"Contains_AND": ["780"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "7800", "paying $"],
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*780", "780\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 130
 			},
 			{
 				"tags": ["GPU", "Nvidia", "2x8", "gtx 780", "7xx", "mid", "high"],
-				"Contains_AND": ["780", "TI"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "7800", "paying $"],
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*780\\W*TI", "780\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 140
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "gtx 950", "9xx", "low"],
-				"Contains_AND": ["950"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "9500", "paying $"],
-				"MaxPrice": 70
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*950", "950\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 80
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "1x8", "gtx 960", "9xx", "low"],
-				"Contains_AND": ["960"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "9600", "paying $"],
-				"MaxPrice": 85
-			},
-			{
-				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 970", "9xx", "mid", "high"],
-				"Contains_AND": ["970"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "9700", "paying $"],
-				"MaxPrice": 150
-			},
-			{
-				"tags": ["GPU", "Nvidia", "2x8", "gtx 980", "9xx", "high"],
-				"Contains_AND": ["980"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "9800", "paying $"],
-				"MaxPrice": 200
-			},
-			{
-				"tags": ["GPU", "Nvidia", "2x8", "gtx 980", "9xx", "high"],
-				"Contains_AND": ["980", "TI"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "9800", "paying $"],
-				"MaxPrice": 230
-			},
-			{
-				"tags": ["GPU", "Nvidia", "low power", "gtx 1050", "10xx", "low"],
-				"Contains_AND": ["1050"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*960", "960\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 100
 			},
 			{
-				"tags": ["GPU", "Nvidia", "low power", "gtx 1050", "gtx 1050ti", "10xx", "low"],
-				"Contains_AND": ["1050"],
-				"Contains_OR": [" ti", " ti", "4g", "4 g", "four g"],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
-				"MaxPrice": 120
+				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 970", "9xx", "mid", "high"],
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*970", "970\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 180
 			},
 			{
-				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 1060", "10xx", "mid", "high"],
-				"Contains_AND": [""],
-				"Contains_OR": ["1060", "P106"],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
+				"tags": ["GPU", "Nvidia", "2x8", "gtx 980", "9xx", "high"],
+				"filter": "title",
+				"Contains_AND":["980"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*980", "980\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "9800", "((GTX|RTX)?\\W*(980|1060|1070|1080|1650|1660|2060|2070|2080|3060|3070|3080)\\W?(TI|super)?\\W*){3,}"],
+				"MaxPrice": 250
+			},
+			{
+				"tags": ["GPU", "Nvidia", "2x8", "gtx 980ti", "9xx", "high"],
+				"filter": "title",
+				"Contains_AND":["980", "TI"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*980\\W*TI", "980\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{3}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 350
+			},
+			{
+				"tags": ["GPU", "Nvidia", "low power", "gtx 1050", "10xx", "low"],
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1050", "1050\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 130
+			},
+			{
+				"tags": ["GPU", "Nvidia", "low power", "gtx 1050", "gtx 1050ti", "10xx", "low"],
+				"filter": "title",
+				"Contains_AND": ["1050"],
+				"Contains_OR": ["(gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1050\\W*TI", "1050\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)", "\\W(4|four)\\W*(gb|gig|mb)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 150
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 1060", "10xx", "mid", "high"],
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1060", "1060\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)", "P106"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 180
+			},
+			{
+				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 1060ti", "10xx", "mid", "high"],
+				"filter": "title",
 				"Contains_AND": ["1060"],
-				"Contains_OR": ["6g", "6 g", "six g", "ti ", " ti", "1060ti"],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
-				"MaxPrice": 170
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1060\\W*TI", "1060\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)", "\\W(6|six)\\W*(gb|gig|mb)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 220
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 1070", "10xx", "high"],
-				"Contains_AND": ["1070"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "1070 mobile", "paying $"],
-				"MaxPrice": 290
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1070", "1070\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "((GTX|RTX)?\\W*(980|1060|1070|1080|1650|1660|2060|2070|2080|3060|3070|3080)\\W?(TI|super)?\\W*){3,}"],
+				"MaxPrice": 400
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 1070", "10xx", "high"],
+				"filter": "title",
 				"Contains_AND": ["1070", "TI"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "1070 mobile", "paying $"],
-				"MaxPrice": 325
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1070\\W*TI", "1070\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "((GTX|RTX)?\\W*(980|1060|1070|1080|1650|1660|2060|2070|2080|3060|3070|3080)\\W?(TI|super)?\\W*){3,}"],
+				"MaxPrice": 450
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 1080", "10xx", "high"],
-				"Contains_AND": ["1080"],
-				"Contains_OR": [],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "faulty", "1080p", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "paying $"],
-				"MaxPrice": 500
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1080", "1080\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "1080p", "((GTX|RTX)?\\W*(980|1060|1070|1080|1650|1660|2060|2070|2080|3060|3070|3080)\\W?(TI|super)?\\W*){3,}"],
+				"MaxPrice": 600
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6 1x8", "1x8", "2x6", "gtx 1080", "gtx 1080ti", "10xx", "high"],
-				"Contains_AND": [""],
-				"Contains_OR": ["1080ti", "1080 ti", "11gb", "11 gb"],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
-				"MaxPrice": 650
+				"filter": "title",
+				"Contains_AND": ["1080", "TI"],
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1080\\W*TI", "1080\\W*TI\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC)", "11\\W*(gb|gig)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "1080p", "((GTX|RTX)?\\W*(980|1060|1070|1080|1650|1660|2060|2070|2080|3060|3070|3080)\\W?(TI|super)?\\W*){3,}"],
+				"MaxPrice": 700
 			},
 			{
 				"tags": ["GPU", "Nvidia", "low power", "gtx 1650", "16xx", "high"],
+				"filter": "title",
 				"Contains_AND": ["1650"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
-				"MaxPrice": 200
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1650", "1650\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 250
 			},
 			{
-				"tags": ["GPU", "Nvidia", "low power", "gtx 1650", "16xx", "high"],
-				"Contains_AND": ["1650 super"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
-				"MaxPrice": 230
-			},
-			{
-				"tags": ["GPU", "Nvidia", "1x6", "gtx 1660", "16xx", "high"],
-				"Contains_AND": ["1660"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
-				"MaxPrice": 280
-			},
-			{
-				"tags": ["GPU", "Nvidia", "1x6", "gtx 1660", "16xx", "high"],
-				"Contains_AND": ["1660 super"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "SLI bridge", "box only", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy"],
+				"tags": ["GPU", "Nvidia", "low power", "gtx 1650 super", "16xx", "high"],
+				"filter": "title",
+				"Contains_AND": ["1650"],
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)(\\W)*1650(\\W)*s"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
 				"MaxPrice": 300
+			},
+			{
+				"tags": ["GPU", "Nvidia", "1x6", "gtx 1660", "16xx", "high"],
+				"filter": "title",
+				"Contains_AND": ["1660"],
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1660", "1660\\W*(gpu|graphics\\W*card|video\\W*card|gtx|OC|TI)"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 450
+			},
+			{
+				"tags": ["GPU", "Nvidia", "1x6", "gtx 1660 super", "16xx", "high"],
+				"filter": "title",
+				"Contains_OR": ["(gt(x|s)?|rtx|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*1660\\W*s"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 500
 			}
 		]	
 	},	
@@ -404,73 +496,91 @@
 		"criteria": [
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 2060", "20xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["2060"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "upgraded to 2060", "upgraded to RTX 2060", "upgraded to RTX2060", "got a 2060", "got the 2060", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*"],
-				"MaxPrice": 350
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 500
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 2060", "20xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["2060 super"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "upgraded to 2060", "upgraded to a 2060", "upgraded to RTX 2060", "upgraded to RTX2060", "got a 2060", "got the 2060", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*"],
-				"MaxPrice": 400
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 550
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 2070", "20xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["2070"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "upgraded to 2070", "upgraded to RTX 2070", "upgraded to RTX2070", "got a 2070", "got the 2070", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*"],
-				"MaxPrice": 580
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 650
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 2070", "20xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["2070 super"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "upgraded to 2070", "upgraded to RTX 2070", "upgraded to RTX2070", "got a 2070", "got the 2070", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*"],
-				"MaxPrice": 620
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 700
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 2080", "20xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["2080"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "upgraded to 2080", "upgraded to RTX 2080", "upgraded to RTX2080", "got a 2080", "got the 2080", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*"],
-				"MaxPrice": 750
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 800
 			},	
 			{
-				"tags": ["GPU", "Nvidia", "1x6", "RTX 2080", "20xx", "High", "RTX"],
+				"tags": ["GPU", "Nvidia", "1x6", "RTX 2080 super", "20xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["2080 super"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "upgraded to 2080", "upgraded to RTX 2080", "upgraded to RTX2080", "got a 2080", "got the 2080", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*"],
-				"MaxPrice": 775
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 860
 			},
 			{
-				"tags": ["GPU", "Nvidia", "1x6", "RTX 2080", "20xx", "High", "RTX"],
+				"tags": ["GPU", "Nvidia", "1x6", "RTX 2080 ti", "20xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["2080", "TI"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "upgraded to 2080", "upgraded to RTX 2080", "upgraded to RTX2080", "got a 2080", "got the 2080", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*", "-sold", " - sold", "scam", "bot"],
-				"MaxPrice": 800
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 1000
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 3060", "30xx", "High", "RTX"],
+				"filter": "title",
 				"Contains_AND": ["3060"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy", "need to buy", "not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "Need a RTX", "Need an RTX", "upgraded to 3060", "upgraded to a 3060", "upgraded to RTX 3060", "upgraded to RTX3060", "upgrade to a rtx 3060", "upgraded to an rtx 3060", "got a 3060", "got the 3060", "get a 3060", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*", "-sold", " - sold", "scam", "bot", "help place order for rtx"],
-				"MaxPrice": 750
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 800
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 3070", "30xx", "High", "RTX"],
-				"Contains_AND": ["3070"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy", "need to buy", "not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "Need a RTX", "Need an RTX", "upgraded to 3070", "upgraded to a 3070", "upgraded to RTX 3070", "upgraded to RTX3070", "upgrade to a rtx 3070", "upgraded to an rtx 3070", "got a 3070", "got the 3070", "get a 3070", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*", "-sold", " - sold", "scam", "bot", "help place order for rtx"],
-				"MaxPrice": 950
+				"filter": "title",
+				"Contains_OR": ["3070"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 1100
 			},
 			{
 				"tags": ["GPU", "Nvidia", "1x6", "RTX 3080", "30xx", "High", "RTX"],
-				"Contains_AND": ["3080"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["Waterblock", "Water block", "like to buy", "need to buy", "not working", "no display", "broken", "for parts", "faulty", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:","Need a RTX", "Need an RTX", "upgraded to 3080", "upgraded to a 3080", "upgraded to RTX 3080", "upgraded to RTX3080", "upgrade to a rtx 3080", "upgraded to an rtx 3080", "got a 3080", "got the 3080", "get a 3080", "new pc with 3080", "trade", "trading", "(SOLD)", "[SOLD]", "*Sold*", "-sold", " - sold", "scam", "bot", "help place order for rtx"],
-				"MaxPrice": 1450
+				"filter": "title",
+				"Contains_OR": ["3080"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "(\\sfor|support(s)|(can|will) run|ready for|works with|need)(\\W*\\w*){0,3}\\d{3}", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*\\d{4}", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "\\d{4}(\\s|\\-)m", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}\\d{3}", "(upgraded|bought|got)(\\W*\\w*){0,4}\\d{0,3}", "have(\\W*\\w*){0,3}\\d{3}\\d?\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}\\d{3}", "((RTX|GTX)?\\W*\\d{3,4}\\W*\\w*\\W*){3,}"],
+				"MaxPrice": 1500
 			}
 		]
 	},
@@ -481,136 +591,194 @@
 		"categories": [128, 772, 29324001, 29659001],
 		"criteria": [
 			{
-				"tags": ["GPU", "Nvidia", "2x8", "Titan", "10xx", "9xx", "7xx", "high", "Ultra"],
-				"Contains_AND": ["Titan"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted"],
+				"tags": ["GPU", "Nvidia", "2x8", "Titan", "high", "Ultra"],
+				"filter": "title",
+				"Contains_OR": ["Titan"],
+				"Contains_NOR": ["scalper", "scam", "not working", "no display", "(gpu|water)(\\W*cooling)?\\W*block", "box\\W*only", "no\\W*gpu", "broken", "for parts", "faulty", "(cooling|cooler|gpu) fan", "like to buy", "Wanted", "Looking for", "buying", "purchasing", "(willing|looking|want(ing)|going|planning|like|trying)\\sto\\s(buy|purchase|get a)", "(paying|offering|buying for)\\W*\\d+"],
+				"Ignore": ["vs\\W*(gtx|rtx|nvidia)\\W*titan", "(moved|sold|took out|except)\\W*((the|my|a|RTX|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}titan", "Fan (broken|not working)", "(trade for|with)\\W*((the|my|a|or|rtx|gt(x|s)?|Nvidia|N|ASUS|MSI|PNY|ROG|Gigabyte|EVGA|zotac|geforce)\\W*){0,3}titan}", "(upgraded|bought|got)(\\W*\\w*){0,4}titan", "have(\\W*\\w*){0,3}titan\\w*\\W*now", "(selling( this| it| now)* (to|so|because)|reason for (selling|sale))\\W*(\\w*\\W*){1,6}titan"],
 				"MaxPrice": 400
 			}
 		]
 	},
 	{
 		"SearchTerms": ["HD"],
-		"PriceMargin": 15.01,
-		"MinPrice": 0,
+		"PriceMargin": 15,
+		"MinPrice": 1.01,
 		"categories": [128, 772, 29324001, 29659001],
 		"criteria": [
 			{
+				"tags": ["GPU", "AMD", "2x6", "HD 8990", "HD 8xxx"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*8990"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty", "laptop"],
+				"MaxPrice": 90
+			},
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 8950", "HD 8870", "HD 8xxx"],
+				"filter": "full",
+				"Contains_AND": [""],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*8950", "(AMD|Radeon|R7|R9|RX|HD)\\W*8870"],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty", "laptop"],
+				"MaxPrice": 80
+			},
+			{
+				"tags": ["GPU", "AMD", "low power", "HD 8770", "HD 8670", "HD 8730", "HD 8xxx"],
+				"filter": "full",
+				"Contains_AND": [""],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*(8770|8760|8730)"],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty", "laptop"],
+				"MaxPrice": 70
+			},
+			{
+				"tags": ["GPU", "AMD", "low power", "HD 8670", "HD 8570", "HD 8xxx"],
+				"filter": "full",
+				"Contains_AND": [""],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*(8670|8570)"],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty", "laptop"],
+				"MaxPrice": 65
+			},
+			{
+				"tags": ["GPU", "AMD", "low power", "HD 8490", "HD 8470", "HD 8xxx", "dumpster"],
+				"filter": "full",
+				"Contains_AND": [""],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*8490", "(AMD|Radeon|R7|R9|RX|HD)\\W*8470"],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty", "laptop"],
+				"MaxPrice": 10
+			},
+			{
 				"tags": ["GPU", "AMD", "2x6", "HD 7990", "HD 7xxx", "dx11"],
-				"Contains_AND": ["7990"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*7990"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 50
 			},
 			{
 				"tags": ["GPU", "AMD", "2x6", "HD 7970", "HD 7xxx", "dx11"],
-				"Contains_AND": ["7970"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*7970"],
 				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 40
+			},
+			{
+				"tags": ["GPU", "AMD", "2x6", "HD 78xx", "dx11"],
+				"filter": "full",
+				"Contains_AND": [""],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*7950", "(AMD|Radeon|R7|R9|RX|HD)\\W*7870", "(AMD|Radeon|R7|R9|RX|HD)\\W*7850"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 30
 			},
 			{
-				"tags": ["GPU", "AMD", "2x6", "HD 78xx", "dx11"],
-				"Contains_AND": [""],
-				"Contains_OR": ["7950", "7870", "7850"],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
-				"MaxPrice": 25
-			},
-			{
 				"tags": ["GPU", "AMD", "1x6", "HD 77xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["7790", "7770"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*7790", "(AMD|Radeon|R7|R9|RX|HD)\\W*7770"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "HD 7750", "HD 77xx", "dumpster", "dx11"],
-				"Contains_AND": ["7750"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*7750"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "HD 7670", "HD 7xxx", "dumpster", "dx11"],
-				"Contains_AND": ["7670"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*7670"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "HD 7670", "HD 7xxx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["7570", "7510"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*7570", "(AMD|Radeon|R7|R9|RX|HD)\\W*7510"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 15			
 			},
 			{
 				"tags": ["GPU", "AMD", "2x6", "HD 6990", "6xxx", "dumpster", "dx11"],
-				"Contains_AND": ["6990"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*6990"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 45
 			},
 			{
 				"tags": ["GPU", "AMD", "2x6", "HD 69xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["6970", "6950"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*6970", "(AMD|Radeon|R7|R9|RX|HD)\\W*6950"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 25
 			},
 			{
 				"tags": ["GPU", "AMD", "2x6", "HD 69xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["6950", "6930"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*6950", "(AMD|Radeon|R7|R9|RX|HD)\\W*6930"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20
 			},
 			{
 				"tags": ["GPU", "AMD", "1x6", "HD 67xx", "7xxx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["6790", "6770", "6750"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*6790", "(AMD|Radeon|R7|R9|RX|HD)\\W*6770", "(AMD|Radeon|R7|R9|RX|HD)\\W*6750"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "HD 6770", "HD 67xx", "dumpster", "dx11"],
-				"Contains_AND": ["6770"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*6770"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "HD 6xxx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["6750", "6670", "6570"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*6750", "(AMD|Radeon|R7|R9|RX|HD)\\W*6670", "(AMD|Radeon|R7|R9|RX|HD)\\W*6570"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 15			
 			},
 			{
 				"tags": ["GPU", "AMD", "HD 5970", "HD 5xxx", "HD 59xx", "dumpster", "dx11"],
-				"Contains_AND": ["5970"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*5970"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
 				"tags": ["GPU", "AMD", "HD 5850", "HD 59xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["5850", "5830"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*5850", "(AMD|Radeon|R7|R9|RX|HD)\\W*5830"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
-				"tags": ["GPU", "AMD", "HD 5870", "HD 57xx", "dumpster", "dx11"],
-				"Contains_AND": ["5770"],
+				"tags": ["GPU", "AMD", "HD 5770", "HD 57xx", "dumpster", "dx11"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX|HD)\\W*5770"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 15			
 			},
 			{
-				"tags": ["GPU", "AMD", "low power", "HD 5750", "HD 57xx", "dumpster", "dx11"],
+				"tags": ["GPU", "AMD", "low power", "HD 5750", "HD 5670", "HD 57xx", "dumpster", "dx11"],
+				"filter": "full",
 				"Contains_AND": [""],
-				"Contains_OR": ["5750", "5670", "5570"],
+				"Contains_OR": ["(AMD|Radeon|R7|R9|RX|HD)\\W*5750", "(AMD|Radeon|R7|R9|RX|HD)\\W*5670", "(AMD|Radeon|R7|R9|RX|HD)\\W*5570"],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 10			
 			}
@@ -624,31 +792,35 @@
 		"criteria": [
 			{
 				"tags": ["GPU", "AMD", "low power", "R5", "2xx", "dumpster"],
-				"Contains_AND": ["330"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|R5|R7|R9|RX)\\W*330"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
+				"MaxPrice": 15			
+			},
+			{
+				"tags": ["GPU", "AMD", "low power", "R5", "2xx", "dumpster"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|R5|R7|R9|RX)\\W*235"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 10			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "R5", "2xx", "dumpster"],
-				"Contains_AND": ["235"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|R5|R7|R9|RX)\\W*230"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 10			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "R5", "2xx", "dumpster"],
-				"Contains_AND": ["230"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|R5|R7|R9|RX)\\W*220"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 10			
-			},
-			{
-				"tags": ["GPU", "AMD", "low power", "R5", "2xx", "dumpster"],
-				"Contains_AND": ["220"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
-				"MaxPrice": 5			
 			}
 		]
 	},
@@ -660,70 +832,80 @@
 		"criteria": [
 			{
 				"tags": ["GPU", "AMD", "low power", "R7", "R7 240", "2xx", "dumpster"],
-				"Contains_AND": ["240"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*240"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "broken", "for parts", "faulty"],
 				"MaxPrice": 20			
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "R7", "2xx", "dumpster"],
-				"Contains_AND": ["250"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*250"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "no display", "broken", "for parts", "faulty", "cooling fan", "cooler fan", "gpu fan"],
 				"MaxPrice": 25			
 			},
 			{
 				"tags": ["GPU", "AMD", "1x6", "R7", "2xx", "dumpster"],
-				"Contains_AND": ["260"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*260"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "no display", "broken", "for parts", "faulty", "cooling fan", "cooler fan", "gpu fan"],
 				"MaxPrice": 40			
 			},
 			{
 				"tags": ["GPU", "AMD", "1x6", "R7", "2xx", "low"],
-				"Contains_AND": ["265"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*265"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "no display", "broken", "for parts", "faulty", "cooling fan", "cooler fan", "gpu fan"],
 				"MaxPrice": 45		
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "R7", "2xx", "dumpster"],
-				"Contains_AND": ["350"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*350"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["not working", "no display", "broken", "for parts", "faulty", "cooling fan", "cooler fan", "gpu fan"],
 				"MaxPrice": 25			
 			},
 			{
 				"tags": ["GPU", "AMD", "1x6", "1x6 1x8", "R7 360", "3xx", "low"],
-				"Contains_AND": ["360"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*360"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
+				"Contains_NOR": ["(AMD|Radeon|R5|R7|R9|RX)\\W*like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "laptop"],
 				"MaxPrice": 45
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "1x6 1x8", "R7 370", "3xx", "low"],
-				"Contains_AND": ["370"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*370"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
 				"MaxPrice": 60
 			},
 			{
-				"tags": ["GPU", "AMD", "1x8", "low power", "R7 435", "4xx", "low"],
-				"Contains_AND": ["435"],
-				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 35
-			},
-			{
 				"tags": ["GPU", "AMD", "1x8", "low power", "R7 430", "4xx", "low"],
-				"Contains_AND": ["430"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*430"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
 				"MaxPrice": 25
 			},
 			{
+				"tags": ["GPU", "AMD", "1x8", "low power", "R7 435", "4xx", "low"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*435"],
+				"Contains_OR": [""],
+				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
+				"MaxPrice": 35
+			},
+			{
 				"tags": ["GPU", "AMD", "1x8", "low power", "R7 450", "4xx", "low"],
-				"Contains_AND": ["450"],
+				"filter": "full",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*450"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
 				"MaxPrice": 55
@@ -739,59 +921,75 @@
 		"criteria": [
 			{
 				"tags": ["GPU", "AMD", "1x8", "1x6 1x8", "R9 270", "2xx", "low"],
-				"Contains_AND": ["270"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*270"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "gtx 270"],
-				"MaxPrice": 75
+				"MaxPrice": 85,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*270"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "1x6 1x8", "R9 280", "2xx", "low", "mid"],
-				"Contains_AND": ["280"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*280"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "GTX 280"],
-				"MaxPrice": 120
+				"MaxPrice": 125,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*280"]
 			},
 			{
 				"tags": ["GPU", "AMD", "2x8", "R9 290", "2xx", "mid"],
-				"Contains_AND": ["290"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*290"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 135
+				"MaxPrice": 140,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*290"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "1x6 1x8", "R7 370", "3xx"],
-				"Contains_AND": ["370"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*370"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 100
+				"MaxPrice": 110,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*370"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "1x6 1x8", "R9 380", "3xx", "mid"],
-				"Contains_AND": ["380"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*380"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 130
+				"MaxPrice": 130,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*380"]
 			},
 			{
 				"tags": ["GPU", "AMD", "2x8", "R9 390", "3xx", "mid", "high"],
-				"Contains_AND": ["390"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R5|R7|R9|RX)\\W*390"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 160
+				"MaxPrice": 160,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*390"]
 			},
 			{
-				"tags": ["GPU", "AMD", "2x8", "R9 390", "3xx", "mid", "high"],
+				"tags": ["GPU", "AMD", "2x8", "R9 Fury", "3xx", "mid", "high"],
+				"filter": "title",
 				"Contains_AND": ["Fury"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan", "hyperX", "Kingston", "DDR3"],
-				"MaxPrice": 250
+				"MaxPrice": 250,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*Fury"]
 			},
 			{
-				"tags": ["GPU", "AMD", "2x8", "R9 390", "3xx", "mid", "high"],
+				"tags": ["GPU", "AMD", "2x8", "R9 Nano", "3xx", "mid", "high"],
+				"filter": "title",
 				"Contains_AND": ["Nano"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 200
+				"MaxPrice": 200,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*Nano"]
 			}
 		]
 	},
@@ -803,80 +1001,102 @@
 		"criteria": [
 			{
 				"tags": ["GPU", "AMD", "1x8", "rx 460", "rx 4xx", "mid", "high"],
-				"Contains_AND": ["460"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*460"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy", "not working", "no display", "broken", "for parts", "Faulty", "Wanted", "GTX 460", "gtx460", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 80
+				"MaxPrice": 80,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*460"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "rx 470", "rx 4xx", "mid", "high"],
-				"Contains_AND": ["470"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*470"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "GTX 470", "gtx470", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 130
+				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "GTX 470", "gtx470", "7470", "cooling fan", "cooler fan", "gpu fan"],
+				"MaxPrice": 130,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*470"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "1x6 1x8", "rx 480", "rx 4xx", "mid", "high"],
-				"Contains_AND": ["480"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*480"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "GTX 480", "GTX480", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 145
+				"MaxPrice": 145,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*480"]
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "rx 540", "rx 5xx", "low", "low power"],
-				"Contains_AND": ["540"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*540"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "GTX 560", "gtx560", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 30
+				"MaxPrice": 30,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*540"]
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "rx 550", "rx 5xx", "low", "low power"],
-				"Contains_AND": ["550"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*550"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "GTX 560", "gtx560", "cooling fan", "cooler fan", "gpu fan", "550W"],
-				"MaxPrice": 50
+				"MaxPrice": 50,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*550"]
 			},
 			{
 				"tags": ["GPU", "AMD", "low power", "rx 560", "rx 5xx", "low", "low power"],
-				"Contains_AND": ["560"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*560"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "GTX 560", "gtx560", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 100
+				"MaxPrice": 100,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*560"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "rx 570", "rx 5xx", "high"],
-				"Contains_AND": ["570"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*570"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "no display", "broken", "for parts", "Faulty", "GTX 570", "gtx570", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 105
+				"MaxPrice": 105,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*570"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "1x6 1x8", "rx 580", "rx 5xx", "high"],
-				"Contains_AND": ["580"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*580"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "Wanted", "Looking for", "buying", "looking to buy", "Want to buy", "Will buy", "WTB ", " WTB", "WTB:", "no display", "broken", "for parts", "Faulty", "GTX 580", "GTX580", "cooling fan", "cooler fan", "gpu fan", "water"],
-				"MaxPrice": 180
+				"MaxPrice": 180,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*580"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x6", "rx 5500", "rx 5xxx", "high"],
-				"Contains_AND": ["5500"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*5500"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "HD 5500", "cooling fan", "cooler fan", "gpu fan"],
-				"MaxPrice": 200
+				"MaxPrice": 200,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*5500"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "rx 5600", "rx 5xx", "high"],
-				"Contains_AND": ["5600"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*5600"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "HD 5600", "cooling fan", "cooler fan", "gpu fan", "water"],
-				"MaxPrice": 250
+				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "HD 5600", "cooling fan", "cooler fan", "gpu fan", "water", "sodimm", "DDR4"],
+				"MaxPrice": 250,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*5600"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "rx 5700", "rx 5xx", "high"],
-				"Contains_AND": ["5700"],
+				"filter": "title",
+				"Contains_AND": ["(AMD|Radeon|R7|R9|RX)\\W*5700"],
 				"Contains_OR": [""],
 				"Contains_NOR": ["like to buy","not working", "no display", "broken", "for parts", "Faulty", "Wanted", "HD 5700", "cooling fan", "cooler fan", "gpu fan", "water"],
-				"MaxPrice": 300
+				"MaxPrice": 300,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*5700"]
 			}
 		]
 	},
@@ -888,17 +1108,37 @@
 		"criteria": [
 			{
 				"tags": ["GPU", "AMD", "2x8", "Vega 56", "Vega", "high"],
+				"filter": "title",
 				"Contains_AND": ["Vega"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["ryzen", "athlon", "like to buy","not working", "no display", "broken", "for parts", "Wanted", "Want to buy", "looking for", "looking to buy", "speaker", "woofer", "Vegas", "cooling fan", "cooler fan", "gpu fan", "water"],
-				"MaxPrice": 400
+				"Contains_NOR": ["ryzen", "athlon", "like to buy","not working", "no display", "broken", "for parts", "Wanted", "Want to buy", "looking for", "looking to buy", "speaker", "woofer", "Vegas", "cooling fan", "cooler fan", "gpu fan", "water", "Razer core"],
+				"MaxPrice": 400,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*Vega"]
 			},
 			{
 				"tags": ["GPU", "AMD", "1x8", "rx 470", "rx 4xx", "mid", "high"],
-				"Contains_AND": ["Vega", "64"],
+				"filter": "title",
+				"Contains_AND": ["Vega\\W?64"],
 				"Contains_OR": [""],
-				"Contains_NOR": ["ryzen", "athlon", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Want to buy", "looking for", "looking to buy", "speaker", "woofer", "Vegas", "cooling fan", "cooler fan", "gpu fan", "water"],
-				"MaxPrice": 500
+				"Contains_NOR": ["ryzen", "athlon", "like to buy","not working", "no display", "broken", "for parts", "faulty", "Wanted", "Want to buy", "looking for", "looking to buy", "speaker", "woofer", "Vegas", "cooling fan", "cooler fan", "gpu fan", "water", "Razer core"],
+				"MaxPrice": 500,
+				"Ignore":["With a(n)\\W*(AMD|Radeon|R7|R9|RX)?\\W*Vega"]
+			}
+		]
+	},
+	{
+		"SearchTerms": ["cpu", "processor"],
+		"PriceMargin": 50,
+		"MinPrice": 1,
+		"categories": [128, 772, 29324001, 29659001],
+		"criteria": [
+			{ 
+				"tags": ["CPU", "Intel", "core 2 quad", "Qxxxx", "dumpster", "775"],
+				"filter": "full",
+				"Contains_AND": ["Q"],
+				"Contains_OR": ["Q6400", "Q6600", "Q6700", "6800", "6850", "Q8200", "Q8300", "Q8400", "Q9300", "Q9400", "Q9450", "Q9500", "Q9505", "Q9550", "Q9650", "9750", "9770", "9775"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold "],
+				"MaxPrice": 15
 			}
 		]
 	},
@@ -910,65 +1150,66 @@
 		"criteria": [
 			{ 
 				"tags": ["CPU", "Intel", "i3", "0xxx", "low", "Clarkdale", "Westmere", "Lynnfield", "Nehalm"],
+				"filter": "full",
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["530", "540", "550", "560", "Clarkdale", "Westmere", "Lynnfield", "Nehalm", "1st gen", "first gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 5
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i3", "2xxx", "low", "Sandy Bridge"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["2100", "2102", "2105", "2120", "2125", "2130", "Sandy Bridge", "Sandy-Bridge", "2nd gen", "second gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 15
 			},
 			{
 				"tags": ["CPU", "Intel", "i3", "3xxx", "low", "Ivy Bridge"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["3210", "3220", "3225", "3240", "3245", "3250", "Ivy Bridge", "Ivy-Bridge", "3rd gen", "third gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 20
 			},
 			{
 				"tags": ["CPU", "Intel", "i3", "4xxx", "low", "Haswell"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["4130", "4150", "4160", "4170", "4340", "4350", "4370", "Haswell", "4th gen", "fourth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 40
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i3", "6xxx", "mid", "high", "Skylake"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["6098", "6100", "6300", "6320", "Skylake", "Sky lake", "6th gen", "sixth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 60
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i3", "7xxx", "High", "Kaby Lake"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["7100", "7300", "7320", "7350", "Kaby Lake", "Kaby-lake", "7th gen", "seventh gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 85
 			},
 			{
 				"tags": ["CPU", "Intel", "i3", "8xxx", "mid", "Coffee Lake"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["8100", "8300", "8350", "Coffee Lake", "8th gen", "eigth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 110
 			},
 			{
 				"tags": ["CPU", "Intel", "i3", "9xxx", "mid", "Coffee Lake"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["9100", "9300", "9320", "9350", "Coffee Lake", "9th gen", "ninth gen", "nineth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 130
 			},
 			{
 				"tags": ["CPU", "Intel", "i3", "10xxx", "mid", "Comet Lake"],
 				"Contains_AND": ["i3"],
 				"Contains_OR": ["10100", "10300", "10320", "9350", "Comet Lake", "10th gen", "tenth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 150
 			}
 		]
@@ -983,63 +1224,63 @@
 				"tags": ["CPU", "Intel", "i5", "0xxx", "low", "Clarkdale", "Westmere", "Lynnfield", "Nehalm"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["750", "760", "650", "655", "660", "661", "670", "680", "Clarkdale", "Westmere", "Lynnfield", "Nehalm", "1st gen", "first gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 10
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i5", "2xxx", "mid", "low", "Sandy Bridge"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["2300", "2310", "2320", "2380", "2400", "2450", "2500", "2550", "Sandy Bridge", "Sandy-Bridge", "2nd gen", "second gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 20
 			},
 			{
 				"tags": ["CPU", "Intel", "i5", "3xxx", "mid", "Ivy Bridge"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["3330", "3340", "3350", "3450", "3470", "3550", "3570", "Ivy Bridge", "Ivy-Bridge", "3rd gen", "third gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 35
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i5", "4xxx", "mid", "Haswell"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["4430", "4440", "4460", "4570", "4590", "4670", "4690", "Haswell", "4th gen", "fourth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 55
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i5", "6xxx", "mid", "high", "Skylake"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["6400", "6402", "6500", "6600", "Skylake", "Sky lake", "6th gen", "sixth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 110
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i5", "7xxx", "High", "Kaby Lake"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["7400", "7500", "7600", "7640", "Kaby Lake", "Kaby-lake", "7th gen", "seventh gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 130
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i5", "8xxx", "High", "Coffee Lake"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["8400", "8500", "8600", "Coffee Lake", "8th gen", "eigth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 150
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i5", "9xxx", "High", "Coffee Lake"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["9400", "9500", "9600", "Coffee Lake", "9th gen", "ninth gen", "nineth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 160
 			},
 			{
 				"tags": ["CPU", "Intel", "i5", "10xxx", "High", "Comet Lake"],
 				"Contains_AND": ["i5"],
 				"Contains_OR": ["10400", "10500", "10600", "Comet Lake", "10th gen", "tenth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 200
 			}
 		]
@@ -1054,71 +1295,71 @@
 				"tags": ["CPU", "Intel", "i7", "0xxx", "low", "mid", "Clarkdale", "Westmere", "Lynnfield", "Nehalm"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["920", "930", "940", "950", "960", "965", "975", "860", "870", "875", "880", "970", "980", "990", "995", "Clarkdale", "Westmere", "Lynnfield", "Nehalm", "gulftown", "1st gen", "first gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 25
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i7", "2xxx", "mid", "Sandy Bridge"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["2600", "2700", "Sandy Bridge", "Sandy-Bridge", "2nd gen", "second gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 60
 			},
 			{
 				"tags": ["CPU", "Intel", "i7", "3xxx", "mid", "high", "Ivy Bridge"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["3770", "3820", "3930", "3960", "3970", "Ivy Bridge", "Ivy-Bridge", "3rd gen", "third gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 100
 			},
 			{
 				"tags": ["CPU", "Intel", "i7", "4xxx", "High", "Haswell"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["4770", "4771", "4790", "4820", "4930", "4960", "Haswell", "4th gen", "fourth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 150
 			},
 			{
 				"tags": ["CPU", "Intel", "i7", "5xxx", "High", "Haswell", "Broadwell"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["5820", "5930", "5960", "Haswell", "5th gen", "fifth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 160
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i7", "6xxx", "mid", "high", "Skylake"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["6700", "6800", "6850", "6900", "6950", "Skylake", "Sky lake", "6th gen", "sixth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "fx 6800", "fx6800", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "fx 6800", "fx6800", "heat sink only", "laptop cpu", "notebook cpu"],
 				"MaxPrice": 200
 			},
 			{ 
 				"tags": ["CPU", "Intel", "i7", "7xxx", "High", "Kaby Lake"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["7700", "7740", "7800", "7820", "9800", "Kaby Lake", "Kaby-lake", "7th gen", "seventh gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
-				"MaxPrice": 275
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
+				"MaxPrice": 225
 			},
 			{
 				"tags": ["CPU", "Intel", "i7", "8xxx", "high", "Coffee Lake"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["8700", "8086", "Coffee Lake", "8th gen", "eigth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
-				"MaxPrice": 300
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
+				"MaxPrice": 250
 			},		
 			{
 				"tags": ["CPU", "Intel", "i7", "9xxx", "High", "Coffee Lake"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["9700", "Coffee Lake", "9th gen", "ninth gen", "nineth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
-				"MaxPrice": 400
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
+				"MaxPrice": 350
 			},
 			{
 				"tags": ["CPU", "Intel", "i7", "10xxx", "High", "Comet Lake"],
 				"Contains_AND": ["i7"],
 				"Contains_OR": ["10700", "Comet Lake", "10th gen", "tenth gen"],
-				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu", " sold", "sold ", "*sold*"],
-				"MaxPrice": 450
+				"Contains_NOR": ["Wanted", "Want to buy", "like to buy", "heat sink only", "laptop cpu", "notebook cpu"],
+				"MaxPrice": 400
 			}
 		]
 	},
@@ -1409,7 +1650,7 @@
 				"Contains_AND": [""],
 				"Contains_OR": ["8gb", "8 gb", "2x4", "2x 4", "2 x4", "2 x 4", "4x2", "4x 2", "4 x2", "4 x 2"],
 				"Contains_NOR": ["apple", "mac", "DDR1", "DDR2", "DDR 2", "DDR4", "DDR 4", "server", "ECC", "laptop", "Notebook", "ultrabook", "SODIMM", "SO-DIMM", "PC2-", "So Dimm", "512mb", "512 mb", "tablet", "phone", "android", "6400R", "8500R", "10600R", "12800R", "14900R", "17000R"],
-				"MaxPrice": 25
+				"MaxPrice": 30
 			},
 			{
 				"tags": ["ram", "ddr3", "12gb", "High"],
@@ -1422,7 +1663,7 @@
 				"tags": ["ram", "DDR3", "16gb", "High"],
 				"Contains_AND": [""],
 				"Contains_OR": ["16gb", "16 gb", "4x4", "4x 4", "4 x4", "2 x 8", "2x8", "2x 2", "2 x8"],
-				"Contains_NOR": ["apple", "mac", "DDR1", "DDR2", "DDR 2", "DDR4", "DDR 4", "server", "ECC", "laptop", "Notebook", "ultrabook", "SODIMM", "SO-DIMM", "So Dimm", "PC2-", "512mb", "512 mb", "tablet", "phone", "android", "6400R", "8500R", "10600R", "12800R", "14900R", "17000R"],
+				"Contains_NOR": ["apple", "mac", "DDR1", "DDR2", "DDR 2", "DDR4", "DDR 4", "server", "ECC", "laptop", "Notebook", "ultrabook", "SODIMM", "SO-DIMM", "So Dimm", "PC2-", "512mb", "512 mb", "tablet", "phone", "android", "6400R", "8500R", "10600R", "12800R", "14900R", "17000R", "upgraded to 16gb"],
 				"MaxPrice": 60
 			}	
 		]
@@ -1458,7 +1699,7 @@
 				"tags": ["ram", "DDR4", "16gb", "High"],
 				"Contains_AND": [""],
 				"Contains_OR": ["16gb", "16 gb", "4x4", "4x 4", "4 x4", "2 x 8", "2x8", "2x 2", "2 x8"],
-				"Contains_NOR": ["apple", "mac", "DDR1", "DDR2", "DDR 2", "DDR 3", "DDR3", "server", "ECC", "laptop", "Notebook", "ultrabook", "SODIMM", "SO-DIMM", "So Dimm", "PC2-", "512mb", "512 mb", "tablet", "phone", "android", "1600R", "1866R", "2133R", "2400R", "2666R", "2933R", "3200R"],
+				"Contains_NOR": ["apple", "mac", "DDR1", "DDR2", "DDR 2", "DDR 3", "DDR3", "server", "ECC", "laptop", "Notebook", "ultrabook", "SODIMM", "SO-DIMM", "So Dimm", "PC2-", "512mb", "512 mb", "tablet", "phone", "android", "1600R", "1866R", "2133R", "2400R", "2666R", "2933R", "3200R", "upgraded to 16gb"],
 				"MaxPrice": 60
 			}	
 		]
@@ -1686,7 +1927,7 @@
 				"tags": ["PSU", "700W", "high"],
 				"Contains_AND": [""],
 				"Contains_OR": ["750 W", "750w"],
-				"Contains_NOR": ["Broken", "For parts", "laptop", "power supply comes with", "power supply included", "No power supply", "power supply not", "power supply does not", "server"],
+				"Contains_NOR": ["Broken", "For parts", "laptop", "power supply comes with", "power supply included", "No power supply", "power supply not", "power supply does not", "server", "router"],
 				"MaxPrice": 70
 			},
 			{
@@ -1700,30 +1941,51 @@
 	},
 	{
 		"SearchTerms": [""],
-		"PriceMargin": 10,
-		"MinPrice": 10,
+		"PriceMargin": 20,
+		"MinPrice": 5,
 		"categories": [772, 774],
 		"criteria": [
 			{
-				"tags": ["computer", "base", "low", "dumpster"],
+				"tags": ["computer", "base", "dumpster"],
 				"Contains_AND": [""],
-				"Contains_OR": [" PC", " PC", "computer", "desktop", "Work station", "workstation", "work-station", "desk top"],
-				"Contains_NOR": ["android", "looking for", "Bios update", "754", "478", "AM2", " agp ", "sempron", "Pentium 4", " P4 ", "Pentium D", "Athlon 64", "sempron", "atom", "celeron", "laptop", "Notebook", "ultrabook", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "SLI Bridge", "for desktop", "for computer", "for PC", "for a desktop", "for a computer", "for a PC", "modem", "router", "builder", "build you", "build a ", "PC build", "to build", "can build", "will build", "imac", "i mac", "apple", "mac pro", "Mac G5", "Mac g4", "SERVER", ", desktop computers", "repair", "Computer service", "PC service", "recovery", "technician", "server rack", "all in one", "computer keyboard", "desktop keyboard", "desktop keypad", "PC keyboard", "computer mouse", "PC mouse", "gaming mouse", "PC screen", "PC monitor", "Computer screen", "Computer monitor", "desktop monitor", "desktop screen", "PC screen", "computer screen", "computer stand", "PC case", "computer case", "case only", "gaming case", "docking station", "computer holder", "PC power supply", "cooling fan", "computer fan", "PC fan", "Desktop power supply", "Computer power supply", "PC PSU", "desktop PSU", "computer PSU", "PC power supply", "Power source", "power supply for", "computer memory", "desktop memory", "computer ram", "desktop ram", "PC ram", "128m", "256m", "512m", "1gb", "desktop CPU", "desktop hard drive", "computer hard drive", "PC hard drive", "Desktop HDD", "PC HDD", "computer hdd", "PC cable", "computer cable", "PC cable", "computer camera", "computer webcam", "PC webcam", "PC games", "computer games", "tool kit", "ultra small", "mini PC", "mini computer", "thin client", "ultra thin", "ultra slim", "ultra-slim", "SOLD*", "for PC", "for computer", "for desktop", "out of", "card adapter", "KVM switch", "shadow"],
+				"Contains_OR": ["computer", "PC\\W", "desk(\\W)?top", "work(\\W)?station"],
+				"Contains_NOR": ["android", "Bios update", "laptop", "Notebook", "ultrabook", "dummy monitor", "cable management", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "SLI Bridge", "modem", "router", "builder", "\\s(build|make)( \\w*)* (PC|computer|desktop)", "build fee", "service", "i\\W?mac", "apple", "mac pro", "Mac G\\d", "macintosh", "SERVER", "repair", "Computer service", "PC service", "recovery", "technician", "(computer(s)?|PC|desktop|work\\W?station) (mouse|keyboard|monitor|moniter|mointer|screen|display|speakers|case|holder|guide|stand|memory|ram|fan|power supply|mother\\W?board|CPU|PSU|SSD|HDD|hard drive|cable|camera|webcam|client|network|games|parts|stuff|repair)", "RDram", "gaming (keyboard|mouse|case)", "case only", "docking station", "cooling fan", "Power source", "power supply for", "PSU extension", "SAS drive", "SAS hard drive", "tool kit","SOLD\\*", "solder", "for (PC|computer|desktop)", "card adapter", "24 pin", "8 pin", "sata cable", "KVM switch", "shadow", "cash register", "POS system", "Toner Cartridge", "ink cartridge", "\\s(for|in|from|out of)( \\w*)* (PC|computer|desktop|work\\W?station)", "kit of", "tinker board", "tempered"],
+				"Ignore": ["UPC"],
+				"MaxPrice": 10
+			},
+			{
+				"tags": ["computer", "base", "dumpster"],
+				"Contains_AND": [""],
+				"Contains_OR": ["computer", "PC\\W", "desk(\\W)?top", "work(\\W)?station"],
+				"Contains_NOR": ["android", "all\\W?in\\W*(one|1)", "Bios update", "PC3-", "PC3L", "PC2-", "PC4-", "dummy monitor", "cable management",  "754", "478", "sempron", "Athlon\\s?(1|64)", "\\sA\\s?(10|8|6|4)\\W", "atom", "cel(e)?ron", "Intel J", "Pentium(tm)?\\W?(3|4)", "\\sP4\\s", "P4HT", "atom", "laptop", "Notebook", "ultrabook", "supports motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "Windows xp", "windowsxp", "vista", "modem", "router", "builder", "\\s(build|make)( \\w*)* (PC|computer|desktop)", "build fee", "service", "i\\W?mac", "apple", "mac pro", "Mac G\\d", "macintosh", "SERVER", "repair", "Computer service", "PC service", "recovery", "technician", "(computer(s)?|PC|desktop|work\\W?station) (mouse|keyboard|monitor|moniter|mointer|screen|display|speakers|case|holder|guide|stand|memory|ram|fan|power supply|mother\\W?board|CPU|PSU|SSD|HDD|hard drive|cable|camera|webcam|client|network|games|parts|stuff|repair)", "gaming (keyboard|mouse|case)", "RDram", "case only", "docking station", "cooling fan", "Power source", "power supply for", "PSU extension", "SAS drive", "SAS hard drive", "tool kit", "ultra\\W?(small|slim|thin)", "(mini |tiny|micro)\\W?(PC|computer|desktop)", "thin client", "SOLD\\*", "solder", "for (PC|computer|desktop)", "card adapter", "24 pin", "8 pin", "sata cable", "KVM switch", "shadow", "compact", "cash register", "POS system", "media\\W?center", "Toner Cartridge", "ink cartridge", "\\s(for|in|from|out of)( \\w*)* (PC|computer|desktop|work\\W?station)", "kit of", "SFF\\W", "small\\W*form\\W*factor", "slim", "touch", "tinker board", "tempered", "mac and pc"],
+				"Ignore": ["UPC"],
 				"MaxPrice": 40
 			},
 			{
 				"tags": ["computer", "base", "generic"],
 				"Contains_AND": [""],
 				"Contains_OR": ["ryzen", "Xeon", "Xenon", "i3", "i5", "i7", "i9"],
-				"Contains_NOR": ["android", "not working", "broken", "fried", " dead ", " damaged ", "for parts", "vintage", " retro ", "looking for", "Bios update", "775", "754", "478", "AM2", "AM3", "FM1", "DDR2", "DDR 2", " agp ", "sempron", "Phenom", "core2", "Core 2", "Pentium 4", " P4 ", "Pentium E", "PC2-", "Athlon 64", "A8", "A6", "sempron", "atom", "laptop", "Notebook", "ultrabook", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "SLI Bridge"],
-				"MaxPrice": 140
+				"Contains_NOR": ["android", "not working", "broken", "fried", " dead ", " damaged ", "for parts", "vintage", "retro ", "looking for", "Bios update", "775", "754", "478", "AM2", "AM3", "FM1", "DDR2",  "DDR 2",  "PC3-", "PC2-", "PC4-", " agp ", "sempron", "Phenom", "Amd x2", "AMD A4", "AMD A6", "Athlon X2", "II x2", "celeron", "celron", "core2", "Core 2", "E4300", "E4400", "E4500", "E4600", "E4700", "E6300", "E6320", "E6400", "E6420", "E6600", "E6420", "E6600", "E6700", "E6540", "E6550", "E6750", "E6850", "E6305", "E6405", "E6500", "E7200", "E7300", "E7400", "E7500", "E7600", "E8190", "E8200", "E8290", "E8300", "E8400", "E8500", "E8600", "E8700", "Pentium 3", "pentium3", "Pentium III", "Pentium 4", " P4 ", "Pentium E", "Pentium4", "Pentium(R) 4", "Pentium d", "PentiumD", "Athlon 64", "A8", "A6", "sempron", "atom", "laptop", "Notebook", "ultrabook", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "computer motherboard", "PC motherboard", "Desktop motherboard", "SLI Bridge", "laptop", "Windows xp", "windowsxp","vista", "modem", "router", "PC case", "computer case", "case only", "builder", "build you", "build a ", "PC build", "to build", "can build", "will build", "imac", "i mac", "apple", "mac pro", "Mac G5", "Mac g4", "SERVER", ", desktop computers", "repair", "Computer service", "PC service", "recovery", "technician", "server rack", "all in one", "computer keyboard", "desktop keyboard", "desktop keypad", "PC keyboard", "computer mouse", "PC mouse", "gaming mouse", "PC screen", "PC monitor", "Computer screen", "Computer monitor", "desktop monitor", "desktop screen", "PC screen", "computer screen", "computer stand", "PC case", "computer case", "case only", "gaming case", "docking station", "computer holder", "PC power supply", "cooling fan", "computer fan", "PC fan", "Desktop power supply", "Computer power supply", "PC PSU", "desktop PSU", "computer PSU", "PC power supply", "Power source", "power supply for", "computer memory", "desktop memory", "computer ram", "desktop ram", "PC ram", "128m", "256m", "512m", "1gb", "desktop CPU", "desktop hard drive", "computer hard drive", "PC hard drive", "Desktop HDD", "PC HDD", "computer hdd", "PC cable", "computer cable", "PC cable", "computer camera", "computer webcam", "PC webcam",  "computer network", "PC games", "computer games", "tool kit", "ultra small", "mini PC", "mini computer", "thin client", "ultra thin", "ultra slim", "ultra-slim", "SOLD*", "for PC", "for computer", "for desktop", "out of", "card adapter", "24 pin", "8 pin", "sata cable", "KVM switch", "shadow", "optiplex 755", "optiplex 745", "optiplex 5150"],
+				"MaxPrice": 300
 			},
 			{
-				"tags": ["computer", "base", "catchall"],
+				"tags": ["computer", "catchall"],
 				"Contains_AND": [""],
 				"Contains_OR": ["computer", "PC ", " PC", "desktop", "workstation", "work station", "work-station", "optiplex", "Thinkcentre", "Thinkcenter", "ProDesk", "compaq", "HP pro", "dell vostro", "dell inspiron"],
-				"Contains_NOR": ["android", "not working", "broken", "fried", " dead ", " damaged ", "for parts", "vintage", "retro ", "looking for", "Bios update", "775", "754", "478", "AM2", "AM3", "FM1", "DDR2",  "DDR 2",  "PC3-", "PC2-", "PC4-", " agp ", "sempron", "Phenom", "Amd x2", "AMD A4", "AMD A6", "Athlon X2", "II x2", "celeron", "celron", "core2", "Core 2", "E4300", "E4400", "E4500", "E4600", "E4700", "E6300", "E6320", "E6400", "E6420", "E6600", "E6420", "E6600", "E6700", "E6540", "E6550", "E6750", "E6850", "E6305", "E6405", "E6500", "E7200", "E7300", "E7400", "E7500", "E7600", "E8190", "E8200", "E8290", "E8300", "E8400", "E8500", "E8600", "E8700", "Pentium 3", "pentium3", "Pentium III", "Pentium 4", " P4 ", "Pentium E", "Pentium4", "Pentium(R) 4", "Pentium d", "PentiumD", "Athlon 64", "A8", "A6", "sempron", "atom", "laptop", "Notebook", "ultrabook", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "SLI Bridge", "laptop", "Windows xp", "windowsxp","vista", "modem", "router", "PC case", "computer case", "case only", "builder", "build you", "build a ", "PC build", "to build", "can build", "will build", "imac", "i mac", "apple", "mac pro", "Mac G5", "Mac g4", "SERVER", ", desktop computers", "repair", "Computer service", "PC service", "recovery", "technician", "server rack", "all in one", "computer keyboard", "desktop keyboard", "desktop keypad", "PC keyboard", "computer mouse", "PC mouse", "gaming mouse", "PC screen", "PC monitor", "Computer screen", "Computer monitor", "desktop monitor", "desktop screen", "PC screen", "computer screen", "computer stand", "PC case", "computer case", "case only", "gaming case", "docking station", "computer holder", "PC power supply", "cooling fan", "computer fan", "PC fan", "Desktop power supply", "Computer power supply", "PC PSU", "desktop PSU", "computer PSU", "PC power supply", "Power source", "power supply for", "computer memory", "desktop memory", "computer ram", "desktop ram", "PC ram", "128m", "256m", "512m", "1gb", "desktop CPU", "desktop hard drive", "computer hard drive", "PC hard drive", "Desktop HDD", "PC HDD", "computer hdd", "PC cable", "computer cable", "PC cable", "computer camera", "computer webcam", "PC webcam",  "computer network", "PC games", "computer games", "tool kit", "ultra small", "mini PC", "mini computer", "thin client", "ultra thin", "ultra slim", "ultra-slim", "SOLD*", "for PC", "for computer", "for desktop", "out of", "card adapter", "24 pin", "8 pin", "sata cable", "KVM switch", "shadow", "optiplex 755", "optiplex 745", "optiplex 5150"],
+				"Contains_NOR": ["android", "vintage", "retro ", "looking for", "Bios update", "AM2", "AM3", "FM1", "DDR2","DDR 2",  "PC3-", "PC2-", "PC4-", " agp ", "Toner Cartridge", 
+				"775", "754", "478",
+				"sempron", "Phenom", "Amd x2", "AMD A4", "AMD A6", "Athlon X2", "II x2", "Athlon 64", "Athlon x2", "Athlon64", " A8", "A8 ", "A6 ", " A6", 
+				"atom", "celeron", "celron", "Pentium 3", "pentium3", "Pentium III", "Pentium 4", " P4", "P4 ",  "Pentium4","Pentium(R) 4", "Pentium D", "PentiumD", "Pentium E", "core2", "Core 2", "E4300", "E4400", "E4500", "E4600", "E4700", "E6300", "E6320", "E6400", "E6420", "E6600", "E6420", "E6600", "E6700", "E6540", "E6550", "E6750", "E6850", "E6305", "E6405", "E6500", "E7200", "E7300", "E7400", "E7500", "E7600", "E8190", "E8200", "E8290", "E8300", "E8400", "E8500", "E8600", "E8700", 
+				"atom", "laptop", "Notebook", "ultrabook", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "SLI Bridge", "laptop", "Windows xp", "windowsxp", "vista", "modem", "router", "PC case", "computer case", "case only", "builder", "build you", "build a ", "PC build", "to build", "can build", "will build", "imac", "i mac", "apple", "mac pro", "Mac G5", "Mac g4", "SERVER", ", desktop computers", "repair", "Computer service", "PC service", "recovery", "technician", "server rack", "all in one", "computer keyboard", "desktop keyboard", "desktop keypad", "PC keyboard", "gaming keyboard", "computer mouse", "PC mouse", "gaming mouse", "Computer speakers", "PC speakers", "PC screen", "PC monitor", "Computer screen", "Computer monitor", "desktop monitor", "desktop screen", "PC screen", "computer screen", "computer stand", "PC case", "computer case", "case only", "gaming case", "docking station", "computer holder", "PC power supply", "cooling fan", "computer fan", "PC fan", "Desktop power supply", "Computer power supply", "PC PSU", "desktop PSU", "computer PSU", "PC power supply", "Power source", "power supply for", "computer memory", "desktop memory", "computer ram", "desktop ram", "PC ram", "128m", "256m", "512m", "1gb", "desktop CPU", "desktop hard drive", "computer hard drive", "PC hard drive", "Desktop HDD", "PC HDD", "computer hdd", "PC cable", "computer cable", "PC cable", "computer camera", "computer webcam", "PC webcam", "computer network", "PC games", "computer games", "tool kit", "ultra small", "mini PC", "mini computer", "thin client", "ultra thin", "ultra slim", "ultra-slim", "SOLD*", "for PC", "for computer", "for desktop", "out of", "card adapter", "24 pin", "8 pin", "sata cable", "KVM switch", "shadow", "optiplex 755", "optiplex 745", "optiplex 5150"],
 				"MaxPrice": 300
+			},
+			{
+				"tags": ["computer", "beta", "high"],
+				"Contains_AND": [""],
+				"Contains_OR": ["computer", "PC\\W", "desk(\\W)?top", "work(\\W)?station"],
+				"Contains_NOR": ["android", "vintage", "retro ", "all\\W?in\\W*(one|1)", "looking for", "Bios update", "AM2", "AM3", "FM1", "DDR2","DDR 2",  "PC3-", "PC3L", "PC2-", "PC4-", " agp ", "dummy monitor", "775", "754", "478", "sempron", "Phenom", "Amd x2", "AMD A4", "AMD A6", "Athlon X2", "Athlon\\s?(1|2|II|64|x2|x4)", "\\sA\\s?(10|8|6|4)\\W", "atom", "cel(e)?ron", "Intel J", "Pentium", "\\sP4\\s", "P4HT", "core\\W?2", "core(tm)\\W?2", "(E|Q)\\d\\d00", "atom", "dual\\W?core", "2\\W?core", "i3\\W*5\\d\\d\\w?\\W", "i3\\W*(2|3|4)\\d\\d\\d(\\w)?\\W", "i5\\W*6\\d\\d\\w?\\W", "i5\\W*(2|3)\\d\\d\\d\\w?", "i7\\W*(9|8)\\d\\d\\w?\\W", "laptop", "Notebook", "ultrabook", "supports motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "Windows xp", "windowsxp", "vista", "modem", "router", "builder", "\\s(build|make)( \\w*)* (PC|computer|desktop)", "build fee", "service", "i\\W?mac", "apple", "mac pro", "Mac G\\d", "macintosh", "SERVER", "repair", "Computer service", "PC service", "recovery", "technician", "(computer|PC|desktop|work\\W?station) (mouse|keyboard|monitor|moniter|mointer|screen|display|speakers|case|holder|guide|stand|memory|ram|fan|power supply|mother\\W?board|CPU|PSU|SSD|HDD|hard drive|cable|camera|webcam|client|network|games|parts|stuff|repair)", "gaming (keyboard|mouse|case)", "case only", "docking station", "cooling fan", "Power source", "power supply for", "PSU extension", "128m", "256m", "\\W(2|2.0)\\W*g\\W*(Ram|memory)", "\\W(Ram|memory)\\W*(2|2.0)\\W*g", "SAS drive", "SAS hard drive", "tool kit", "ultra\\W?(small|slim|thin)", "(mini |tiny|micro)\\W?(PC|computer|desktop)", "thin client", "SOLD\\*", "solder", "for (PC|computer|desktop)", "card adapter", "24 pin", "8 pin", "sata cable", "KVM switch", "shadow", "compact", "cash register", "POS system", "media\\W?center", "Toner Cartridge", "ink cartridge", "\\s(for|in|from|out of)( \\w*)* (PC|computer|desktop|work\\W?station)", "kit of", "SFF\\W", "small\\W*form\\W*factor", "slim", "touch", "tinker board", "Dell( \\w*)*\\W*Dimension", "Optiplex\\W?(780|760|745|740|755|580|380|360|330|320)\\W", "(DC|DX)\\d\\d\\d\\d", "tempered", "mac and pc"],
+				"Ignore": ["UPC", "https://(\\w|\\.|\\-|/)*(desktop|pc|computer)", "Vertical segment(\\W)*Desktop", ", desktop computers"],
+				"MaxPrice": 150
 			}
 		]
 	},
@@ -1737,7 +1999,8 @@
 				"tags": ["base", "gaming pc", "gaming computer"],
 				"Contains_AND": [""],
 				"Contains_OR": ["gaming", "gtx", "nvidia"],
-				"Contains_NOR": ["android", "not working", "broken", "fried", " dead ", " damaged ", "for parts", "vintage", "retro ", "looking for", "Bios update", "775", "754", "478", "AM2", "AM3", "FM1", "DDR2",  "DDR 2",  "PC3-", "PC2-", "PC4-", " agp ", "sempron", "Phenom", "Amd x2", "AMD A4", "AMD A6", "Athlon X2", "II x2", "celeron", "celron", "core2", "Core 2", "E4300", "E4400", "E4500", "E4600", "E4700", "E6300", "E6320", "E6400", "E6420", "E6600", "E6420", "E6600", "E6700", "E6540", "E6550", "E6750", "E6850", "E6305", "E6405", "E6500", "E7200", "E7300", "E7400", "E7500", "E7600", "E8190", "E8200", "E8290", "E8300", "E8400", "E8500", "E8600", "E8700", "Pentium 4", " P4 ", "Pentium E", "Pentium4", "Pentium(R) 4", "Pentium d", "PentiumD", "Athlon 64", "A8", "A6", "sempron", "atom", "laptop", "Notebook", "ultrabook", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "SLI Bridge", "laptop", "Windows xp", "windowsxp","vista", "modem", "router", "PC case", "computer case", "case only", "builder", "build you", "build a ", "PC build", "to build", "can build", "will build", "imac", "i mac", "apple", "mac pro", "Mac G5", "Mac g4", "SERVER", ", desktop computers", "repair", "Computer service", "recovery", "technician", "server rack", "all in one", "computer hard drive", "computer keyboard", "desktop keyboard", "PC screen", "PC monitor", "Computer screen", "Computer monitor", "desktop monitor", "desktop screen", "PC screen", "computer screen", "computer stand", "docking station", "computer holder", "PC power supply", "cooling fan", "Desktop power supply", "Computer power supply", "PC power supply", "Power source", "power supply for", "computer memory", "desktop memory", "computer ram", "desktop ram", "PC ram", "PC games", "computer games", "ultra small", "mini PC", "mini computer", "thin client", "ultra thin", "ultra slim", "ultra-slim", "SOLD*", "[sold]", "-sold", "for PC", "for computer", "for desktop", " Pci", "out of", "card adapter", "optiplex 755", "optiplex 745", "optiplex 5150", "Intel HD graphics", "for gaming computer", "for gaming PC", "gaming case", "gaming pc case", "gaming PC tower"],
+				"Contains_NOR": ["android", "not working", "broken", "fried", " dead ", " damaged ", "for parts", "vintage", "retro ", "looking for", "Bios update", "775", "754", "478", "AM2", "AM3", "FM1", "DDR2",  "DDR 2",  "PC3-", "PC2-", "PC4-", " agp ", "sempron", "Phenom", "Amd x2", "AMD A4", "AMD A6", "Athlon X2", "II x2", "celeron", "celron", "core2", "Core 2", "E4300", "E4400", "E4500", "E4600", "E4700", "E6300", "E6320", "E6400", "E6420", "E6600", "E6420", "E6600", "E6700", "E6540", "E6550", "E6750", "E6850", "E6305", "E6405", "E6500", "E7200", "E7300", "E7400", "E7500", "E7600", "E8190", "E8200", "E8290", "E8300", "E8400", "E8500", "E8600", "E8700", "Pentium 4", " P4 ", "Pentium E", "Pentium4", "Pentium(R) 4", "Pentium d", "PentiumD", "Athlon 64", "A8", "A6", "sempron", "atom", "laptop", "Notebook", "ultrabook", "supports motherboard", "compatibility with your motherboard", "compatible with your motherboard", "motherboard compatib", "motherboard is compat", "your motherboard", "SLI Bridge", "laptop", "Windows xp", "windowsxp","vista", "modem", "router", "PC case", "computer case", "case only", "builder", "build you", "build a ", "PC build", "to build", "can build", "will build", "imac", "i mac", "apple", "mac pro", "Mac G5", "Mac g4", "SERVER", "repair", "Computer service", "recovery", "technician", "server rack", "all in one", "computer hard drive", "computer keyboard", "desktop keyboard", "PC screen", "PC monitor", "Computer screen", "Computer monitor", "desktop monitor", "desktop screen", "PC screen", "computer screen", "computer stand", "docking station", "computer holder", "PC power supply", "cooling fan", "Desktop power supply", "Computer power supply", "PC power supply", "Power source", "power supply for", "computer memory", "desktop memory", "computer ram", "desktop ram", "PC ram", "PC games", "computer games", "ultra small", "mini PC", "mini computer", "thin client", "ultra thin", "ultra slim", "ultra-slim", "SOLD*", "[sold]", "-sold", "for PC", "for computer", "for desktop", " Pci", "out of", "card adapter", "optiplex 755", "optiplex 745", "optiplex 5150", "Intel HD graphics", "for gaming computer", "for gaming PC", "gaming case", "gaming pc case", "gaming PC tower"],
+				"Ignore": [", desktop computers"],
 				"MaxPrice": 1000
 			}
 		]
