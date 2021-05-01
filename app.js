@@ -13,11 +13,15 @@ const util = require('util');
 const { exec } = require('child_process');
 const path = require('path');
 
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ', err);
+  console.log(err.stack);
+});
 
 //==============================================
 
 //Any searches in the json file containing these tags will be ran.
-var mytags_AND = ["gpu", "Nvidia"]
+var mytags_AND = ["gpu"]
 var mytags_OR = [""]
 
 //VARIABLE SETUP
@@ -44,8 +48,8 @@ var msedgeLinks = true
 //Filter out all ads with "sold" in the title
 var removeSoldTitle = true
 
-//What to filter on. Set to title, shortDescription, longDescription 
-var filter = 'longDescription'
+//What to filter on if not set in json. Set to title, short, full 
+var defaultFilter = 'short'
 
 //Open the CSV file at program end (depreciated)
 var openSpreadsheet = false
@@ -546,9 +550,11 @@ function RunSearches(searches, callback){
 											}
 										}
 										
-										//NOR with title and/or shortDescription
+
+										//Get adText
 										var adText = ads[i].title
-										if(filter != "title"){
+										
+										if(searches[si].criteria[ci].filter != "title"){
 											adText += ads[i].description
 										}
 										adText = adText.toLowerCase()
@@ -560,7 +566,7 @@ function RunSearches(searches, callback){
 												adText = adText.replace(regexCompare, '')
 											}
 										}
-										//Nor filter (title and/or shortDescription)	
+										//Nor filter (title and/or short)	
 										for (let k = 0; k < searches[si].criteria[ci].Contains_NOR.length & searches[si].criteria[ci].Contains_NOR[k] != ""; ++k){ //For all tags searched for
 											var regexCompare = new RegExp(searches[si].criteria[ci].Contains_NOR[k], 'i')
 											if (regexCompare.test(adText)){
@@ -568,8 +574,13 @@ function RunSearches(searches, callback){
 												continue CriteriaLoop
 											}
 										}
-										if(filter == 'shortDescription' | filter == 'title'){
-											//OR filter (title and/or shortDescription)
+										
+										//Set up type of filter
+										if (searches[si].criteria[ci].filter === undefined){
+											searches[si].criteria[ci].filter = defaultFilter
+										}
+										if(searches[si].criteria[ci].filter == 'title' | searches[si].criteria[ci].filter == 'short'){
+											//OR filter (title and/or short)
 											if (searches[si].criteria[ci].Contains_OR !== undefined){
 												var OR_CriteriaMet = 0
 												for (let j = 0; j < searches[si].criteria[ci].Contains_OR.length; ++j) {
@@ -584,7 +595,7 @@ function RunSearches(searches, callback){
 													continue CriteriaLoop
 												}
 											}
-											//AND filter (title and/or shortDescription)
+											//AND filter (title and/or short)
 											if (!(searches[si].criteria[ci].Contains_AND === undefined)){
 												for (let j = 0; j < searches[si].criteria[ci].Contains_AND.length & searches[si].criteria[ci].Contains_AND[j] != ""; ++j) {
 													var regexCompare = new RegExp(searches[si].criteria[ci].Contains_AND[j], 'i')
@@ -593,15 +604,17 @@ function RunSearches(searches, callback){
 														continue CriteriaLoop
 													}
 												}
-											}											
+											}
+											ads[i].metCriteria = searches[si].criteria[ci]
 										}
 										ads[i].criteriaBlock.push(searches[si].criteria[ci]) //Stack up the criteria on the ad object
 									}
-									if(ads[i].criteriaBlock.length > 0){
+									if(ads[i].criteriaBlock.length > 0 | ads[i].metCriteria !== undefined){
 										ShownAds.push(ads[i]);
 									}
 								}
 								else { //noFiltering
+									ads[i].metCriteria = "No Filtering"
 									ShownAds.push(ads[i]);
 								}
 							}
@@ -611,7 +624,7 @@ function RunSearches(searches, callback){
 								console.log("Filter 1:\t" + ShownAds.length)
 								callback(ShownAds, showOutput)
 							}
-						}).catch(console.error);
+						})//.catch(console.error);
 					}
 				}
 				params.minPrice += searches[si].PriceMargin
@@ -625,16 +638,18 @@ function RunSearches(searches, callback){
 function descFilter(ads2, callback){
 	ShownAds2 = [];
 	numFinished = 0;
+	
 	for(let ai = 0; ai < ads2.length; ai++){ //For all ads at stage 2:		
 		kijiji.Ad.Get(ads2[ai].url).then(ad => {
 			ads2[ai].fullDescription = ad.description //Change description
 			
-			if(filter == 'longDescription' & !noFiltering){
-				var adText = (ads2[ai].title + ads2[ai].fullDescription).toLowerCase();
-				
+			if(noFiltering | ads2[ai].criteriaBlock === undefined){ //Filter is set to short or title, or NoFiltering is on
+				ShownAds2.push(ads2[ai]);
+			}
+			else{
 				LongCriteriaLoop:
-				for(let ci = 0; ci < ads2[ai].criteriaBlock.length; ci++){
-					
+				for(let ci = 0; ci < ads2[ai].criteriaBlock.length; ci++){ 
+					var adText = (ads2[ai].title + ads2[ai].fullDescription).toLowerCase();
 					//Remove Ignored Words
 					if(ads2[ai].criteriaBlock[ci].Ignore !== undefined){
 						for (let k = 0; k < ads2[ai].criteriaBlock[ci].Ignore.length & ads2[ai].criteriaBlock[ci].Ignore[k] != ""; k++){
@@ -685,11 +700,6 @@ function descFilter(ads2, callback){
 					}
 				}
 			}
-			else{
-				ads2[ai].metCriteria = ads2[ci].criteriaBlock[0] 
-				ShownAds2.push(ads2[ai]);
-			}
-			
 			numFinished++;
 			if (numFinished == ads2.length){
 				//Remove Duplicates:
@@ -704,7 +714,7 @@ function descFilter(ads2, callback){
 				console.log("Filter 2:\t" + ShownAds2.length + "\n")
 				callback(ShownAds2)
 			}
-		}).catch(console.error);
+		})//.catch(console.error);
 	}
 }
 
