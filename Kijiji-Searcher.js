@@ -15,8 +15,8 @@ const path = require('path');
 //==============================================
 
 //Any searches in the json file containing these tags will be ran.
-var mytags_AND = ["ram"]
-var mytags_OR = ["mid", "high"]
+var mytags_AND = ["GPU", "Nvidia"]
+var mytags_OR = [""]
 
 //VARIABLE SETUP
 
@@ -29,6 +29,9 @@ var cities = [ "Ancaster", "Hamilton", "Burlington", "Dundas", "Milton", "Oakvil
 
 //Multiply the thresholds for prices of all items by this amount.
 var priceMultiplier = 1
+
+//Maximum number of visits (views) an ad can have before it gets filtered out. Set to 0 for it to have no effect.
+var maxVisits = 500
 
 //Open all results in a seperate tab in the web browser
 var openInBrowser = false
@@ -224,7 +227,7 @@ function showOutput(ShownAds)
 				console.log("BULK SELLER DETECTED:")
 			}
 			console.log(ShownAds[i].attributes.price + '\t' + ShownAds[i].title.replace("\n", "").replace("\r", ""))
-			console.log(ShownAds[i].metCriteria.tags)
+			//console.log(ShownAds[i].metCriteria.tags)
 
 			//Address Crap (Organized as "City, postal Code" for filtering)
 			var locString = ShownAds[i].attributes.location.replace(/[A-Z]{2,3}, Canada,/g, 'ON,')
@@ -435,7 +438,7 @@ function descFilter(ads2, callback){
 	for(let ai = 0; ai < ads2.length; ai++){
 		kijiji.Ad.Get(ads2[ai].url).then(ad => { //For all ads at stage 2:		
 			ads2[ai].fullDescription = ad.description //Change description
-			
+			ads2[ai].attributes.visits = ad.attributes.visits
 			if(noFiltering | ads2[ai].metCriteria !== undefined){ 
 				ShownAds2.push(ads2[ai]);
 			}
@@ -443,11 +446,14 @@ function descFilter(ads2, callback){
 				for(let ci = 0; ci < ads2[ai].criteriaBlock.length; ci++){ 
 					var adText = (ads2[ai].title + ads2[ai].fullDescription).toLowerCase();
 					adText = removeIgnored(adText, ads2[ai].criteriaBlock[ci].Ignore) //Remove Ignored Words
-					if( OR_CriteriaMet = OrMatch(ads2[ai].criteriaBlock[ci].Contains_OR, adText)){ //OR filter
-						if( AND_CriteriaMet = AndMatch(ads2[ai].criteriaBlock[ci].Contains_AND, adText)){ //AND filter
-							if (NOR_CriteriaMet = NorMatch(ads2[ai].criteriaBlock[ci].Contains_NOR, adText)){ //NOR filter
-								ads2[ai].metCriteria = ads2[ai].criteriaBlock[ci] 
-								ShownAds2.push(ads2[ai]);
+					if( OrMatch(ads2[ai].criteriaBlock[ci].Contains_OR, adText)){ //OR filter
+						if( AndMatch(ads2[ai].criteriaBlock[ci].Contains_AND, adText)){ //AND filter
+							if ( NorMatch(ads2[ai].criteriaBlock[ci].Contains_NOR, adText)){ //NOR filter
+								if(ads2[ai].attributes.visits < maxVisits){ //Number of views filter
+									ads2[ai].metCriteria = ads2[ai].criteriaBlock[ci] 
+									ShownAds2.push(ads2[ai]);
+									console.log(util.inspect(ad, false, null, true))
+								}
 							}
 						}
 					}
