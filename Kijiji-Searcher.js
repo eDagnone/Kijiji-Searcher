@@ -12,49 +12,15 @@ const fs = require('fs');
 const util = require('util');
 const { exec } = require('child_process');
 const path = require('path');
+const config = require('./config');
 //==============================================
 
-//Any searches in the json file containing these tags will be ran.
-var mytags_AND = ["GPU", "Nvidia"]
-var mytags_OR = [""]
 
-//VARIABLE SETUP
+let rawdata = fs.readFileSync(path.resolve(__dirname, 'Searches.json')); //Searches.JSON
+let searchBlocks = JSON.parse(rawdata);
+var apiStartLocation = config.startLocation.replace(/ /g, "%2C").replace(/,/g, "")
 
-//json file used:
-let rawdata = fs.readFileSync(path.resolve(__dirname, 'Searches.json'));
-
-//Set to empty array to remove city constraint
-//Cities:		"Burlington", "Hamilton", "Milton", "Oakville", "Mississauga", "Brampton", "Etobicoke", "Vaughan", "Woodbridge", "Toronto", "York", "Scarboruogh", "Markham", "Richmond Hill"
-var cities = [ "Ancaster", "Hamilton", "Burlington", "Dundas", "Milton", "Oakville", "Mississauga", "Brampton", "Etobicoke", "Vaughan", "Maple", "Woodbridge", "Toronto", "York", "Scarborough", "Markham", "Thornhill", "Richmond Hill" ]
-
-//Multiply the thresholds for prices of all items by this amount.
-var priceMultiplier = 1
-
-//Maximum number of visits (views) an ad can have before it gets filtered out. Set to 0 for it to have no effect.
-var maxVisits = 500
-
-//Open all results in a seperate tab in the web browser
-var openInBrowser = false
-
-//When OpenInBrowser is set to 1, which browser is used?
-var browserToOpen = "chrome" //alternatives: msedge, Firefox
-
-//In the HTML file, prefix all url's with microsoft-edge: so that they open in edge
-var msedgeLinks = true
-
-//Filter out all ads with "sold" in the title
-var removeSoldTitle = true
-
-//What to filter on if not set in json. Set to title, short, full 
-var defaultFilter = 'short'
-
-//Open the CSV file at program end (depreciated)
-var openSpreadsheet = false
-
-//"Origin" for google maps links. Set this to an address or area near you.
-var startLocation = "Mississauga, ON L5P 1B2" 
-//Pearson: Mississauga, ON L5P 1B2
-
+var cities = config.cities
 var locations =[]
 for(let i = 0; i < cities.length; i++){
 	if(cities[i] == "Hamilton" || cities[i] == "Burlington" || cities[i] == "Ancaster"){
@@ -71,8 +37,6 @@ for(let i = 0; i < cities.length; i++){
 		addLocation(1700274);
 	}
 }
-// OVERRIDE:
-// var locations =[]
 function addLocation(areaNumber){
 	for(let j = 0; j < locations.length; j++){
 		if (locations[j] == areaNumber){
@@ -82,22 +46,12 @@ function addLocation(areaNumber){
 	locations.push(areaNumber)
 }
 
-
-//If set to 1, every ad scraped will be displayed. Useful for debugging.
-var noFiltering = false
-
-//=============================================
-//Nothing below here needs to be touched by end users
-
-
 var LinkPlatform = ""
-if (msedgeLinks) {
+if (config.msedgeLinks) {
 	LinkPlatform = "microsoft-edge:";
 }
 
-var apiStartLocation = startLocation.replace(/ /g, "%2C").replace(/,/g, "")
 
-let importedSearches = JSON.parse(rawdata);
 
 //Figure out which searches need to be done based on tags
 var searches = [];
@@ -106,34 +60,14 @@ var AND_met = 0
 var OR_met = 0
 
 SearchLoop:
-for(let i = 0; i < importedSearches.length; ++i) { //cycle all search objects
+for(let i = 0; i < searchBlocks.length; ++i) { //cycle all search objects
+	//Collect all prices for big search object
 	block_MaxPrices = [];	
-	CriteriaLoop:
-	for (let m = 0; m < importedSearches[i].criteria.length; ++m) { //cycle criteria blocks in search object
-		for (let k = 0; k < mytags_AND.length; ++k){ //Cycle mytags_AND to compare
-			AND_met = 0
-			for (let j = 0; j < importedSearches[i].criteria[m].tags.length; ++j){ //Cycle tags in said block
-				if (importedSearches[i].criteria[m].tags[j].toLowerCase() == mytags_AND[k].toLowerCase()| mytags_AND[k] == ""){ //If any block tags match this mytags_AND
-					AND_met = 1
-					break
-				}
+	for (let m = 0; m < searchBlocks[i].criteria.length; ++m) { //cycle criteria blocks in search object
+		if (andTagMatch(searchBlocks[i].criteria[m].tags, config.mytags_AND)){
+			if (orTagMatch(searchBlocks[i].criteria[m].tags, config.mytags_OR)){
+				block_MaxPrices.push(searchBlocks[i].criteria[m].MaxPrice)
 			}
-			if (!AND_met){
-				continue CriteriaLoop
-			}
-		}
-		OR_loop:
-		for (let j = 0; j < importedSearches[i].criteria[m].tags.length; ++j){ //Cycle tags in said block
-			for (let k = 0; k < mytags_OR.length; ++k){ //Cycle mytags_OR
-				if (importedSearches[i].criteria[m].tags[j].toLowerCase() == mytags_OR[k].toLowerCase() | mytags_OR[k] == "" ){ //If any mytags_OR match this block tag
-					block_MaxPrices.push(importedSearches[i].criteria[m].MaxPrice)
-					OR_met = 1
-					break OR_loop
-				}
-			}
-		}
-		if (!OR_met){
-			continue CriteriaLoop
 		}
 	}
 	if(block_MaxPrices.length !== 0){
@@ -143,39 +77,44 @@ for(let i = 0; i < importedSearches.length; ++i) { //cycle all search objects
 				maxSearchPrice = block_MaxPrices[j];
 			}
 		}
-		maxSearchPrice *= priceMultiplier
+		maxSearchPrice *= config.priceMultiplier
 		
-		importedSearches[i].MaxPrice = maxSearchPrice
-		searches.push(importedSearches[i])
+		searchBlocks[i].MaxPrice = maxSearchPrice
+		searches.push(searchBlocks[i])
 	}
 }
 
 if(searches.length == 0){
-	console.log("No searches found in JSON matching the following tag criteria:")
-	if(mytags_AND.length > 0){
+	console.log("\nNo searches found in JSON matching the following tag criteria:")
+	if(config.mytags_AND.length > 0){
 		console.log("Search contains all of these tags:")
-		console.log(mytags_AND)
+		console.log(config.mytags_AND)
 	}
-	if(mytags_OR.length > 0){
+	if(config.mytags_OR.length > 0){
 		console.log("Search contains one of these tags:")
-		console.log(mytags_OR)
+		console.log(config.mytags_OR)
 	}
 	process.exit()
 }	
 
+console.log("\n#=======================================================")
+console.log("|   Performing the following searches:")
+console.log("}-------------------------------------------------------")
+for(let i = 0; i < searches.length; i++){
 
-console.log("Performing the following searches:\n\n")
-console.log(searches)
+	console.log("|\tSearchTerms:\t" + searches[i].SearchTerms)
+	console.log("|\tPrice:\t\t" + (searches[i].MinPrice | "0") + " - " + (Math.round(searches[i].MaxPrice * 100) / 100).toFixed(2))
+	console.log("|\tCategories:\t" + searches[i].categories)
+	console.log("}- - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+}
+
 RunSearches(searches, descFilter)
-
-
 
 
 //====================================================================================
 
 
-function showOutput(ShownAds)
-{	
+function showOutput(ShownAds){	
 	if(!(ShownAds.length)){
 		console.log("Didn't find any ads.")
 	}
@@ -209,11 +148,15 @@ function showOutput(ShownAds)
 		urlList = " --new-window "
 		CSVstream.write("BUY THIS:");
 		HTMLstream.write(fs.readFileSync(path.resolve(__dirname, 'HTMLstring1.txt'), "utf8"));
+		console.log("\n\n#=================================================================================================")
+		console.log("| BUY THIS")
+		console.log("}-------------------------------------------------------------------------------------------------")
+		
 		
 		for (let i = 0; i < ShownAds.length; ++i) { //For all shown ads
 			urlList += " " + ShownAds[i].url
-			if (((i+1)%30 == 0  | i + 1==ShownAds.length) & openInBrowser) {
-				exec("start " + browserToOpen + " " + urlList, (err, stdout, stderr) => {
+			if (((i+1)%30 == 0  | i + 1==ShownAds.length) & config.openInBrowser) {
+				exec("start " + config.browserToOpen + " " + urlList, (err, stdout, stderr) => {
 					if(err) {
 						console.log(`stderr: ${stderr}`);
 						return;
@@ -226,7 +169,7 @@ function showOutput(ShownAds)
 			if (dollarSigns > 4){
 				console.log("BULK SELLER DETECTED:")
 			}
-			console.log(ShownAds[i].attributes.price + '\t' + ShownAds[i].title.replace("\n", "").replace("\r", ""))
+			console.log("| " + ShownAds[i].attributes.price + '\t: ' + ShownAds[i].title.replace("\n", "").replace("\r", ""))
 			//console.log(ShownAds[i].metCriteria.tags)
 
 			//Address Crap (Organized as "City, postal Code" for filtering)
@@ -236,7 +179,6 @@ function showOutput(ShownAds)
 				for(let j = 0; j < cities.length; j++){
 					if(ShownAds[i].attributes.location.includes(cities[j])){
 						var displayLocation = cities[j]
-						console.log("here")
 					}
 				}
 			}else{
@@ -285,11 +227,10 @@ function showOutput(ShownAds)
 			HTMLstream.write((ShownAds[i].fullDescription).replace(/(\r\n|\n|\r)/gm, '<br>\n') + "</td>") //Description
 			HTMLstream.write('\n\t<td><a style="color:black; text-decoration:none" href=' + mapsURL + '" target="_blank" rel="noopener noreferrer">' + displayLocation + '</a></td>\n</tr>')
 		}
-		//console.log("\n" + urlList.trim() + "\n")
-		
+		console.log("}-------------------------------------------------------------------------------------------------")		
 		//Open the HTML or CSV file
 		CSVstream.close(() => {
-			if (openSpreadsheet) {
+			if (config.openSpreadsheet) {
 				exec("start " + path.resolve(__dirname, 'KijijiSearch.csv'));
 			}
 		});
@@ -313,7 +254,7 @@ function RunSearches(searches, callback){
 	var evaluatedAds = [];
 	
 	for (let i = 0; i < searches.length; ++i) {
-		searches[i].PriceMargin *= priceMultiplier
+		searches[i].PriceMargin *= config.priceMultiplier
 		if ((searches[i].MaxPrice - searches[i].MinPrice) % searches[i].PriceMargin == 0) {
 			numSearches += searches[i].SearchTerms.length * locations.length * searches[i].categories.length * (Math.ceil((searches[i].MaxPrice - searches[i].MinPrice) / searches[i].PriceMargin) + 1)
 		}
@@ -321,8 +262,10 @@ function RunSearches(searches, callback){
 			numSearches += searches[i].SearchTerms.length * locations.length * searches[i].categories.length * Math.ceil((searches[i].MaxPrice - searches[i].MinPrice) / searches[i].PriceMargin)
         }
 	}
-	console.log("\nPerforming " + numSearches + " searches.\n")
-
+	console.log("\n\n}===========================================")
+	console.log("|   Running " + numSearches + " searches...")
+	console.log("}-------------------------------------------")
+	
 	for (let si = 0; si < searches.length; ++si) {
 		var options = {
 			minResults: -1,
@@ -353,16 +296,13 @@ function RunSearches(searches, callback){
 						
 						//RUN THE SEARCH
 						kijiji.search(params, options).then(ads => {
-							if(ads.length != 0){
-								console.log("Scraped " + ads.length)
-							}
 							AdsScanned += ads.length
 
 							AdLoop:
 							for (let i = 0; i < ads.length; ++i) //For all ads scraped
 							{
 								var added = 0;
-								if(!noFiltering){								
+								if(!config.noFiltering){								
 									//Eliminate Duplicates
 									for (let j = 0; j < evaluatedAds.length; ++j) {
 										if (evaluatedAds[j].url == ads[i].url || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].description == ads[i].description) || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].attributes.location == ads[i].attributes.location)){
@@ -372,13 +312,13 @@ function RunSearches(searches, callback){
 									evaluatedAds.push(ads[i]);
 									 
 									if(CityMatch(cities, ads[i].attributes.location)){ //City name filter
-										if( !ads[i].title.toLowerCase().includes("sold") | !removeSoldTitle){ //"sold" is not in title (or we don't care about it)
+										if( !ads[i].title.toLowerCase().includes("sold") | !config.removeSoldTitle){ //"sold" is not in title (or we don't care about it)
 											ads[i].criteriaBlock = []
 										
 											for (ci = 0; ci < searches[si].criteria.length & ads[i].metCriteria === undefined; ++ci){  //For all criteria blocks in the search from the json file
 
-												if (!((searches[si].criteria[ci].MaxPrice*priceMultiplier < ads[i].attributes.price) || ads[i].attributes.price === undefined)) { //Price Filter
-													if (orTagMatch(searches[si].criteria[ci].tags, mytags_OR) & andTagMatch(searches[si].criteria[ci].tags, mytags_AND)){ //AND/OR tag filter
+												if (!((searches[si].criteria[ci].MaxPrice*config.priceMultiplier < ads[i].attributes.price) || ads[i].attributes.price === undefined)) { //Price Filter
+													if (orTagMatch(searches[si].criteria[ci].tags, config.mytags_OR) & andTagMatch(searches[si].criteria[ci].tags, config.mytags_AND)){ //AND/OR tag filter
 														//Get adText
 														var adText = ads[i].title
 														if(searches[si].criteria[ci].filter != "title"){
@@ -389,7 +329,7 @@ function RunSearches(searches, callback){
 														
 														if (NorMatch(searches[si].criteria[ci].Contains_NOR, adText)){ //Nor Filter
 															if (searches[si].criteria[ci].filter === undefined) //Criteria filter setup
-																searches[si].criteria[ci].filter = defaultFilter															
+																searches[si].criteria[ci].filter = config.defaultFilter															
 															if(searches[si].criteria[ci].filter == 'title' | searches[si].criteria[ci].filter == 'short'){ //IF TITLE OR SHORT FILTER USED
 																if(OrMatch(searches[si].criteria[ci].Contains_OR, adText)){ //adText OR filter 
 																	if (AndMatch(searches[si].criteria[ci].Contains_AND, adText)){ //adText AND filter
@@ -410,18 +350,18 @@ function RunSearches(searches, callback){
 										}
 									}
 								}
-								else { //noFiltering
+								else { //config.noFiltering
 									ads[i].metCriteria = "No Filtering"
 									ShownAds.push(ads[i]);
 								}
 							}
 							searchesDone++
 							if (searchesDone == numSearches) {
-								console.log("Ads scanned:\t" + AdsScanned)
-								console.log("Filter 1:\t" + ShownAds.length)
+								console.log("|\tAds scanned:\t" + AdsScanned)
+								console.log("|\tFilter 1:\t" + ShownAds.length)
 								callback(ShownAds, showOutput)
 							}
-						})//.catch(console.error);
+						}).catch(console.error);
 					}
 				}
 				params.minPrice += searches[si].PriceMargin
@@ -436,44 +376,59 @@ function descFilter(ads2, callback){
 	ShownAds2 = [];
 	numFinished = 0;
 	for(let ai = 0; ai < ads2.length; ai++){
-		kijiji.Ad.Get(ads2[ai].url).then(ad => { //For all ads at stage 2:		
-			ads2[ai].fullDescription = ad.description //Change description
-			ads2[ai].attributes.visits = ad.attributes.visits
-			if(noFiltering | ads2[ai].metCriteria !== undefined){ 
-				ShownAds2.push(ads2[ai]);
-			}
-			else{
-				for(let ci = 0; ci < ads2[ai].criteriaBlock.length; ci++){ 
-					var adText = (ads2[ai].title + ads2[ai].fullDescription).toLowerCase();
-					adText = removeIgnored(adText, ads2[ai].criteriaBlock[ci].Ignore) //Remove Ignored Words
-					if( OrMatch(ads2[ai].criteriaBlock[ci].Contains_OR, adText)){ //OR filter
-						if( AndMatch(ads2[ai].criteriaBlock[ci].Contains_AND, adText)){ //AND filter
-							if ( NorMatch(ads2[ai].criteriaBlock[ci].Contains_NOR, adText)){ //NOR filter
-								if(ads2[ai].attributes.visits < maxVisits){ //Number of views filter
-									ads2[ai].metCriteria = ads2[ai].criteriaBlock[ci] 
-									ShownAds2.push(ads2[ai]);
-									console.log(util.inspect(ad, false, null, true))
+		if (config.pullFullDesc | ads2[ai].metCriteria == undefined){
+			kijiji.Ad.Get(ads2[ai].url).then(ad => { //For all ads at stage 2:		
+				ads2[ai].fullDescription = ad.description //Change description
+				ads2[ai].attributes.visits = ad.attributes.visits
+				if(config.noFiltering | ads2[ai].metCriteria !== undefined){ 
+					ShownAds2.push(ads2[ai]);
+				}
+				else{
+					for(let ci = 0; ci < ads2[ai].criteriaBlock.length; ci++){ 
+						var adText = (ads2[ai].title + ads2[ai].fullDescription).toLowerCase();
+						adText = removeIgnored(adText, ads2[ai].criteriaBlock[ci].Ignore) //Remove Ignored Words
+						if( OrMatch(ads2[ai].criteriaBlock[ci].Contains_OR, adText)){ //OR filter
+							if( AndMatch(ads2[ai].criteriaBlock[ci].Contains_AND, adText)){ //AND filter
+								if ( NorMatch(ads2[ai].criteriaBlock[ci].Contains_NOR, adText)){ //NOR filter
+									if(ads2[ai].attributes.visits <= config.maxVisits || config.maxVisits == 0){ //Views filter
+										ads2[ai].metCriteria = ads2[ai].criteriaBlock[ci] 
+										ShownAds2.push(ads2[ai]);
+									}
 								}
 							}
 						}
 					}
 				}
-			}
-			numFinished++;
+				numFinished++;
+				if (numFinished == ads2.length){
+					ShownAds2 = removeDuplicates(ShownAds2)
+					console.log("|\tFilter 2:\t" + ShownAds2.length)
+					console.log("}-------------------------------------------")
+					callback(ShownAds2)
+				}
+			})
+			.catch(() => { //Runs when "Search" returns ads that are no longer live...
+				numFinished++
+				if (numFinished == ads2.length){
+					ShownAds2 = removeDuplicates(ShownAds2)
+					console.log("|\tFilter 2:\t" + ShownAds2.length)
+					console.log("}-------------------------------------------")
+					callback(ShownAds2)
+				}
+			});
+		}
+		else{
+			ads2[ai].fullDescription = ads2[ai].description + " *PullFullDesc is off"
+			ads2[ai].attributes.visits = -1
+			ShownAds2.push(ads2[ai]);
+			numFinished++ //Required if there's a mix of filtering, AND pullFullDesc is false
 			if (numFinished == ads2.length){
 				ShownAds2 = removeDuplicates(ShownAds2)
-				console.log("Filter 2:\t" + ShownAds2.length + "\n")
+				console.log("|\tFilter 2:\t" + ShownAds2.length)
+				console.log("}-------------------------------------------")
 				callback(ShownAds2)
 			}
-		})
-		.catch(() => { //Runs when "Search" returns ads that are no longer live...
-			numFinished++
-			if (numFinished == ads2.length){
-				ShownAds2 = removeDuplicates(ShownAds2)
-				console.log("Filter 2:\t" + ShownAds2.length + "\n")
-				callback(ShownAds2)
-			}
-		});
+		}
 	}
 }
 
