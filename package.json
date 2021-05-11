@@ -2,10 +2,8 @@
   "name": "kijiji-scraper",
   "version": "0.0.0",
   "description": "KijijiScraper",
-  "main": "app.js",
-  "author": {
-    "name": ""
-  },
+  "main": "Kijiji-Searcher.js",
+  "author": "Ethan Dagnone",
   "dependencies": {
     "is-docker": "^2.1.1",
     "is-wsl": "^2.2.0",
