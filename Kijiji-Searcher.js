@@ -121,7 +121,6 @@ RunSearches(searches, descFilter)
 
 
 function showOutput(ShownAds){	
-	console.log("Link platform: " + LinkPlatform +"/end")
 	if(!(ShownAds.length)){
 		console.log("Didn't find any ads.")
 	}
