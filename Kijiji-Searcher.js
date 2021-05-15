@@ -15,9 +15,15 @@ const path = require('path');
 const config = require('./config');
 //==============================================
 
+//Reverse Search Structure:
+//For each part, have specific and a general
+// If not specific, put in general.
+// After "collecting" a part, get rid of description including that part.
 
 let rawdata = fs.readFileSync(path.resolve(__dirname, 'Searches.json')); //Searches.JSON
-let searchBlocks = JSON.parse(rawdata);
+var searchBlocks = JSON.parse(rawdata);
+let rawdata2 = fs.readFileSync(path.resolve(__dirname, 'ReverseBlocks.json'));
+var reverseBlocks = JSON.parse(rawdata2);
 var apiStartLocation = config.startLocation.replace(/ /g, "%2C").replace(/,/g, "")
 
 var cities = config.cities
@@ -47,7 +53,7 @@ function addLocation(areaNumber){
 }
 
 var LinkPlatform = ""
-if (config.msedgeLinks) {
+if (config.msEdgeLinks) {
 	LinkPlatform = "microsoft-edge:";
 }
 
@@ -115,6 +121,7 @@ RunSearches(searches, descFilter)
 
 
 function showOutput(ShownAds){	
+	console.log("Link platform: " + LinkPlatform +"/end")
 	if(!(ShownAds.length)){
 		console.log("Didn't find any ads.")
 	}
@@ -314,7 +321,6 @@ function RunSearches(searches, callback){
 									if(CityMatch(cities, ads[i].attributes.location)){ //City name filter
 										if( !ads[i].title.toLowerCase().includes("sold") | !config.removeSoldTitle){ //"sold" is not in title (or we don't care about it)
 											ads[i].criteriaBlock = []
-										
 											for (ci = 0; ci < searches[si].criteria.length & ads[i].metCriteria === undefined; ++ci){  //For all criteria blocks in the search from the json file
 
 												if (!((searches[si].criteria[ci].MaxPrice*config.priceMultiplier < ads[i].attributes.price) || ads[i].attributes.price === undefined)) { //Price Filter
@@ -385,14 +391,36 @@ function descFilter(ads2, callback){
 				}
 				else{
 					for(let ci = 0; ci < ads2[ai].criteriaBlock.length; ci++){ 
-						var adText = (ads2[ai].title + ads2[ai].fullDescription).toLowerCase();
+						var adText = (ads2[ai].title + "s e p a r a t o r" + ads2[ai].fullDescription).toLowerCase();
 						adText = removeIgnored(adText, ads2[ai].criteriaBlock[ci].Ignore) //Remove Ignored Words
 						if( OrMatch(ads2[ai].criteriaBlock[ci].Contains_OR, adText)){ //OR filter
 							if( AndMatch(ads2[ai].criteriaBlock[ci].Contains_AND, adText)){ //AND filter
 								if ( NorMatch(ads2[ai].criteriaBlock[ci].Contains_NOR, adText)){ //NOR filter
 									if(ads2[ai].attributes.visits <= config.maxVisits || config.maxVisits == 0){ //Views filter
-										ads2[ai].metCriteria = ads2[ai].criteriaBlock[ci] 
-										ShownAds2.push(ads2[ai]);
+										//EXPERIMENTAL
+										let allText = ads2[ai].title + ads2[ai].fullDescription
+										let estValue = 0;
+										for(let i = 0; i < reverseBlocks.length; ++i) { //cycle all search objects	
+											for (let m = 0; m < reverseBlocks[i].criteria.length; ++m) { //cycle criteria blocks in search object
+												if(orTagMatch(reverseBlocks[i].criteria[m].tags, ["cpu", "gpu", "ram", "SSD", "HDD", "PSU", "motherboard"])){
+													if (OrMatch(reverseBlocks[i].criteria[m].Contains_OR, allText)){ //Check or match
+														if (AndMatch(reverseBlocks[i].criteria[m].Contains_AND, allText)){ //Check and match
+															estValue += reverseBlocks[i].criteria[m].MaxPrice
+															ads2[ai].metCriteria = ads2[ai].criteriaBlock[ci] 
+															ads2[ai].fullDescription += ("\nValue after " + reverseBlocks[i].criteria[m].tags[reverseBlocks[i].criteria[m].tags.length-1] + " " + reverseBlocks[i].SearchTerms[0] + " is " + estValue)
+														}
+													}
+												}
+											}
+										}
+										/*Notes: AdTypes
+										Newline delimited
+										Comma delimited
+										Plus-sign deimited
+										Sentence delimited (sorta) - and, comma, period
+										*/
+										//if(ads2[ai].fullDescription.includes("Value after "))
+											ShownAds2.push(ads2[ai]);
 									}
 								}
 							}
@@ -407,8 +435,9 @@ function descFilter(ads2, callback){
 					callback(ShownAds2)
 				}
 			})
-			.catch(() => { //Runs when "Search" returns ads that are no longer live...
+			.catch((error) => { //Runs when "Search" returns ads that are no longer live...
 				numFinished++
+				console.log(error)
 				if (numFinished == ads2.length){
 					ShownAds2 = removeDuplicates(ShownAds2)
 					console.log("|\tFilter 2:\t" + ShownAds2.length)
@@ -454,8 +483,8 @@ function orTagMatch(searchTags, myTags_OR){
 function andTagMatch(searchTags, myTags_AND){
 	for (let k = 0; k < myTags_AND.length; ++k){ //For all myTags searched for
 		var AND_tagMet = 0;
-		for (let j = 0; j < searchTags.length && myTags_AND[k] != ""; ++j) { //For all tags in JSON search criteria
-			if(searchTags[j].toLowerCase() == myTags_AND[k].toLowerCase()) { 
+		for (let j = 0; j < searchTags.length; ++j) { //For all tags in JSON search criteria
+			if(searchTags[j].toLowerCase() == myTags_AND[k].toLowerCase() || myTags_AND[k] == "") { 
 				AND_tagMet = 1;
 			}
 		}
