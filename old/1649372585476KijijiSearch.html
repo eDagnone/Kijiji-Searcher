@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kijiji Results</title>
+<style>
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+</style>
+</head>
+<body>
+<script>
+function sortTable(tableID, n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById(tableID);
+	switching = true;
+	dir = "asc";
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+					var cmpX=isNaN(parseInt(x.innerHTML))?x.innerText.toLowerCase():parseInt(x.innerHTML);
+					var cmpY=isNaN(parseInt(y.innerHTML))?y.innerText.toLowerCase():parseInt(y.innerHTML);
+	cmpX=(cmpX=='-')?0:cmpX;
+	cmpY=(cmpY=='-')?0:cmpY;
+			if (dir == "asc") {
+				if (cmpX > cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (cmpX < cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount ++;      
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+</script>
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table id="myTable">
+  <tr>
+   	<th>Del</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
+  </tr>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div0">
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/boUAAOSwwXRiQ2C6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/boUAAOSwwXRiQ2C6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/59gAAOSwujZiQ2C9/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/59gAAOSwujZiQ2C9/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/BdAAAOSw~XBiQ2DF/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/BdAAAOSw~XBiQ2DF/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/5ksAAOSwxutiQ2D8/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/5ksAAOSwxutiQ2D8/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTM5WDM4OA==/z/cxMAAOSwe9ZiQ2Dl/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTM5WDM4OA==/z/cxMAAOSwe9ZiQ2Dl/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/evga-gtx-760-4-gb-possibly-bricked-parts/1610796849 target="_blank" rel="noopener noreferrer">EVGA GTX 760 4 GB (possibly bricked/parts)</a><br>I got scammed a couple of days back and bought this non-functional GTX 760. C'est la vie. Fans spin ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5A%2C3B6" target="_blank" rel="noopener noreferrer">Mississauga, L5A3B6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div1">
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/zs8AAOSwnKhiPjRY/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/zs8AAOSwnKhiPjRY/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/2dEAAOSwUuhiPjRe/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/2dEAAOSwUuhiPjRe/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gygabyte-radeon-hd-6670-1gb-ddr3-pci-e-video-card/1610263286 target="_blank" rel="noopener noreferrer">GYGABYTE Radeon HD 6670 1GB DDR3 PCI-E video card</a><br>GYGABYTE Radeon HD 6670 1GB DDR3 PCI-E video card Model GV-R667D3-1GI Great cosmetic and working ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5R%2C2P7" target="_blank" rel="noopener noreferrer">Toronto, M5R2P7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div2">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/41oAAOSwOTNiS2gJ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/41oAAOSwOTNiS2gJ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/7kcAAOSwWcZiS2gN/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/7kcAAOSwWcZiS2gN/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2UEAAOSw6XViS2gQ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2UEAAOSw6XViS2gQ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/untested-asus-directcu-mini-gtx-670-graphics-card/1611611358 target="_blank" rel="noopener noreferrer">UNTESTED - Asus DirectCU mini gtx 670 graphics card</a><br>Untested Asus DirectuCU mini version of nvidia's geforce gtx 670 for sale. A friend gave his pc to ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6T" target="_blank" rel="noopener noreferrer">Brampton, L6T</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div3">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/diYAAOSwRhtiHZUi/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/diYAAOSwRhtiHZUi/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDgwWDY0MA==/z/1E0AAOSwoN5iHZUo/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDgwWDY0MA==/z/1E0AAOSwoN5iHZUo/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/asus-strix-gtx-960-4gb-asus-gtx-750-2gb/1607225311 target="_blank" rel="noopener noreferrer">Asus Strix GTX 960 4GB + Asus GTX 750 2GB</a><br>Got two Asus graphics cards. Both have issues. They are for parts or repair. I got the GTX 960 in a ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7P" target="_blank" rel="noopener noreferrer">Burlington, L7P</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div4">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/7NEAAOSwWcZiR5bc/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/7NEAAOSwWcZiR5bc/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/evga-nvidia-geforce-gtx-650ti-2gb-used/1611198084 target="_blank" rel="noopener noreferrer">EVGA Nvidia Geforce GTX 650TI 2GB USED</a><br>USED in fair condition. Has 1 DVI-I, 1 DVI, and 1 mini HDMI port</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7L%2C4G5" target="_blank" rel="noopener noreferrer">Burlington, L7L4G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div5">
+		<a href="https://i.ebayimg.com/00/s/NDE0WDgwMA==/z/1kwAAOSwHXJhsFYN/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDE0WDgwMA==/z/1kwAAOSwHXJhsFYN/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDExWDgwMA==/z/HwUAAOSwIYdhsFYQ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDExWDgwMA==/z/HwUAAOSwIYdhsFYQ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/amd-radeon-r9-280x-3gb-graphics-card/1597518186 target="_blank" rel="noopener noreferrer">amd radeon r9 280x 3gb graphics card</a><br>selling a amd radeon r9 280x 3gb asus directcu II graphics card. not sure if it works, as there is ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL4Z%2C4B4" target="_blank" rel="noopener noreferrer">Mississauga, L4Z4B4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div6">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/S8AAAOSwe3hiTNk6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/S8AAAOSwe3hiTNk6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2QwAAOSwarliTNlE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2QwAAOSwarliTNlE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>65</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/gigabyte-gtx-760-gddr5-2gb-gpu-graphic-card/1611760491 target="_blank" rel="noopener noreferrer">Gigabyte GTX 760 GDDR5 2GB GPU Graphic Card</a><br>Gigabyte GTX 760 GDDR5 2GB GPU Graphic Card (GV-N760OC-2GD (rev. 2.0)) Good working condition. Good ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6H%2C4Y4" target="_blank" rel="noopener noreferrer">Oakville, L6H4Y4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div7">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ct0AAOSwK8tiLPjR/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ct0AAOSwK8tiLPjR/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>80</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/asus-gtx-760/1608607143 target="_blank" rel="noopener noreferrer">Asus GTX 760 </a><br>Posted by jey in computers, desktop computers in Toronto (GTA), Mississauga / Peel Region. March ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Chinguacousy%2CRd%2Cn/of%2CBovaird%2CDr%2CW%2CBrampton%2CON%2CL7A%2C0H6%2CCanada" target="_blank" rel="noopener noreferrer"> Brampton, L7A0H6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div8">
+		<a href="https://i.ebayimg.com/00/s/NDA1WDgwMA==/z/XLMAAOSw84VhssuW/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDA1WDgwMA==/z/XLMAAOSw84VhssuW/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Mzg0WDgwMA==/z/uasAAOSwfjJhssua/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Mzg0WDgwMA==/z/uasAAOSwfjJhssua/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/amd-radeon-r9-290x-4gb-gpu/1597765254 target="_blank" rel="noopener noreferrer">amd Radeon r9 290x 4gb gpu</a><br>selling a amd radeon r9 290x 4gb msi lightning graphics card. not sure if it works, as there is no ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL4Z%2C4B4" target="_blank" rel="noopener noreferrer">Mississauga, L4Z4B4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div9">
+		<a href="https://i.ebayimg.com/00/s/NDA4WDgwMA==/z/0hEAAOSwqDdiP4iP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDA4WDgwMA==/z/0hEAAOSwqDdiP4iP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Mjg3WDgwMA==/z/ufcAAOSwrrZiP4iR/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Mjg3WDgwMA==/z/ufcAAOSwrrZiP4iR/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzcwWDgwMA==/z/TwwAAOSw-jhiP4iU/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzcwWDgwMA==/z/TwwAAOSw-jhiP4iU/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/geforce-gtx-770-2gb-graphics-card-for-1080p-gaming/1610411534 target="_blank" rel="noopener noreferrer">GeForce GTX 770 2GB Graphics Card for 1080p Gaming</a><br>Gigabyte GeForce GTX 770 2 GB GDDR5 Video Card (Model# GV-N770OC-2GD). Inputs 1x DVI-I, 1x DVI-D, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=3080%2CYonge%2CStreet%2CToronto%2COntario" target="_blank" rel="noopener noreferrer">Toronto</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div10">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/jeEAAOSwIC9iJQbN/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/jeEAAOSwIC9iJQbN/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/I24AAOSwtVViJQbO/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/I24AAOSwtVViJQbO/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/0E4AAOSwvO9iJQeV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/0E4AAOSwvO9iJQeV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/TBwAAOSw0BpiJQbf/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/TBwAAOSw0BpiJQbf/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>120</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/city-of-toronto/nvidia-gtx-960-reference-card/1607877307 target="_blank" rel="noopener noreferrer">Nvidia GTX 960 Reference Card</a><br>Nvidia GTX 960 Reference Card Great Condition Used for a couple of months The card is completely ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM1L" target="_blank" rel="noopener noreferrer">Toronto, M1L</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div11">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/HxoAAOSwDG1iNU7z/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/HxoAAOSwDG1iNU7z/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/UikAAOSwLSliNU70/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/UikAAOSwLSliNU70/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/IhgAAOSw2XRiNU71/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/IhgAAOSw2XRiNU71/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>140</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/gtx-1050/1609393912 target="_blank" rel="noopener noreferrer">GTX 1050</a><br>Barely used , only used for a week or two upgraded to a 3070, 140 no low ballers</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM9V3G1" target="_blank" rel="noopener noreferrer">Toronto, M9V3G1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div12">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/e1YAAOSwfGphzkZ9/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/e1YAAOSwfGphzkZ9/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/qRgAAOSwzh9hzkaQ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/qRgAAOSwzh9hzkaQ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTI4WDgwMA==/z/2LsAAOSwwBdhzkaG/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTI4WDgwMA==/z/2LsAAOSwwBdhzkaG/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAzWDgwMA==/z/Bj4AAOSwsvlhzkac/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAzWDgwMA==/z/Bj4AAOSwsvlhzkac/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/k7MAAOSws3phzkap/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/k7MAAOSws3phzkap/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/6ZEAAOSwb8Bhzkay/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/6ZEAAOSwb8Bhzkay/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/EhEAAOSwoFBhzka-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/EhEAAOSwoFBhzka-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/dell-i7-2600-8gb-ram-120gb-sd-2tb-hd-optional-gtx-1060/1600128854 target="_blank" rel="noopener noreferrer">Dell i7-2600|8GB RAM|120GB SD|2TB HD Optional GTX 1060</a><br>- Intel i7 2600 CPU - Ram 8 GB DDR3 - 120 SSD Windows 10 - 2TB HD - 300W Dell PS - $150 Firm # ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5V%2C1H5" target="_blank" rel="noopener noreferrer">Mississauga, L5V1H5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div13">
+		<a href="https://i.ebayimg.com/00/s/NTAwWDUwMA==/z/X0gAAOSwoZFiRywt/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTAwWDUwMA==/z/X0gAAOSwoZFiRywt/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/NjEAAOSw3KRiRywv/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/NjEAAOSw3KRiRywv/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/UV4AAOSw3KViRyww/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/UV4AAOSw3KViRyww/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/a2gAAOSwY59iRywy/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/a2gAAOSwY59iRywy/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gigabyte-r9-380-4gb/1611138145 target="_blank" rel="noopener noreferrer">Gigabyte r9 380 4gb</a><br>Looking to sell my r9 380. Works great, no issues. Only selling because I upgraded to a 3060. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5B2H1" target="_blank" rel="noopener noreferrer">Toronto, M5B2H1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div14">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/gnwAAOSw2EtiS7NE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/gnwAAOSw2EtiS7NE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/oOsAAOSwm-9iS7NG/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/oOsAAOSwm-9iS7NG/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/24kAAOSw31ZiS7NH/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/24kAAOSw31ZiS7NH/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gtx-1050-2gb-oc-edition/1611647083 target="_blank" rel="noopener noreferrer">GTX 1050 2gb OC edition.</a><br>I’ve never Overclocked and cleaned it today. Used for basic games like Valorant,GTA 5, Fortnite, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM3L1Y7" target="_blank" rel="noopener noreferrer">Toronto, M3L1Y7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div15">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/LicAAOSwqb1iLiLQ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/LicAAOSwqb1iLiLQ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gigabyte-geforce-gtx1050-gpu/1608709864 target="_blank" rel="noopener noreferrer">Gigabyte GeForce gtx1050 gpu</a><br>Selling gpu. Fan is a little too noisy for me. Runs 1080p games without issues. Gets 120 fps on ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM6E" target="_blank" rel="noopener noreferrer">Toronto, M6E</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div16">
+		<a href="https://i.ebayimg.com/00/s/Mzc2WDgwMA==/z/8eEAAOSw8YliSLg2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Mzc2WDgwMA==/z/8eEAAOSw8YliSLg2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTQ4WDgwMA==/z/eNQAAOSw871iSLg6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTQ4WDgwMA==/z/eNQAAOSw871iSLg6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzY5WDgwMA==/z/sgkAAOSw7kFiSLhk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzY5WDgwMA==/z/sgkAAOSw7kFiSLhk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQwOA==/z/-pYAAOSwZH9iSLhr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQwOA==/z/-pYAAOSwZH9iSLhr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/evga-gtx-780/1611316646 target="_blank" rel="noopener noreferrer">EVGA GTX 780</a><br>Fantastic card plays all 1080 games and lightly used. The EVGA GeForce GTX 780 marks an evolution ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CNorth%2CYork%2CON%2CM2J" target="_blank" rel="noopener noreferrer">North York, M2J</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div17">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/NywAAOSwpgNiK-9a/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/NywAAOSwpgNiK-9a/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/grAAAOSwBlZiK-9j/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/grAAAOSwBlZiK-9j/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/xYIAAOSwUZFiK-9l/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/xYIAAOSwUZFiK-9l/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/DKUAAOSwo5BiK-9n/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/DKUAAOSwo5BiK-9n/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>160</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/zotac-gtx-1050ti-4gb-ddr5/1608517990 target="_blank" rel="noopener noreferrer">Zotac GTX 1050ti 4Gb DDR5</a><br>Upgraded to new card, selling this one. Card works great and smooth. Firm price, low ballers will ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM1P" target="_blank" rel="noopener noreferrer">Toronto, M1P</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div18">
+		<a href="https://i.ebayimg.com/00/s/NDk5WDU4MA==/z/-zUAAOSwHcRiPcrR/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDk5WDU4MA==/z/-zUAAOSwHcRiPcrR/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>175</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/evga-gtx-1060-3gb-graphics-card/1610200207 target="_blank" rel="noopener noreferrer">EVGA GTX 1060 3GB Graphics Card</a><br>EVGA GTX 1060 3GB Graphics card in Excellent Condition. $175</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7M%2C5B7" target="_blank" rel="noopener noreferrer">Burlington, L7M5B7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div19">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/u2kAAOSw8v1iGmfM/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/u2kAAOSw8v1iGmfM/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/SKYAAOSw5t9iGmfK/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/SKYAAOSw5t9iGmfK/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>175</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gtx-970-3gb/1606917918 target="_blank" rel="noopener noreferrer">GTX 970 3gb</a><br>GTX 970. No trades no negotiation</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5P2W4" target="_blank" rel="noopener noreferrer">Toronto, M5P2W4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div20">
+		<a href="https://i.ebayimg.com/00/s/NDI4WDgwMA==/z/5eAAAOSwJoViMcQc/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDI4WDgwMA==/z/5eAAAOSwJoViMcQc/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>180</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/gtx-1060-3gb/1609046570 target="_blank" rel="noopener noreferrer">GTX 1060 3gb</a><br>180 firm. Never used for mining, perfect working condition.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5M%2C8B9" target="_blank" rel="noopener noreferrer">Mississauga, L5M8B9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div21">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/cI0AAOSwZQZiMDNg/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/cI0AAOSwZQZiMDNg/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>180</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/asus-strix-gtx-970-good-condition/1608754873 target="_blank" rel="noopener noreferrer">Asus Strix GTX 970 -  good condition</a><br>Selling my Asus Strix GTX 970 video card. Works well, no problems. Only used for gaming and even ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=33%2CLombard%2CStreet%2CToronto%2CON" target="_blank" rel="noopener noreferrer">Toronto</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div22">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ZHkAAOSwexNiR5Ze/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ZHkAAOSwexNiR5Ze/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/a2UAAOSwmpxiR5Zh/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/a2UAAOSwmpxiR5Zh/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/zotac-nvidia-geforce-gtx-1060-3gb-mini-used/1611197888 target="_blank" rel="noopener noreferrer">Zotac Nvidia GeForce GTX 1060 3GB Mini USED</a><br>USED in a gaming pc, in good condition</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7L%2C4G5" target="_blank" rel="noopener noreferrer">Burlington, L7L4G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div23">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/NtYAAOSwbkRiOqR7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/NtYAAOSwbkRiOqR7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/0BIAAOSwGuViOqR~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/0BIAAOSwGuViOqR~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/ct8AAOSwu5hiOqSA/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/ct8AAOSwu5hiOqSA/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/asus-gtx-970-strix-gpu/1609933847 target="_blank" rel="noopener noreferrer">ASUS GTX 970 Strix GPU </a><br>As description says, selling a GTX 970 with original box. It spent many years not used as I was ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM9B" target="_blank" rel="noopener noreferrer">Toronto, M9B</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div24">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/sQ0AAOSwoSRiPk5f/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/sQ0AAOSwoSRiPk5f/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/evga-nvidia-gtx-1060-3gb/1610277279 target="_blank" rel="noopener noreferrer">EVGA Nvidia GTX 1060 3GB</a><br>Original owner. Used in an eGPU box for occasional gaming with my dell laptop. Barely used since I ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5J%2C0B1" target="_blank" rel="noopener noreferrer">Toronto, M5J0B1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div25">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/iGgAAOSw4K9iQ3j-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/iGgAAOSw4K9iQ3j-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ZDAAAOSwmpxiQ3j3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ZDAAAOSwmpxiQ3j3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ByIAAOSwR3piQ3j6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ByIAAOSwR3piQ3j6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>210</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/mint-asus-gtx-970-4gb-strix/1610809931 target="_blank" rel="noopener noreferrer">Mint Asus GTX 970 4Gb Strix</a><br>Selling gently used Asus Gtx 970 4gb Could drop off for extra fee. Cash only</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5A%2C3G9" target="_blank" rel="noopener noreferrer">Mississauga, L5A3G9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div26">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/pbMAAOSw0RFiSJ57/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/pbMAAOSw0RFiSJ57/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/9twAAOSwTLZiSJ5~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/9twAAOSwTLZiSJ5~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ZpkAAOSwnk9iSJ6C/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ZpkAAOSwnk9iSJ6C/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/JQQAAOSwF4RiSJ6F/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/JQQAAOSwF4RiSJ6F/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTMzWDgwMA==/z/rKwAAOSwzcZiSJ6I/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTMzWDgwMA==/z/rKwAAOSwzcZiSJ6I/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>210</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/asus-geforce-gtx-970-4g-turbo-oc-graphics-card/1611298854 target="_blank" rel="noopener noreferrer">Asus GeForce GTX 970 4G Turbo OC Graphics Card</a><br>I'm selling my Asus Turbo GTX 970 OC graphics card. Functions perfectly, in great condition and was ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=639%2CWarden%2CAvenue%2CToronto%2CON" target="_blank" rel="noopener noreferrer">Toronto</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div27">
+		<a href="https://i.ebayimg.com/00/s/NDAyWDgwMA==/z/nkIAAOSwW69iKjo6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDAyWDgwMA==/z/nkIAAOSwW69iKjo6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>230</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/city-of-toronto/gtx-1060-6gb/1608346465 target="_blank" rel="noopener noreferrer">GTX 1060 6GB</a><br>Asus Rog Strix GTX 1060 6GB. Used it 7 months for gaming. Never mined on. No issues! Low ballers ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Dawes%2CRd%2C#502%2CToronto%2CON%2CM4B%2C2G1%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M4B2G1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div28">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/lOUAAOSwxFxiQINC/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/lOUAAOSwxFxiQINC/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/Rz0AAOSwM7NiQIND/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/Rz0AAOSwM7NiQIND/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/DdEAAOSwJbNiQINE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/DdEAAOSwJbNiQINE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg4NTY=/z/0DgAAOSwDARiQING/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg4NTY=/z/0DgAAOSwDARiQING/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/L4UAAOSwf25iQINH/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/L4UAAOSwf25iQINH/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/~KgAAOSwauZiQINJ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/~KgAAOSwauZiQINJ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>250</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/mississauga-peel-region/gtx-1060-6gb-asus/1610489380 target="_blank" rel="noopener noreferrer">GTX 1060 6gb asus</a><br>This card was lightly used for gaming, I mainly did stuff that didn't use a ton of GPU power. This ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Bala%2CDr%2CMississauga%2CON%2CL5M%2C7N2%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L5M7N2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div29">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/1YUAAOSwAK9iQKA0/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/1YUAAOSwAK9iQKA0/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/18kAAOSwzcZiQKA2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/18kAAOSwzcZiQKA2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>250</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/city-of-toronto/evga-gtx-1060-6gb/1610511428 target="_blank" rel="noopener noreferrer">Evga GTX 1060 6gb </a><br>used for gaming slightly like new. no mining use switched to other cars so selling it no original ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM9M2P4" target="_blank" rel="noopener noreferrer">Toronto, M9M2P4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div30">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM2MA==/z/avcAAOSwbThiORLb/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM2MA==/z/avcAAOSwbThiORLb/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/4DUAAOSwrrZiORLd/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/4DUAAOSwrrZiORLd/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>250</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/city-of-toronto/gtx-1060-6gb-asus-dual/1609783977 target="_blank" rel="noopener noreferrer">GTX 1060 6gb asus dual </a><br>Never used for mining, kept in very cool conditions for its entire lifetime, comes with original ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4S%2C2H4%2CCanada" target="_blank" rel="noopener noreferrer">Toronto, M4S2H4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div31">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tOoAAOSwnk9iRgb1/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tOoAAOSwnk9iRgb1/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTEzWDgwMA==/z/y4YAAOSwxxpiRgfL/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTEzWDgwMA==/z/y4YAAOSwxxpiRgfL/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/xgMAAOSwLV5iRgb3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/xgMAAOSwLV5iRgb3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ymIAAOSwIttiRgb4/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ymIAAOSwIttiRgb4/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/CWkAAOSwAoViRgb6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/CWkAAOSwAoViRgb6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/QP4AAOSweU5iRgb7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/QP4AAOSweU5iRgb7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTE5WDgwMA==/z/xYQAAOSwXA5iRgfM/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTE5WDgwMA==/z/xYQAAOSwXA5iRgfM/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>250</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/evga-gtx-1060-6gb/1611042109 target="_blank" rel="noopener noreferrer">EVGA GTX 1060 6Gb</a><br>I'm selling my GTX 1060 now that I've finally been able to upgrade. It's never been mined on and ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Garden%2CAve%2CBrampton%2CON%2CL6X%2C1M5%2CCanada" target="_blank" rel="noopener noreferrer"> Brampton, L6X1M5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div32">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/X2YAAOSwjoZiQzsO/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/X2YAAOSwjoZiQzsO/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/NMMAAOSwpPNiQzr9/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/NMMAAOSwpPNiQzr9/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/r8gAAOSwwTZiQzsC/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/r8gAAOSwwTZiQzsC/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2VIAAOSwwERiQzsJ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2VIAAOSwwERiQzsJ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>250</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/pny-nvidia-geforce-gtx-1060-6gb-good-condition/1610774063 target="_blank" rel="noopener noreferrer">PNY Nvidia GeForce GTX 1060 6GB - good condition</a><br>Yes available, removed when sold .PNY Nvidia GeForce GTX 1060 6GB - good condition. Pulled from a ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5V" target="_blank" rel="noopener noreferrer">Mississauga, L5V</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div33">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/l2kAAOSwuqViGmiC/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/l2kAAOSwuqViGmiC/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/S4gAAOSwjfJiGmiD/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/S4gAAOSwjfJiGmiD/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/5DkAAOSwBehiGmiD/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/5DkAAOSwBehiGmiD/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>250</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gtx-1060-6gb/1606918315 target="_blank" rel="noopener noreferrer">GTX 1060 6gb</a><br>Zotac GTX 1060 Price is firm</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5P2W4" target="_blank" rel="noopener noreferrer">Toronto, M5P2W4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div34">
+		<a href="https://i.ebayimg.com/00/s/MzM2WDgwMA==/z/NOQAAOSwbcFiKbiz/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzM2WDgwMA==/z/NOQAAOSwbcFiKbiz/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzM5WDgwMA==/z/-dYAAOSwllViKbi2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzM5WDgwMA==/z/-dYAAOSwllViKbi2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>260</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/xfx-amd-radeon-r9-fury-4gb-gpu/1608305289 target="_blank" rel="noopener noreferrer">xfx amd radeon r9 fury 4gb gpu</a><br>Have a xfx pro triple dissipation amd radeon r9 fury 4gb gpu graphics card to sell, in great ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL4Z%2C4B4" target="_blank" rel="noopener noreferrer">Mississauga, L4Z4B4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div35">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/h-IAAOSw6fpiO1mO/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/h-IAAOSw6fpiO1mO/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/MdIAAOSwoPJiO1mP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/MdIAAOSwoPJiO1mP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/NccAAOSwm-9iO1mQ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/NccAAOSwm-9iO1mQ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/2IoAAOSwbW1iO1pk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/2IoAAOSwbW1iO1pk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/GEsAAOSw~I1iO1pl/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/GEsAAOSw~I1iO1pl/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>275</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/r9-fury-strix-performance-equivalent-to-an-rtx-2060/1609985568 target="_blank" rel="noopener noreferrer">R9 Fury STRIX, performance equivalent to an RTX 2060</a><br>Older GPU that has been most recently just been sitting in my pc, comes with original box. Can run ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM1G1P1" target="_blank" rel="noopener noreferrer">Toronto, M1G1P1</a></td>
+</tr>
+</table></body>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+</html>

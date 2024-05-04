@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kijiji Results</title>
+<style>
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+</style>
+</head>
+<body>
+<script>
+function sortTable(tableID, n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById(tableID);
+	switching = true;
+	dir = "asc";
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+					var cmpX=isNaN(parseInt(x.innerHTML))?x.innerText.toLowerCase():parseInt(x.innerHTML);
+					var cmpY=isNaN(parseInt(y.innerHTML))?y.innerText.toLowerCase():parseInt(y.innerHTML);
+	cmpX=(cmpX=='-')?0:cmpX;
+	cmpY=(cmpY=='-')?0:cmpY;
+			if (dir == "asc") {
+				if (cmpX > cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (cmpX < cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount ++;      
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+</script>
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table id="myTable">
+  <tr>
+   	<th>Del</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
+  </tr>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div0">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/~1oAAOSwiJJiQQum/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/~1oAAOSwiJJiQQum/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/L1gAAOSwWoBiQQun/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/L1gAAOSwWoBiQQun/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/samsung-ssd-128gb/1610581903 target="_blank" rel="noopener noreferrer">Samsung ssd 128gb</a><br>Ssd used a few times runs great</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mavis%2CRd%2CMississauga%2CON%2CL5V%2C1Z9%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L5V1Z9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div1">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/yNoAAOSwZHRiQj0r/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/yNoAAOSwZHRiQj0r/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/kingston-ssd-120gb/1610694801 target="_blank" rel="noopener noreferrer">Kingston SSD 120GB</a><br>Fixed price, serious buyers only.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6V%2C4K9%2CCanada" target="_blank" rel="noopener noreferrer">Brampton, L6V4K9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div2">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/W6UAAOSw4ytevIzu/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/W6UAAOSw4ytevIzu/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/6doAAOSwvppevIzv/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/6doAAOSwvppevIzv/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/U94AAOSwxOJevIz3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/U94AAOSwxOJevIz3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/4sIAAOSwhNNfPpPI/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/4sIAAOSwhNNfPpPI/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/dhMAAOSwcUJfPpPL/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/dhMAAOSwcUJfPpPL/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-laptop-accessories/hamilton/computer-hard-and-ssds/1500830834 target="_blank" rel="noopener noreferrer">Computer Hard  and SSDs</a><br>1- 500GB HDD-$40 525 GB SSD-$80- Has been sold 1-240GB SSD-$60- Sold 1-40GB SSD-$20 1-250GB SSD-$60 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Tindale%2CCt%2CHamilton%2CON%2CL8K%2C6C8%2CCanada" target="_blank" rel="noopener noreferrer"> Hamilton, L8K6C8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div3">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ki0AAOSwm6ZiT5EV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ki0AAOSwm6ZiT5EV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/37QAAOSwMWpiT5EX/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/37QAAOSwMWpiT5EX/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/wosAAOSwTSJiT5EZ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/wosAAOSwTSJiT5EZ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/Di4AAOSwUuhiT5Eb/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/Di4AAOSwUuhiT5Eb/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/xpg-sx930-adata-ssd-2-5-inches-480gb-25-if-you-can-come-asap/1612029851 target="_blank" rel="noopener noreferrer">XPG SX930 ADATA SSD 2.5 Inches 480Gb ($25 if you can come ASAP)
+</a><br>($25 if you can come tonight april 7) ▪︎Storage 480Gb ▪︎Brand ADATA ▪︎Series XPG SX930 ▪︎Size 2.5 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mohawk%2CRd%2CE%2CHamilton%2CON%2CL9A%2C2J3%2CCanada" target="_blank" rel="noopener noreferrer"> Hamilton, L9A2J3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div4">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/fssAAOSwq7liLjRe/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/fssAAOSwq7liLjRe/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>45</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/500gb-western-digital-ssd/1608722068 target="_blank" rel="noopener noreferrer">500GB Western Digital SSD</a><br>I am going through my older computer equipment and posting everything that I will not be using ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7L4R7" target="_blank" rel="noopener noreferrer">Burlington, L7L4R7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div5">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/5oIAAOSwMWpiS2N3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/5oIAAOSwMWpiS2N3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/EuEAAOSwdVxiS2N6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/EuEAAOSwdVxiS2N6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/KioAAOSwB1ZiS2N-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/KioAAOSwB1ZiS2N-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/512gb-480gb-2-5-inch-sata-3-ssd-with-512m-cache/1611609447 target="_blank" rel="noopener noreferrer">512gb /480gb 2.5 inch SATA 3 SSD with 512M cache</a><br>Great condition, solid state drive with DRAM cache. According to amazon, it can go up to 559 / ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6T" target="_blank" rel="noopener noreferrer">Brampton, L6T</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div6">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/Vq8AAOSw7yViQLKM/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/Vq8AAOSw7yViQLKM/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/vq4AAOSwsOZiQLKS/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/vq4AAOSwsOZiQLKS/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>65</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-flash-memory-usb-sticks/mississauga-peel-region/adata-512gb-ssd-m2/1610525446 target="_blank" rel="noopener noreferrer">ADATA 512GB SSD M2</a><br>Solid state drive in excellent condition.I just upgrade to a larger drive.No longer needed.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6P%2C1A3" target="_blank" rel="noopener noreferrer">Brampton, L6P1A3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div7">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/e5UAAOSwg2piEoxl/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/e5UAAOSwg2piEoxl/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NzI1WDgwMA==/z/tAwAAOSw0I9iEoxp/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NzI1WDgwMA==/z/tAwAAOSw0I9iEoxp/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTMzWDgwMA==/z/q0YAAOSw-hFiEox0/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTMzWDgwMA==/z/q0YAAOSw-hFiEox0/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>65</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/new-adata-su800-512gb-3d-nand-2-5-inch-sata-iii/1606233635 target="_blank" rel="noopener noreferrer">New ADATA SU800, 512GB 3D-NAND 2.5 Inch SATA III</a><br>New Sealed. High Speed Read & Write up to 560MB/s & 520MB/s Solid State Drive Price: $65. $80 Value ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6T" target="_blank" rel="noopener noreferrer">Brampton, L6T</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div8">
+		<a href="https://i.ebayimg.com/00/s/NTkwWDgwMA==/z/SJwAAOSwGuViRlAS/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTkwWDgwMA==/z/SJwAAOSwGuViRlAS/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTg4WDgwMA==/z/qGYAAOSwOMpiRlAT/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTg4WDgwMA==/z/qGYAAOSwOMpiRlAT/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-flash-memory-usb-sticks/mississauga-peel-region/crucial-mx500-ssd-1tb/1611078204 target="_blank" rel="noopener noreferrer">crucial MX500 ssd 1tb</a><br>Brand new asking $100</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Argentia%2CRd%2CMississauga%2CON%2CL5N%2C0A2%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L5N0A2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div9">
+		<a href="https://i.ebayimg.com/00/s/Mjk2WDgwMA==/z/MzwAAOSwx5NiTvZ1/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Mjk2WDgwMA==/z/MzwAAOSwx5NiTvZ1/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/samsung-980-series-1tb/1611942278 target="_blank" rel="noopener noreferrer">Samsung 980 Series - 1TB</a><br>Samsung 980 Series - 1TB PCIe Gen3. X4 NVMe 1.4 - M.2 Internal SSD (MZ-V8V1T0B/AM Brand new box ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6S%2CCanada" target="_blank" rel="noopener noreferrer">Brampton, L6S</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div10">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/TNsAAOSwcVFiSWCG/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/TNsAAOSwcVFiSWCG/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/1-tb-ssd/1611373030 target="_blank" rel="noopener noreferrer">1 TB SSD</a><br>1 TB SSD. Posted in computer accessories, system components in Mississauga / Peel Region. April 3, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5B0G3" target="_blank" rel="noopener noreferrer">Mississauga, L5B0G3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div11">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/m2wAAOSwpv1iQ-hd/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/m2wAAOSwpv1iQ-hd/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/PekAAOSwbNdiQ-hf/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/PekAAOSwbNdiQ-hf/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>120</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/mississauga-peel-region/wd-black-p50-1tb-2000mb-s/1610852951 target="_blank" rel="noopener noreferrer">WD BLACK P50 1TB (2000mb/s)</a><br>Selling a brand new ssd for gaming.i have never used it.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6X2Z6" target="_blank" rel="noopener noreferrer">Brampton, L6X2Z6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div12">
+		<a href="https://i.ebayimg.com/00/s/NDU4WDY0MA==/z/rzgAAOSwrb1glJ8d/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDU4WDY0MA==/z/rzgAAOSwrb1glJ8d/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>120</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/samsung-870-qvo-sata-iii-2-5-ssd-1tb/1555140853 target="_blank" rel="noopener noreferrer">SAMSUNG 870 QVO SATA III 2.5" SSD 1TB</a><br>New, not formatted, out of the box for picture only. Bottom price, just reply with your number when ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5M" target="_blank" rel="noopener noreferrer">Mississauga, L5M</a></td>
+</tr>
+</table></body>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+</html>

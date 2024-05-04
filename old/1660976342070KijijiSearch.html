@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kijiji Results</title>
+<style>
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+</style>
+</head>
+<body>
+<script>
+function sortTable(tableID, n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById(tableID);
+	switching = true;
+	dir = "asc";
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+					var cmpX=isNaN(parseInt(x.innerHTML))?x.innerText.toLowerCase():parseInt(x.innerHTML);
+					var cmpY=isNaN(parseInt(y.innerHTML))?y.innerText.toLowerCase():parseInt(y.innerHTML);
+	cmpX=(cmpX=='-')?0:cmpX;
+	cmpY=(cmpY=='-')?0:cmpY;
+			if (dir == "asc") {
+				if (cmpX > cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (cmpX < cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount ++;      
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+</script>
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table id="myTable">
+  <tr>
+   	<th>Del</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
+  </tr>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div0">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/97/97e449d3-18d5-48f8-be30-7881d247618a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/97/97e449d3-18d5-48f8-be30-7881d247618a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/71/71eeefdc-8221-4d58-b8c5-168e57597c59?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/71/71eeefdc-8221-4d58-b8c5-168e57597c59?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/pc-computer-build-parts-cpu-fan-heatsink-details-below/1614060825 target="_blank" rel="noopener noreferrer">PC/Computer Build Parts CPU Fan/Heatsink, Details Below</a><br>Brampton ... CPU Pentium R G2020 290GHZ Socket 1155, Runs Windows 10 or Linux, Linux Mint OS etc ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=107%2CDarras%2CCourt%2CBrampton%2CON" target="_blank" rel="noopener noreferrer">Brampton</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div1">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fd/fd533ae5-172b-40da-a69f-6081be8e581b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fd/fd533ae5-172b-40da-a69f-6081be8e581b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/tp-link-ac1200-pcie-wireless-wifi-pcie-card-2-4g5g-dual-band-w/1614636562 target="_blank" rel="noopener noreferrer">TP-Link AC1200 PCIe Wireless Wifi PCIe Card - 2.4G5G Dual Band W</a><br>Originally purchased 2 years ago and recently upgraded to a motherboard which included wifi so no ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9A" target="_blank" rel="noopener noreferrer">Etobicoke, M9A</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div2">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d72be2cf-7275-498b-a96b-866484163145?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d72be2cf-7275-498b-a96b-866484163145?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/asrock-b450m-pro4/1627175357 target="_blank" rel="noopener noreferrer">ASRock B450M pro4</a><br>$50 OBO Been using this motherboard for around 2 years until I recently upgraded. Comes with an IO ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5R%2C4G6" target="_blank" rel="noopener noreferrer">Mississauga, L5R4G6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div3">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe96535d-c788-47c1-b4a7-e6f1593aed2f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe96535d-c788-47c1-b4a7-e6f1593aed2f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/gigabyte-b365m-motherboard/1628802992 target="_blank" rel="noopener noreferrer">GigaByte B365M Motherboard</a><br>Unsealed. New, price is firm.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5B%2C2C9" target="_blank" rel="noopener noreferrer">Mississauga, L5B2C9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div4">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05d6f488-8442-4787-9b41-1214304d4814?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05d6f488-8442-4787-9b41-1214304d4814?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/intel-core-i7-3770-quad-core-processor/1625930605 target="_blank" rel="noopener noreferrer">Intel Core i7 3770 quad core processor</a><br>Intel Core i7-3770 Processor 8M Cache, up to 3.90 GHz 4 core, 8 thread LGA1155 Socket Tested, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Hamilton%2CON%2CL8H" target="_blank" rel="noopener noreferrer">Hamilton, L8H</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div5">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/56/56a86815-e841-44f6-9be5-dce897066d08?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/56/56a86815-e841-44f6-9be5-dce897066d08?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4c/4c428856-f948-42c5-a325-d4efe0ad948a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4c/4c428856-f948-42c5-a325-d4efe0ad948a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/6050bf58-3325-4656-8f11-89e36a1295ee?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/6050bf58-3325-4656-8f11-89e36a1295ee?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8eb4cc15-c344-4b6d-9b59-d493362b1cd5?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8eb4cc15-c344-4b6d-9b59-d493362b1cd5?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/65/6541b858-1f52-4267-8a44-54260efc590b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/65/6541b858-1f52-4267-8a44-54260efc590b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff4cfc75-4032-42f8-b92d-6e6e9319304c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff4cfc75-4032-42f8-b92d-6e6e9319304c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>65</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/dell-t1600-matx-motherboard-e3-1245-xeon-cpu-tower-heatsink/1613157714 target="_blank" rel="noopener noreferrer">Dell t1600 matx motherboard + e3 1245 xeon cpu + tower heatsink</a><br>Dell precision t1600 matx ddr3 motherboard e3 1245 xeon 4 core 8 thread equivalent to 2600k ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Churchville%2CBrampton%2CON%2CL6Y%2CCanada" target="_blank" rel="noopener noreferrer"> Brampton, L6Y</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div6">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8c81d5e9-0cc5-4058-a99f-4e57549c58ed?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8c81d5e9-0cc5-4058-a99f-4e57549c58ed?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>80</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/asus-prime-x570-p-am4-motherboard/1625726162 target="_blank" rel="noopener noreferrer">ASUS Prime x570 - P AM4 Motherboard</a><br>Selling working Asus Prime X570 -P have original box and other stuff. Rear audio doesn't work for ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Ebenezer%2CRd%2CBrampton%2CON%2CL6P%2C2S1%2CCanada" target="_blank" rel="noopener noreferrer"> Brampton, L6P2S1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div7">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a1/a12c13dd-dcc3-44d7-998b-c896a4daeae7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a1/a12c13dd-dcc3-44d7-998b-c896a4daeae7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9f/9f32d97f-8e78-41b6-86ee-a9cf49e87c98?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9f/9f32d97f-8e78-41b6-86ee-a9cf49e87c98?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/912c6d21-bf80-4ce1-9eee-3158fce02320?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/912c6d21-bf80-4ce1-9eee-3158fce02320?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a6/a62d4f84-3013-41a0-8ab8-ce4ce4a3dcf2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a6/a62d4f84-3013-41a0-8ab8-ce4ce4a3dcf2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>90</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/brand-new-gigabyte-a520m-s2h-am4-pcie-3-0-micro-atx-motherboard/1613939197 target="_blank" rel="noopener noreferrer">Brand New Gigabyte A520M S2H AM4 PCIE 3.0 Micro ATX Motherboard</a><br>Up for sale is a brand new Gigabyte A520M S2H (AMD Ryzen AM4/MicroATX/4+3 Phases Digital ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL7A%2C0N5" target="_blank" rel="noopener noreferrer">Brampton, L7A0N5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div8">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cf61e414-96a1-4dc2-ba06-891ce836b783?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cf61e414-96a1-4dc2-ba06-891ce836b783?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/11265221-3fd2-4828-bfbc-babbd639933e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/11265221-3fd2-4828-bfbc-babbd639933e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/18/186cd863-c129-48be-8585-0835204b7f9d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/18/186cd863-c129-48be-8585-0835204b7f9d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/msi-b450-gaming-pro-carbon-ac-motherboard/1625571170 target="_blank" rel="noopener noreferrer">MSI B450 Gaming Pro Carbon AC Motherboard</a><br>MSI B450 Gaming Pro Carbon AC Motherboard. Like new, works great! Comes with original packaging and ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6M%2C4M2" target="_blank" rel="noopener noreferrer">Oakville, L6M4M2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div9">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/63/6340d767-c31e-4aec-9a09-70e158392253?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/63/6340d767-c31e-4aec-9a09-70e158392253?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4467a5f6-d7dd-44b1-a998-9d55014b90e0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4467a5f6-d7dd-44b1-a998-9d55014b90e0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/msi-h310-motherboard/1626620436 target="_blank" rel="noopener noreferrer">Msi h310 motherboard </a><br>Gaming arctic motherboard. Like new, includes sata cables and io shield</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6M4X1" target="_blank" rel="noopener noreferrer">Oakville, L6M4X1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div10">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/de/dec246aa-adf0-4ee1-85ef-8d8835f5e987?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/de/dec246aa-adf0-4ee1-85ef-8d8835f5e987?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/bnib:-gigabyte-b450-aorus-pro-wifi-socket-am4/1627622420 target="_blank" rel="noopener noreferrer">BNIB: GIGABYTE B450 AORUS PRO WIFI Socket AM4</a><br>I have a BNIB: GIGABYTE B450 AORUS PRO WIFI Socket AM4 Motherboard. Works with 5000 series AMD CPU ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6W" target="_blank" rel="noopener noreferrer">Brampton, L6W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td>No Image</td>
+	<td>130</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/hamilton/machinist-motherboard/1625766457 target="_blank" rel="noopener noreferrer">MACHINIST MOTHERBOARD</a><br>Machinist motherboard x99-k9 Great for custom pc building Brand new open box Cash pick up only ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Paramount%2CDr%2CHamilton%2CON%2CL8J%2C0B4%2CCanada" target="_blank" rel="noopener noreferrer"> Hamilton, L8J0B4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div12">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c0/c03d7f08-a893-4b6b-957e-956aabd0536e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c0/c03d7f08-a893-4b6b-957e-956aabd0536e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>130</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/asus-rog-strix-b450-f-gaming-2-motherboard/1622673430 target="_blank" rel="noopener noreferrer">Asus Rog Strix B450-F GAMING 2 MotherBoard</a><br>The motherboard has never come out of the package and is in very good condition.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6Y%2C0N5" target="_blank" rel="noopener noreferrer">Brampton, L6Y0N5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div13">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/88/8873fcdf-352b-40cf-9a86-4bc0a1b8282f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/88/8873fcdf-352b-40cf-9a86-4bc0a1b8282f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/93/93f5c521-33cc-4f10-a0bb-f7e04ab3d783?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/93/93f5c521-33cc-4f10-a0bb-f7e04ab3d783?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/42/42fb2014-88fe-4e4f-9c9b-e22d177d94ca?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/42/42fb2014-88fe-4e4f-9c9b-e22d177d94ca?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cfcae371-f834-4db8-9829-fbbd76b6e5c2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cfcae371-f834-4db8-9829-fbbd76b6e5c2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>140</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/hp-computer/1629024049 target="_blank" rel="noopener noreferrer">HP COMPUTER</a><br>HP COMPUTER COMES WITH A CASE CD DVD DRIVE MOTHERBOARD THAT IS A 8TH GEN INTEL DDR4 VIDEO CARD IM ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6X%2C4J8" target="_blank" rel="noopener noreferrer">Brampton, L6X4J8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div14">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7cc924d1-bcda-4a8c-a20c-8a6b9b077078?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7cc924d1-bcda-4a8c-a20c-8a6b9b077078?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/02/02ab2dbd-a11c-4a55-811e-2824facb42f7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/02/02ab2dbd-a11c-4a55-811e-2824facb42f7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/msi-b550-a-pro-motherboard/1628676685 target="_blank" rel="noopener noreferrer">MSI B550-A Pro Motherboard</a><br>I received this brand new board from MSI as part of RMA. It took too long to ship so I bought ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5C%2CCanada" target="_blank" rel="noopener noreferrer">Mississauga, L5C</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div15">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/42/42469343-7c6e-43bb-828d-15dcd3ec15c6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/42/42469343-7c6e-43bb-828d-15dcd3ec15c6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a9/a9ded678-0036-4b8e-9f99-585935b1d66c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a9/a9ded678-0036-4b8e-9f99-585935b1d66c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/59/599543c8-549e-4eac-a61a-2acd6d789500?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/59/599543c8-549e-4eac-a61a-2acd6d789500?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/418479ed-c238-4a0f-af43-58d6b40af119?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/418479ed-c238-4a0f-af43-58d6b40af119?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d32ea4ef-0352-4d7d-81b2-a5e8a816da1d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d32ea4ef-0352-4d7d-81b2-a5e8a816da1d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/79/79e26096-7e8f-4b97-8793-667475f59bd0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/79/79e26096-7e8f-4b97-8793-667475f59bd0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7dbcfda9-a049-474a-af6b-2efa02af35d4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7dbcfda9-a049-474a-af6b-2efa02af35d4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9d/9d0f44a7-4644-439e-8ee4-22bcdd5e799f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9d/9d0f44a7-4644-439e-8ee4-22bcdd5e799f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b3690112-2072-4ef1-9ccb-51523c244370?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b3690112-2072-4ef1-9ccb-51523c244370?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/21/215ba5b7-ad42-497b-81c3-3ff6112b91b8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/21/215ba5b7-ad42-497b-81c3-3ff6112b91b8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>159</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/msi-b550-a-pro-proseries-motherboard-amd-am4-ddr4/1629218332 target="_blank" rel="noopener noreferrer">MSI B550-A PRO ProSeries Motherboard (AMD AM4, DDR4, </a><br>MSI B550-A PRO ProSeries Motherboard (AMD AM4, DDR4, PCIe 4.0, SATA 6Gb/s, M.2, USB 3.2 Gen 2, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7M" target="_blank" rel="noopener noreferrer">Burlington, L7M</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div16">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a4/a4149853-b5bd-4144-b563-321910b96102?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a4/a4149853-b5bd-4144-b563-321910b96102?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ae/aefcb008-9312-4c7d-a8da-364ba2a0ab69?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ae/aefcb008-9312-4c7d-a8da-364ba2a0ab69?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85ad0066-bec8-412e-aadb-a8051295f850?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85ad0066-bec8-412e-aadb-a8051295f850?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6c/6c2134b1-d9e2-453b-9198-7dcc689cbeb5?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6c/6c2134b1-d9e2-453b-9198-7dcc689cbeb5?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/7554c005-d402-43af-a92f-4ab5a7950dfa?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/7554c005-d402-43af-a92f-4ab5a7950dfa?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>160</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/msi-b550-tomahawk-am4-motherboard-ryzen-3rd-gen/1627769610 target="_blank" rel="noopener noreferrer">MSI B550 Tomahawk am4 motherboard ryzen 3rd gen</a><br>Brand new sealed Supports ryzen 5000, 3000, 4000 g series processors DDR 4 up to 5100mhz (oc) Pcie ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=S%2CGateway%2CRd%2CMississauga%2CON%2CL4W%2C5G6%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L4W5G6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div17">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/59/59cbef5e-2f90-4e53-9c91-737ef2e1efc6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/59/59cbef5e-2f90-4e53-9c91-737ef2e1efc6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d16606db-fbd9-4454-87c9-f5735600b240?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d16606db-fbd9-4454-87c9-f5735600b240?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/41c29272-a7f5-4915-9bf2-ec9cca52a9b8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/41c29272-a7f5-4915-9bf2-ec9cca52a9b8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>170</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/asus-tuf-gaming-b550m-plus-wi-fi-motherboard-for-amd-ryzen/1629218343 target="_blank" rel="noopener noreferrer">ASUS TUF GAMING B550M-PLUS (WI-FI) motherboard for AMD Ryzen</a><br>Less than a year old, still under warranty. ASUS TUF GAMING B550M-PLUS (WI-FI) AMD B550 (Ryzen AM4) ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5B%2C4P5" target="_blank" rel="noopener noreferrer">Mississauga, L5B4P5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div18">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/db/dbe45719-3206-416c-8238-056759b84ea7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/db/dbe45719-3206-416c-8238-056759b84ea7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/gigabyte-x570-aorus-master-motherboard/1624960578 target="_blank" rel="noopener noreferrer">Gigabyte X570 Aorus Master Motherboard</a><br>Motherboard works except for the 2 bottom m.2 slots. It jist stopped reading my nvme drives. Top ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Trident%2CAve%2CMississauga%2CON%2CL5B%2C2L3%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L5B2L3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div19">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b141e25-8a8c-4364-af25-d7f96ba5ee4b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b141e25-8a8c-4364-af25-d7f96ba5ee4b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/21/21131abc-3ffc-4afa-8042-d7109d6431e8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/21/21131abc-3ffc-4afa-8042-d7109d6431e8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/asrock-z77-extreme4-atx-lga-1155-intel-motherboard/1628850643 target="_blank" rel="noopener noreferrer">ASROCK Z77 EXTREME4 ATX LGA 1155 INTEL MOTHERBOARD</a><br>Have a ASRock X77 Extreme4 Intel LGA1155 ATX motherboard that I’m looking to sell-off. Good for use ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5R%2C3E7" target="_blank" rel="noopener noreferrer">Mississauga, L5R3E7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div20">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/82/8222dfd5-4560-4c1d-8725-194b1c5fc76e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/82/8222dfd5-4560-4c1d-8725-194b1c5fc76e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/97/97a4857d-4a3d-4a86-a40f-f8b74d65a2fd?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/97/97a4857d-4a3d-4a86-a40f-f8b74d65a2fd?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/16/160648fa-b7fa-4bf5-b192-2118ca02fde8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/16/160648fa-b7fa-4bf5-b192-2118ca02fde8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>240</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/mississauga-peel-region/msi-mag-x570s-tomahawk-max-am4-amd-x570-6gb-s-atx-motherboard/1629302387 target="_blank" rel="noopener noreferrer">MSI MAG X570S Tomahawk MAX AM4 AMD X570 6Gb/s ATX Motherboard</a><br>Brand new MSI MAG X570S Tomahawk MAX WiFi AM4 AMD X570 SATA 6Gb/s ATX AMD Motherboard NEVER OPENED ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=14%2CMilford%2CCrescent%2CBrampton%2CON" target="_blank" rel="noopener noreferrer">Brampton</a></td>
+</tr>
+</table></body>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+</html>

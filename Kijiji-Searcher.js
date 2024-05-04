@@ -25,22 +25,29 @@ var searchBlocks = JSON.parse(rawdata);
 let rawdata2 = fs.readFileSync(path.resolve(__dirname, 'ReverseBlocks.json'));
 var reverseBlocks = JSON.parse(rawdata2);
 var apiStartLocation = config.startLocation.replace(/ /g, "%2C").replace(/,/g, "")
-
-var cities = config.cities
-var locations =[]
-for(let i = 0; i < cities.length; i++){
-	if(cities[i] == "Hamilton" || cities[i] == "Burlington" || cities[i] == "Ancaster"){
-		addLocation(80014);
-	}
-	if(cities[i] == "Oakville" || cities[i] == "Halton" || cities[i] == "Milton"){
-		addLocation(1700277);
-	}
-	if(cities[i] == "Mississauga" || cities[i] == "Brampton"){
-		addLocation(1700276);
-	}
-	if(cities[i] == "Toronto" || cities[i] == "Etobicoke" || cities[i] == "Vaughan" || cities[i] == "Maple" || cities[i] == "Woodbridge" || cities[i] == "York" || cities[i] == "Markham" || cities[i] == "Scarborough" || cities[i] =="Thornhill" || cities[i] == "Richmond Hill"){
-		addLocation(1700273);
-		addLocation(1700274);
+const csvFileName = 'KijijiSearch.csv'
+const HTMLFileName = 'KijijiSearch.html'
+const jsonFileName = 'KijijiSearch.json'
+var locations = []
+var cities = config.cities || [""]
+if (cities.includes("Waterloo")) {
+	locations =[1700212]
+}
+else {
+	for(let i = 0; i < cities.length; i++){
+		if(cities[i] == "Hamilton" || cities[i] == "Burlington" || cities[i] == "Ancaster"){
+			addLocation(80014);
+		}
+		if(cities[i] == "Oakville" || cities[i] == "Halton" || cities[i] == "Milton"){
+			addLocation(1700277);
+		}
+		if(cities[i] == "Mississauga" || cities[i] == "Brampton"){
+			addLocation(1700276);
+		}
+		if(cities[i] == "Toronto" || cities[i] == "Etobicoke" || cities[i] == "Vaughan" || cities[i] == "Maple" || cities[i] == "Woodbridge" || cities[i] == "York" || cities[i] == "Markham" || cities[i] == "Scarborough" || cities[i] =="Thornhill" || cities[i] == "Richmond Hill"){
+			addLocation(1700273);
+			addLocation(1700274);
+		}
 	}
 }
 function addLocation(areaNumber){
@@ -114,27 +121,39 @@ for(let i = 0; i < searches.length; i++){
 	console.log("}- - - - - - - - - - - - - - - - - - - - - - - - - - - -")
 }
 
-RunSearches(searches, descFilter)
+RunSearches(searches, showOutput)
 
 
 //====================================================================================
-
+function errorFn (err) {
+	if (err) throw err
+	console.log('Successfully moved!')
+}
+	
 
 function showOutput(ShownAds){	
 	if(!(ShownAds.length)){
 		console.log("Didn't find any ads.")
 	}
 	else{
-		//Clear old csv and html files, create write streams
+		//Move old csv and html files, create write streams
 		try {
-			fs.truncateSync(path.resolve(__dirname, 'KijijiSearch.csv'))
-			fs.truncateSync(path.resolve(__dirname, 'KijijiSearch.html'))
+			fs.rename(path.resolve(__dirname, jsonFileName), path.resolve(__dirname + "/old/", +Date.now().toString()+jsonFileName), errorFn)
+			fs.rename(path.resolve(__dirname, csvFileName), path.resolve(__dirname + "/old/", +Date.now().toString()+csvFileName), errorFn)
+			fs.rename(path.resolve(__dirname, HTMLFileName), path.resolve(__dirname + "/old/", +Date.now().toString()+HTMLFileName), errorFn)
+			
 		} catch(err) {
 		  console.error(err)
 		}
-		const CSVstream = fs.createWriteStream(path.resolve(__dirname, 'KijijiSearch.csv'), { flags: 'a' });
-		const HTMLstream = fs.createWriteStream(path.resolve(__dirname, 'KijijiSearch.html'), { flags: 'a' });	
-
+		const CSVstream = fs.createWriteStream(path.resolve(__dirname, csvFileName), { flags: 'a' });
+		const HTMLstream = fs.createWriteStream(path.resolve(__dirname, HTMLFileName), { flags: 'a' });	
+		fs.writeFile(path.resolve(__dirname, jsonFileName), JSON.stringify(ShownAds), 'utf8', function (err) {
+			if (err) {
+				console.log("An error occured while writing JSON Object to File.");
+				return console.log(err);
+			}
+		 	console.log("JSON file has been saved.");
+		});
 		
 		//Sort items by price
 		if (ShownAds.length >= 2) {
@@ -160,8 +179,11 @@ function showOutput(ShownAds){
 		
 		
 		for (let i = 0; i < ShownAds.length; ++i) { //For all shown ads
+			//Object.keys(ShownAds[i]).forEach((prop)=> console.log(prop))
+			
+			//Open as Browser tabs
 			urlList += " " + ShownAds[i].url
-			if (((i+1)%30 == 0  | i + 1==ShownAds.length) & config.openInBrowser) {
+			if (config.openInBrowser & ((i+1)%30 == 0  | i + 1==ShownAds.length)) {
 				exec("start " + config.browserToOpen + " " + urlList, (err, stdout, stderr) => {
 					if(err) {
 						console.log(`stderr: ${stderr}`);
@@ -180,11 +202,12 @@ function showOutput(ShownAds){
 
 			//Address Crap (Organized as "City, postal Code" for filtering)
 			var locString = ShownAds[i].attributes.location.replace(/[A-Z]{2,3}, Canada,/g, 'ON,')
+			let displayLocation = locString
 			locInfo = locString.match(/[, ]?((\w* )?(\w*)), [A-Z]{2,3} (\w\d\w[ ]?(\d\w\d)?)/);
-			if (locInfo == undefined){
+			if (!locInfo){
 				for(let j = 0; j < cities.length; j++){
 					if(ShownAds[i].attributes.location.includes(cities[j])){
-						var displayLocation = cities[j]
+						displayLocation = cities[j]
 					}
 				}
 			}else{
@@ -237,14 +260,14 @@ function showOutput(ShownAds){
 		//Open the HTML or CSV file
 		CSVstream.close(() => {
 			if (config.openSpreadsheet) {
-				exec("start " + path.resolve(__dirname, 'KijijiSearch.csv'));
+				exec("start " + path.resolve(__dirname, csvFileName));
 			}
 		});
 		let endScript = fs.readFileSync(path.resolve(__dirname, 'HTMLstring2.txt'), "utf8")
 		HTMLstream.write("\n</table></body>\n" + endScript + '\n</html>');
 		
 		HTMLstream.close(() => {
-			exec("start " + path.resolve(__dirname, 'KijijiSearch.html'));
+			exec("start " + path.resolve(__dirname, HTMLFileName));
 		});
 		console.log("");
 	}
@@ -260,6 +283,9 @@ function RunSearches(searches, callback){
 	var evaluatedAds = [];
 	
 	for (let i = 0; i < searches.length; ++i) {
+		if(config.minimizeAPIcalls){
+			searches[i].PriceMargin = (searches[i].MaxPrice - searches[i].MinPrice)*config.priceMultiplier + 1
+		}
 		searches[i].PriceMargin *= config.priceMultiplier
 		if ((searches[i].MaxPrice - searches[i].MinPrice) % searches[i].PriceMargin == 0) {
 			numSearches += searches[i].SearchTerms.length * locations.length * searches[i].categories.length * (Math.ceil((searches[i].MaxPrice - searches[i].MinPrice) / searches[i].PriceMargin) + 1)
@@ -291,69 +317,92 @@ function RunSearches(searches, callback){
 			params.q = searches[si].SearchTerms[searchTermIndex];
 			params.minPrice = searches[si].MinPrice
 			params.maxPrice = searches[si].MinPrice + searches[si].PriceMargin - 0.01;
-			while (params.minPrice <= searches[si].MaxPrice) {
+			while (params.minPrice <= searches[si].MaxPrice) { //For each price range that needs to be searched
 				if (params.maxPrice > searches[si].MaxPrice) {
 					params.maxPrice = searches[si].MaxPrice;
 				}
-				for (let categoryIndex = 0; categoryIndex < searches[si].categories.length; ++categoryIndex) {
+				for (let categoryIndex = 0; categoryIndex < searches[si].categories.length; ++categoryIndex) { //for each category (search terms) that needs to be searched
 					params.categoryId = searches[si].categories[categoryIndex];
-					for (let LocIndex = 0; LocIndex < locations.length; ++LocIndex) {
+					for (let LocIndex = 0; LocIndex < locations.length; ++LocIndex) { //for each location that needs to be searched
 						params.locationId = locations[LocIndex];
-						
 						//RUN THE SEARCH
 						kijiji.search(params, options).then(ads => {
 							AdsScanned += ads.length
-
 							AdLoop:
 							for (let i = 0; i < ads.length; ++i) //For all ads scraped
 							{
 								var added = 0;
-								if(!config.noFiltering){								
-									//Eliminate Duplicates
-									for (let j = 0; j < evaluatedAds.length; ++j) {
-										if (evaluatedAds[j].url == ads[i].url || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].description == ads[i].description) || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].attributes.location == ads[i].attributes.location)){
+								if(!config.noFiltering){ //if filtering
+									evaluatedAds.push(ads[i]);
+									for (let j = 0; j < evaluatedAds.length -1; ++j) {	//For all ads seen so far
+										if (evaluatedAds[j].url == ads[i].url || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].description == ads[i].description) || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].attributes.location == ads[i].attributes.location)){ //eliminate duplicates
 											continue AdLoop;
 										}
-									}
-									evaluatedAds.push(ads[i]);
-									 
-									if(CityMatch(cities, ads[i].attributes.location)){ //City name filter
-										if( !ads[i].title.toLowerCase().includes("sold") | !config.removeSoldTitle){ //"sold" is not in title (or we don't care about it)
-											ads[i].criteriaBlock = []
-											for (ci = 0; ci < searches[si].criteria.length & ads[i].metCriteria === undefined; ++ci){  //For all criteria blocks in the search from the json file
-
-												if (!((searches[si].criteria[ci].MaxPrice*config.priceMultiplier < ads[i].attributes.price) || ads[i].attributes.price === undefined)) { //Price Filter
-													if (orTagMatch(searches[si].criteria[ci].tags, config.mytags_OR) & andTagMatch(searches[si].criteria[ci].tags, config.mytags_AND)){ //AND/OR tag filter
-														//Get adText
-														var adText = ads[i].title
-														if(searches[si].criteria[ci].filter != "title"){
-															adText += ads[i].description
-														}
-														adText = adText.toLowerCase()
-														adText = removeIgnored(adText, searches[si].criteria[ci].Ignore) //Remove Ignored words
-														
-														if (NorMatch(searches[si].criteria[ci].Contains_NOR, adText)){ //Nor Filter
-															if (searches[si].criteria[ci].filter === undefined) //Criteria filter setup
-																searches[si].criteria[ci].filter = config.defaultFilter															
-															if(searches[si].criteria[ci].filter == 'title' | searches[si].criteria[ci].filter == 'short'){ //IF TITLE OR SHORT FILTER USED
-																if(OrMatch(searches[si].criteria[ci].Contains_OR, adText)){ //adText OR filter 
-																	if (AndMatch(searches[si].criteria[ci].Contains_AND, adText)){ //adText AND filter
-																		ads[i].metCriteria = searches[si].criteria[ci] //No further filtering required.
-																	}
+									}										
+									if(CityMatch(cities, ads[i].attributes.location) & //City name filter
+									(!(ads[i].title.toLowerCase().includes("sold")) | !config.removeSoldTitle)){ //"sold" is not in title (or we don't care about it)
+										for (ci = 0; ci < searches[si].criteria.length & ads[i].metCriteria === undefined; ++ci){  //For all criteria blocks in the search from the json file
+											if (!((searches[si].criteria[ci].MaxPrice*config.priceMultiplier < ads[i].attributes.price) || ads[i].attributes.price === undefined) & //Price Filter
+											(orTagMatch(searches[si].criteria[ci].tags, config.mytags_OR) & andTagMatch(searches[si].criteria[ci].tags, config.mytags_AND))){ //AND/OR tag filter
+													//Get adText
+													var adText = ads[i].title
+													if(searches[si].criteria[ci].filter != "title"){
+														adText += "[ s e p a r a t o r ]" + ads[i].description
+													}
+													adText = adText.toLowerCase()
+													adText = removeIgnored(adText, searches[si].criteria[ci].Ignore) //Remove Ignored words
+													
+													if (NorMatch(searches[si].criteria[ci].Contains_NOR, adText)){ //Nor Filter
+														if (searches[si].criteria[ci].filter === undefined) //Criteria filter setup
+															searches[si].criteria[ci].filter = config.defaultFilter															
+														if(searches[si].criteria[ci].filter == 'title' | searches[si].criteria[ci].filter == 'short' | !config.pullFullDesc){ //IF TITLE OR SHORT FILTER USED
+															if(OrMatch(searches[si].criteria[ci].Contains_OR, adText)){ //adText OR filter 
+																if (AndMatch(searches[si].criteria[ci].Contains_AND, adText)){ //adText AND filter
+																	ads[i].metCriteria = searches[si].criteria[ci] //No further filtering required. Criteria met, loop will stop.																				
+																	ads[i].fullDescription = ads[i].description
 																}
 															}
-															else { //LONG filter used
-																ads[i].criteriaBlock.push(searches[si].criteria[ci]) //Add to potential criteria for further description filtering
-															}
-														}										
-													}
-												}
-											} //End of CriteriaLoop
-											if(ads[i].criteriaBlock.length > 0 || ads[i].metCriteria !== undefined){
-												ShownAds.push(ads[i]);
+														}
+														else { //LONG filter used and desc must be pulled
+															kijiji.Ad.Get(ads[i].url).then(ad => { //For all ads at stage 2:		
+																ads[i].fullDescription = ad.description //Change description
+																ads[i].attributes.visits = ad.attributes.visits //FLAG
+																adText2 = (ads[i].title + "[s e p a r a t o r]" + ads[i].fullDescription).toLowerCase();
+																adText2 = removeIgnored(adText2, ads[i].criteria[ci].Ignore) //Remove Ignored Words
+																if (( OrMatch(ads[i].criteria[ci].Contains_OR, adText2))& //OR filter
+																( AndMatch(ads[i].criteria[ci].Contains_AND, adText2)) & //AND filter
+																( NorMatch(ads[i].criteria[ci].Contains_NOR, adText2)) & //NOR filter
+																(ads[i].attributes.visits <= config.maxVisits || config.maxVisits == 0)){ //Views filter
+																	//EXPERIMENTAL
+																	let allText = ads[i].title + "[s e p a r a t o r]" + ads[i].fullDescription
+																	let estValue = 0;
+																	for(let i = 0; i < reverseBlocks.length; ++i) { //cycle all search objects	
+																		for (let m = 0; m < reverseBlocks[i].criteria.length; ++m) { //cycle criteria blocks in search object
+																			if (OrMatch(reverseBlocks[i].criteria[m].Contains_OR, allText) & AndMatch(reverseBlocks[i].criteria[m].Contains_AND, allText)){ //And/Or match
+																				if(orTagMatch(reverseBlocks[i].criteria[m].tags, ["cpu", "gpu", "ram", "SSD", "HDD", "PSU", "motherboard"])){ //Relevent tag to reverse
+																					estValue += reverseBlocks[i].criteria[m].MaxPrice
+																					ads[i].fullDescription += ("\nValue after " + reverseBlocks[i].criteria[m].tags[reverseBlocks[i].criteria[m].tags.length-1] + " " + reverseBlocks[i].SearchTerms[0] + " is " + estValue)
+																				}
+																				ads[i].metCriteria = ads[i].criteria[ci] //No further filtering required. Criteria met, loop will stop.
+																			}
+																		}
+																	}
+																}
+															})
+															.catch((error) => { //Runs when "Search" returns ads that are no longer live...
+																console.log(error)
+																Object.keys(searches[si]).forEach((prop)=> console.log(prop))
+															});
+														}
+													}										
+												
 											}
+										} //End of CriteriaLoop
+										if(ads[i].metCriteria !== undefined){ //If it met some criteria
+											ShownAds.push(ads[i]);
 										}
 									}
+									
 								}
 								else { //config.noFiltering
 									ads[i].metCriteria = "No Filtering"
@@ -363,8 +412,8 @@ function RunSearches(searches, callback){
 							searchesDone++
 							if (searchesDone == numSearches) {
 								console.log("|\tAds scanned:\t" + AdsScanned)
-								console.log("|\tFilter 1:\t" + ShownAds.length)
-								callback(ShownAds, showOutput)
+								console.log("|\tFiltered:\t" + ShownAds.length)
+								callback(ShownAds)
 							}
 						}).catch(console.error);
 					}
@@ -372,90 +421,6 @@ function RunSearches(searches, callback){
 				params.minPrice += searches[si].PriceMargin
 				params.maxPrice += searches[si].PriceMargin
 			} 
-		}
-	}
-}
-
-//Stage 2: Filter by description and append full description to ad.
-function descFilter(ads2, callback){
-	ShownAds2 = [];
-	numFinished = 0;
-	for(let ai = 0; ai < ads2.length; ai++){
-		if (config.pullFullDesc | ads2[ai].metCriteria == undefined){
-			kijiji.Ad.Get(ads2[ai].url).then(ad => { //For all ads at stage 2:		
-				ads2[ai].fullDescription = ad.description //Change description
-				ads2[ai].attributes.visits = ad.attributes.visits
-				if(config.noFiltering | ads2[ai].metCriteria !== undefined){ 
-					ShownAds2.push(ads2[ai]);
-				}
-				else{
-					for(let ci = 0; ci < ads2[ai].criteriaBlock.length; ci++){ 
-						var adText = (ads2[ai].title + "s e p a r a t o r" + ads2[ai].fullDescription).toLowerCase();
-						adText = removeIgnored(adText, ads2[ai].criteriaBlock[ci].Ignore) //Remove Ignored Words
-						if( OrMatch(ads2[ai].criteriaBlock[ci].Contains_OR, adText)){ //OR filter
-							if( AndMatch(ads2[ai].criteriaBlock[ci].Contains_AND, adText)){ //AND filter
-								if ( NorMatch(ads2[ai].criteriaBlock[ci].Contains_NOR, adText)){ //NOR filter
-									if(ads2[ai].attributes.visits <= config.maxVisits || config.maxVisits == 0){ //Views filter
-										//EXPERIMENTAL
-										let allText = ads2[ai].title + ads2[ai].fullDescription
-										let estValue = 0;
-										for(let i = 0; i < reverseBlocks.length; ++i) { //cycle all search objects	
-											for (let m = 0; m < reverseBlocks[i].criteria.length; ++m) { //cycle criteria blocks in search object
-												if(orTagMatch(reverseBlocks[i].criteria[m].tags, ["cpu", "gpu", "ram", "SSD", "HDD", "PSU", "motherboard"])){
-													if (OrMatch(reverseBlocks[i].criteria[m].Contains_OR, allText)){ //Check or match
-														if (AndMatch(reverseBlocks[i].criteria[m].Contains_AND, allText)){ //Check and match
-															estValue += reverseBlocks[i].criteria[m].MaxPrice
-															ads2[ai].metCriteria = ads2[ai].criteriaBlock[ci] 
-															ads2[ai].fullDescription += ("\nValue after " + reverseBlocks[i].criteria[m].tags[reverseBlocks[i].criteria[m].tags.length-1] + " " + reverseBlocks[i].SearchTerms[0] + " is " + estValue)
-														}
-													}
-												}
-											}
-										}
-										/*Notes: AdTypes
-										Newline delimited
-										Comma delimited
-										Plus-sign deimited
-										Sentence delimited (sorta) - and, comma, period
-										*/
-										//if(ads2[ai].fullDescription.includes("Value after "))
-											ShownAds2.push(ads2[ai]);
-									}
-								}
-							}
-						}
-					}
-				}
-				numFinished++;
-				if (numFinished == ads2.length){
-					ShownAds2 = removeDuplicates(ShownAds2)
-					console.log("|\tFilter 2:\t" + ShownAds2.length)
-					console.log("}-------------------------------------------")
-					callback(ShownAds2)
-				}
-			})
-			.catch((error) => { //Runs when "Search" returns ads that are no longer live...
-				numFinished++
-				console.log(error)
-				if (numFinished == ads2.length){
-					ShownAds2 = removeDuplicates(ShownAds2)
-					console.log("|\tFilter 2:\t" + ShownAds2.length)
-					console.log("}-------------------------------------------")
-					callback(ShownAds2)
-				}
-			});
-		}
-		else{
-			ads2[ai].fullDescription = ads2[ai].description + " *PullFullDesc is off"
-			ads2[ai].attributes.visits = -1
-			ShownAds2.push(ads2[ai]);
-			numFinished++ //Required if there's a mix of filtering, AND pullFullDesc is false
-			if (numFinished == ads2.length){
-				ShownAds2 = removeDuplicates(ShownAds2)
-				console.log("|\tFilter 2:\t" + ShownAds2.length)
-				console.log("}-------------------------------------------")
-				callback(ShownAds2)
-			}
 		}
 	}
 }
@@ -496,12 +461,17 @@ function andTagMatch(searchTags, myTags_AND){
 
 //Compares cities list to adLocation
 function CityMatch(cities, adLocation){
-	for (let j = 0; j < cities.length; ++j) { //For cities searched for
-		if (adLocation.includes(cities[j])) {
-			return true											
+	
+	if(!cities.length){
+	return true
+	} else {
+		for (let j = 0; j < cities.length; ++j) { //For cities searched for
+			if (adLocation.includes(cities[j])) {
+				return true											
+			}
 		}
+		return false
 	}
-	return false
 }
 
 //Evaluates AND match

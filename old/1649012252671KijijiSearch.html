@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kijiji Results</title>
+<style>
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+</style>
+</head>
+<body>
+<script>
+function sortTable(tableID, n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById(tableID);
+	switching = true;
+	dir = "asc";
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+					var cmpX=isNaN(parseInt(x.innerHTML))?x.innerText.toLowerCase():parseInt(x.innerHTML);
+					var cmpY=isNaN(parseInt(y.innerHTML))?y.innerText.toLowerCase():parseInt(y.innerHTML);
+	cmpX=(cmpX=='-')?0:cmpX;
+	cmpY=(cmpY=='-')?0:cmpY;
+			if (dir == "asc") {
+				if (cmpX > cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (cmpX < cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount ++;      
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+</script>
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table id="myTable">
+  <tr>
+   	<th>Del</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
+  </tr>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div0">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/Ue4AAOSw2XliGqLX/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/Ue4AAOSw2XliGqLX/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/city-of-toronto/be-quiet-pure-wing-2-case-fans-x2/1606954203 target="_blank" rel="noopener noreferrer">Be Quiet Pure Wing 2 case fans. X2</a><br>Selling two Be Quiet Pure Wing 2 fans. Brand new, in box. $10 each</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5A%2C2H5%2CCanada" target="_blank" rel="noopener noreferrer">Toronto, M5A2H5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div1">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/5v0AAOSwpw1iPJq~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/5v0AAOSwpw1iPJq~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/-P4AAOSwD9FiPJrA/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/-P4AAOSwD9FiPJrA/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/f-IAAOSwOa1iPJrB/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/f-IAAOSwOa1iPJrB/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/kwgAAOSwPURiPJrC/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/kwgAAOSwPURiPJrC/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/thermaltake-core-v1-cube-case-please-read/1610098301 target="_blank" rel="noopener noreferrer">Thermaltake core v1 cube case (please read)</a><br>Selling this itx case for $20. The original Thermaltake fan at the front was too noisy for me so I ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5N%2C7X2%2CCanada" target="_blank" rel="noopener noreferrer">Mississauga, L5N7X2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div2">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/d~YAAOSwnpRiRjKr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/d~YAAOSwnpRiRjKr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/k-kAAOSwWgdiRjKs/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/k-kAAOSwWgdiRjKs/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/oakville-halton-region/pc-case/1611065380 target="_blank" rel="noopener noreferrer">PC case</a><br>Used in good condition 6 x 3.5" slots 4 x 5.25" slots Fit up to full ATX motherboard Two USB and ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Prince%2CJohn%2CCir%2COakville%2CON%2CL6J%2C6T2%2CCanada" target="_blank" rel="noopener noreferrer"> Oakville, L6J6T2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div3">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/uZ4AAOSwgCpiReLv/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/uZ4AAOSwgCpiReLv/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/PCEAAOSw2X5iReMD/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/PCEAAOSw2X5iReMD/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/J~0AAOSwTDhiReMV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/J~0AAOSwTDhiReMV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/n-4AAOSwaeJiReMr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/n-4AAOSwaeJiReMr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/XYcAAOSwyohiReM~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/XYcAAOSwyohiReM~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/aXYAAOSw8qpiReNU/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/aXYAAOSw8qpiReNU/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/M~8AAOSwk75iReNn/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/M~8AAOSwk75iReNn/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/l3gAAOSwxoliReN5/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/l3gAAOSwxoliReN5/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/JugAAOSwl1diReOK/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/JugAAOSwl1diReOK/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/UpsAAOSwpuZiReOe/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/UpsAAOSwpuZiReOe/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/mid-tower-antec-case-used-cleaned-up/1611021802 target="_blank" rel="noopener noreferrer">Mid Tower Antec Case Used-Cleaned Up</a><br>Used , little scratch on top, missing one plastic foot pad bottom back. It's been completely ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5J%2C1P2" target="_blank" rel="noopener noreferrer">Mississauga, L5J1P2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div4">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDUxMQ==/z/LMMAAOSwXA5iN82e/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDUxMQ==/z/LMMAAOSwXA5iN82e/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwOQ==/z/FCEAAOSw67tiN82f/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwOQ==/z/FCEAAOSw67tiN82f/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/rosewill-ranger-m-computer-case/1609661255 target="_blank" rel="noopener noreferrer">Rosewill Ranger-M Computer Case</a><br>Brand New In Box. Micro ATX.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Victoria%2CPark%2CAve%2Cat%2CFinch%2CAve%2CEast%2CVictoria%2CPark%2CAve%2CToronto%2CON%2CM1W%2C2T3%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M1W2T3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div5">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQxNg==/z/570AAOSwnjlhwKjV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQxNg==/z/570AAOSwnjlhwKjV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/Pk4AAOSwARZhwKjo/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/Pk4AAOSwARZhwKjo/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/l7IAAOSwz9RhwKja/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/l7IAAOSwz9RhwKja/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/bKEAAOSwYLRhwKjj/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/bKEAAOSwYLRhwKjj/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/P4wAAOSwc~xhwKjy/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/P4wAAOSwc~xhwKjy/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/mississauga-peel-region/luggage-briefcase-on-wheels/1599042107 target="_blank" rel="noopener noreferrer">Luggage - Briefcase on wheels</a><br>Used: business case on wheels (two wheels) black polyster Retractable telescopic trolley handle ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6W" target="_blank" rel="noopener noreferrer">Brampton, L6W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div6">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/CJoAAOSwU3lhv0OU/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/CJoAAOSwU3lhv0OU/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/~D0AAOSwUvVhv0Ob/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/~D0AAOSwUvVhv0Ob/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/TQEAAOSwlephv0Oh/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/TQEAAOSwlephv0Oh/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/atx-computer-case-with-power-dvd/1598908627 target="_blank" rel="noopener noreferrer">ATX Computer Case with Power & DVD</a><br>ATX computer case, with Power Supply and 2x DVD drives. All working... Don't ask me any specs for ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5N%2C5K5" target="_blank" rel="noopener noreferrer">Mississauga, L5N5K5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div7">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1PsAAOSw5Iph3PxV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1PsAAOSw5Iph3PxV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/aEUAAOSwJ-Vh3PxW/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/aEUAAOSwJ-Vh3PxW/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/gOkAAOSwpsdh5MSS/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/gOkAAOSwpsdh5MSS/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/e0cAAOSwhxJh5MSV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/e0cAAOSwhxJh5MSV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/earthwatts-psu-500w-ea-500d-used/1601480504 target="_blank" rel="noopener noreferrer">Earthwatts PSU - 500w EA-500d - used</a><br>Used earthwatts EA-500d 500w PSU. Functional. Came with an antec case, performed reliably.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Lawrence%2CAve%2CE%2CToronto%2CON%2CM1C%2C4A7%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M1C4A7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div8">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/SBYAAOSwmrNiQKab/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/SBYAAOSwmrNiQKab/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/OFIAAOSwppViQ0oH/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/OFIAAOSwppViQ0oH/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/86QAAOSwwERiQ0oP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/86QAAOSwwERiQ0oP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/lancool-pc-k57-black-steel-atx-mid-tower-computer-case/1610438085 target="_blank" rel="noopener noreferrer">Lancool PC-K57 Black Steel ATX Mid Tower Computer Case</a><br>INCLUDED LIAN LI Lancool PC-K57 Black Steel ATX Mid Tower Computer Case HAVE ONE PROBLEMS MY TOWER ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=105%2CLa%2CRose%2CAvenue%2CEtobicoke%2CON%2CM9P%2C1A9" target="_blank" rel="noopener noreferrer"> Etobicoke, M9P1A9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div9">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/ZOgAAOSwgZ5iFRmk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/ZOgAAOSwgZ5iFRmk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/dmsAAOSwxOBiFRmy/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/dmsAAOSwxOBiFRmy/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/63AAAOSw28ViFRu8/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/63AAAOSw28ViFRu8/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/pc-case-top-mounted-psu/1606469027 target="_blank" rel="noopener noreferrer">PC   case, top  mounted  psu</a><br>Used pc case. Medium case. Top mounted psu slot. CD-rom drive slot. USB 2.0. No fans. Unbranded. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7P%2C4Y7" target="_blank" rel="noopener noreferrer">Burlington, L7P4Y7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div10">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/VIAAAOSwyjJiKDRq/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/VIAAAOSwyjJiKDRq/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/deepcool-matrexx-30-matx-case/1608183121 target="_blank" rel="noopener noreferrer">Deepcool Matrexx 30 mATX case</a><br>Deepcool Matrexx 30 micro ATX case power supply in picture not included</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5L%2C1A1" target="_blank" rel="noopener noreferrer">Mississauga, L5L1A1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div11">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2kcAAOSwpddiNBF-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2kcAAOSwpddiNBF-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/kfEAAOSwgP9iNBGB/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/kfEAAOSwgP9iNBGB/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/nvcAAOSwDvxiNBGD/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/nvcAAOSwDvxiNBGD/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/deepcool-matrexx-30-microatx-case/1609275697 target="_blank" rel="noopener noreferrer">Deepcool Matrexx 30 microATX case</a><br>Deepcool Matrexx 30 mATX case</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5L%2C1A1" target="_blank" rel="noopener noreferrer">Mississauga, L5L1A1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div12">
+		<a href="https://i.ebayimg.com/00/s/NDQ5WDgwMA==/z/XpsAAOSwB2hiQe0k/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDQ5WDgwMA==/z/XpsAAOSwB2hiQe0k/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/8RkAAOSwcVFiQe0l/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/8RkAAOSwcVFiQe0l/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/kCIAAOSwf5tiQe0n/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/kCIAAOSwf5tiQe0n/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/ubQAAOSwf-ZiQe0o/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/ubQAAOSwf-ZiQe0o/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/gnQAAOSwdeRiQe0p/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/gnQAAOSwdeRiQe0p/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/F3cAAOSwuzliQe0q/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/F3cAAOSwuzliQe0q/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/~jgAAOSws1RiQe0q/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/~jgAAOSws1RiQe0q/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/PVwAAOSwUtZiQe0s/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/PVwAAOSwUtZiQe0s/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/hLgAAOSwMWliQe0t/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAyWDgwMA==/z/hLgAAOSwMWliQe0t/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/g~8AAOSwMWpiQe0u/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMg==/z/g~8AAOSwMWpiQe0u/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>29</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/metallicgear-neo-mini-v2-itx-mitx-case-w-tempered-glass-side/1610645919 target="_blank" rel="noopener noreferrer">MetallicGear Neo Mini V2 ITX mITX case w/tempered glass side</a><br>Excellent condition Metallic Gear Neo Mini V2 ITX case with accessories and original box. MSRP is ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Queens%2CQuay%2CW%2CToronto%2CON%2CM5J%2C2T5%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M5J2T5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div13">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/SB4AAOSwTzpiSKAp/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/SB4AAOSwTzpiSKAp/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/tggAAOSwQJdiSKAq/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/tggAAOSwQJdiSKAq/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/6N8AAOSwM3liSKAr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/6N8AAOSwM3liSKAr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/HrsAAOSw4eFiSKAs/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/HrsAAOSw4eFiSKAs/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/EMcAAOSwEUNiSKAu/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/EMcAAOSwEUNiSKAu/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/-3AAAOSwI~piSKAv/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/-3AAAOSwI~piSKAv/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/5ZkAAOSwso5iSKAw/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/5ZkAAOSwso5iSKAw/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/JQAAAOSwxidiSKAx/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/JQAAAOSwxidiSKAx/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/t98AAOSwg3ViSKAz/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/t98AAOSwg3ViSKAz/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/Rx8AAOSwDqliSKA0/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/Rx8AAOSwDqliSKA0/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/cooler-master-case-cm690-atx/1611300339 target="_blank" rel="noopener noreferrer">Cooler master case CM690 ATX </a><br>$30 Comes with dvd writer Missing some back plate cover Minor scratches</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6M" target="_blank" rel="noopener noreferrer">Oakville, L6M</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div14">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/mlMAAOSwwrhgfeCo/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/mlMAAOSwwrhgfeCo/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/fs8AAOSwKHtgfeC2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/fs8AAOSwKHtgfeC2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/pSYAAOSwhahgfeDK/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/pSYAAOSwhahgfeDK/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/iREAAOSwR7xgfeEP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/iREAAOSwR7xgfeEP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/EXcAAOSw3gNgfeEd/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/EXcAAOSw3gNgfeEd/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/pJwAAOSw~4tgfeEq/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/pJwAAOSw~4tgfeEq/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/mjsAAOSw7yFgfeE4/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/mjsAAOSw7yFgfeE4/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/WPsAAOSwwpRgfeFO/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/WPsAAOSwwpRgfeFO/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/7EEAAOSw2qtgfeF9/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/7EEAAOSw2qtgfeF9/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/IzYAAOSwooJgfeHc/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/IzYAAOSwooJgfeHc/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/antec-piano-black-atx-computer-case-available-30-firm/1562059497 target="_blank" rel="noopener noreferrer">Antec Piano Black ATX computer case. Available. $30 Firm.</a><br>If you see this ad, this item is available. Located in the QEW & 427 area. Antec Black Obsidian ATX ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8W" target="_blank" rel="noopener noreferrer">Etobicoke, M8W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div15">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/V74AAOSw~FFgU5La/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/V74AAOSw~FFgU5La/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/i8AAAOSwCHVgU5Ln/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/i8AAAOSwCHVgU5Ln/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/IFAAAOSwvaJgU5L-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/IFAAAOSwvaJgU5L-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/IrYAAOSwr9RgU5Mi/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/IrYAAOSwr9RgU5Mi/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/CUsAAOSwAQ5gU5My/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/CUsAAOSwAQ5gU5My/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/qqMAAOSwsVtgU5M8/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/qqMAAOSwsVtgU5M8/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/iT0AAOSwSLlgU5OR/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/iT0AAOSwSLlgU5OR/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/matx-case-all-aluminum-copper-colour-30-firm-available/1556195609 target="_blank" rel="noopener noreferrer">mATX case All Aluminum.  Copper Colour. $30 Firm. Available.</a><br>If you see this ad, this item is available. Located in the QEW & 427 area. mATX Computer case All ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8W" target="_blank" rel="noopener noreferrer">Etobicoke, M8W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div16">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/06wAAOSw5kZiEbah/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/06wAAOSw5kZiEbah/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/M4EAAOSwLuZiEbbO/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/M4EAAOSwLuZiEbbO/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/wqEAAOSwGRFiEban/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/wqEAAOSwGRFiEban/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/bA4AAOSw9UhiEbap/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/bA4AAOSw9UhiEbap/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/ULYAAOSwP7JiEbaq/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/ULYAAOSwP7JiEbaq/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/44wAAOSwXeRiEbas/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/44wAAOSwXeRiEbas/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/atx-computer-case-raidmax/1606173925 target="_blank" rel="noopener noreferrer">ATX Computer Case - RaidMax</a><br>Clean ATX Aluminum Case Perfect for Gaming PC Build Fits: Hard Drive, Motherboard SSD RAM AIO + HDD ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9C3Y8" target="_blank" rel="noopener noreferrer">Etobicoke, M9C3Y8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div17">
+		<a href="https://i.ebayimg.com/00/s/NjgxWDgwMA==/z/c70AAOSwq4ViFBPk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjgxWDgwMA==/z/c70AAOSwq4ViFBPk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/uHgAAOSwtNxiL4j8/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/uHgAAOSwtNxiL4j8/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1a8AAOSwoLFiL4kB/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1a8AAOSwoLFiL4kB/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/3IAAAOSwQEliL4jy/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/3IAAAOSwQEliL4jy/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/QA4AAOSwPd5iL4j6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/QA4AAOSwPd5iL4j6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/hxUAAOSwz0FiL4j3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/hxUAAOSwz0FiL4j3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ToQAAOSwI15iL4j1/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ToQAAOSwI15iL4j1/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/antec-nsk1380-microatx-cube-case/1606393856 target="_blank" rel="noopener noreferrer">Antec NSK1380 MicroATX Cube Case</a><br>Great condition in original box Steel MicroATX Cube No MB No drives w/ Antec 80PLUS 350 Watts PS a ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5A" target="_blank" rel="noopener noreferrer">Toronto, M5A</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div18">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/CIAAAOSwQ9Jh-xHC/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/CIAAAOSwQ9Jh-xHC/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/K6kAAOSwaXxh-xHE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/K6kAAOSwaXxh-xHE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/fAEAAOSw1c1h-xHF/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/fAEAAOSw1c1h-xHF/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/HVIAAOSwf7Fh-xHH/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/HVIAAOSwf7Fh-xHH/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/motherboard-gigabyte-b365mds3h/1604187200 target="_blank" rel="noopener noreferrer">Motherboard Gigabyte B365MDS3H</a><br>Motherboard Gigabyte B365MDS3H. Posted in computer accessories, system components in City of ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM1W2C8" target="_blank" rel="noopener noreferrer">Toronto, M1W2C8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td>No Image</td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/intel-i7-i5-xeon-socket-1156-processors/1611205216 target="_blank" rel="noopener noreferrer">Intel i7 i5 xeon socket 1156 processors</a><br>i5-650 $30 firm i5-750 $50 firm i7-860 $80 firm i7-870 $90 firm xeon x3460 (4 core 8 thread, same ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4B" target="_blank" rel="noopener noreferrer">Toronto, M4B</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div20">
+		<a href="https://i.ebayimg.com/00/s/MTA4MFgxMDgw/z/1U4AAOSwmy1g58e6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTA4MFgxMDgw/z/1U4AAOSwmy1g58e6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/city-of-toronto/key-fob-copy-service-guaranteed-to-work/1575505480 target="_blank" rel="noopener noreferrer">KEY FOB COPY SERVICE GUARANTEED TO WORK!</a><br>We will make a identical copy of your fob. Everyone needs a spare in case you lose your original ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=47%2CCharles%2CSt%2CW%2CToronto%2CON%2CM4Y%2C2R4%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M4Y2R4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div21">
+		<a href="https://i.ebayimg.com/00/s/MTUwOFgxNjAw/z/S0MAAOSwdANhS9t0/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTUwOFgxNjAw/z/S0MAAOSwdANhS9t0/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMzI0/z/eK4AAOSwbqxhS9t7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMzI0/z/eK4AAOSwbqxhS9t7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMDAy/z/KkQAAOSwPD5hS9uH/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMDAy/z/KkQAAOSwPD5hS9uH/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTUzOFgxNjAw/z/YRQAAOSw8TNhS9uP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTUzOFgxNjAw/z/YRQAAOSw8TNhS9uP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTM1MFgxNjAw/z/7ccAAOSwfFVhS9uW/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTM1MFgxNjAw/z/7ccAAOSwfFVhS9uW/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNDQy/z/CH0AAOSwMURhS9uf/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNDQy/z/CH0AAOSwMURhS9uf/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/city-of-toronto/otterbox-gaming-controller-carry-case/1586671228 target="_blank" rel="noopener noreferrer">Otterbox gaming controller carry case</a><br>Never used. $35 or best offer.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM9N1H3" target="_blank" rel="noopener noreferrer">Toronto, M9N1H3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div22">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/41kAAOSw01th7FI6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/41kAAOSw01th7FI6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ZVAAAOSwMgFh7FI3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ZVAAAOSwMgFh7FI3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/IMcAAOSw7rZh7FIV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/IMcAAOSw7rZh7FIV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/GhAAAOSwciZh7FIY/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/GhAAAOSwciZh7FIY/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/p8cAAOSwsG1h7FJU/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/p8cAAOSwsG1h7FJU/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/uIEAAOSwh0xh7FJY/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/uIEAAOSwh0xh7FJY/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/liUAAOSwNgxh7FJr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/liUAAOSwNgxh7FJr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzgxWDgwMA==/z/fG0AAOSwUj5h7FNW/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzgxWDgwMA==/z/fG0AAOSwUj5h7FNW/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/in-win-mini-tower-micro-atx-case/1602847942 target="_blank" rel="noopener noreferrer">IN WIN Mini Tower Micro-ATX Case</a><br>o Used, in like new condition o Easy to build Mini Tower, Micro-ATX computer case with a unique ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5N%2C8J4" target="_blank" rel="noopener noreferrer">Mississauga, L5N8J4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div23">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/zxkAAOSwS9RiMjQu/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/zxkAAOSwS9RiMjQu/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/QiMAAOSw2uNiMjQv/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/QiMAAOSw2uNiMjQv/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/8SkAAOSw4KhiMjQx/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/8SkAAOSw4KhiMjQx/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/-sQAAOSwK8tiMjQy/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/-sQAAOSwK8tiMjQy/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/~r4AAOSwYJtiMjQz/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/~r4AAOSwYJtiMjQz/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/qxQAAOSwvEJiMjWe/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/qxQAAOSwvEJiMjWe/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/v0AAAOSwF~JiMjWg/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/v0AAAOSwF~JiMjWg/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/computer-case/1609102436 target="_blank" rel="noopener noreferrer">Computer Case</a><br>This case is used and it shows haha it has a few scratches but mostly it has some sticker residue ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Bloor%2CSt%2CW%2CToronto%2CON%2CM9A%2C1A2%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M9A1A2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div24">
+		<a href="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/uocAAOSw1SBhkv8B/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/uocAAOSw1SBhkv8B/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/eyMAAOSw34Fhkv8D/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/eyMAAOSw34Fhkv8D/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/anime-pc-case-panel-rem/1594414028 target="_blank" rel="noopener noreferrer">Anime PC CASE PANEL (REM)</a><br>PC Light-up panel intended for inside of PC CASE. Panel has white led and makes image brighter. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4R%2C0A1" target="_blank" rel="noopener noreferrer">Toronto, M4R0A1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div25">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/mZ4AAOSwuXxhu0IX/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/mZ4AAOSwuXxhu0IX/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/40-for-one-last-desktop-computer-case-do-not-have-side-cover/1598551302 target="_blank" rel="noopener noreferrer">$40 for one last desktop computer case, do not have side cover</a><br>$40 for one last desktop computer case, do not have side cover and has a lot of parts, it’s heavy ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9W%2C2A3" target="_blank" rel="noopener noreferrer">Etobicoke, M9W2A3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div26">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDY1MA==/z/-k8AAOSw8HJhnaFY/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDY1MA==/z/-k8AAOSw8HJhnaFY/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/mississauga-peel-region/otterbox-defender-case-for-google-pixel-5-black/1595577467 target="_blank" rel="noopener noreferrer">OtterBox Defender Case for Google Pixel 5 - Black</a><br>Brand new in the box!</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=9600%2CIslington%2CAvenue%2CWoodbridge%2CON" target="_blank" rel="noopener noreferrer">Woodbridge</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div27">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/04gAAOSwdkZiRcz7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/04gAAOSwdkZiRcz7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/1MYAAOSwF-JiRc0G/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/1MYAAOSwF-JiRc0G/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/EXgAAOSw6YxiRc0t/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/EXgAAOSw6YxiRc0t/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/bitcoin-mining-case-with-fans/1611008673 target="_blank" rel="noopener noreferrer">Bitcoin Mining Case with fans</a><br>Never been used. Just no box. Rack mountable Bitcoin mining case.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6P2H3" target="_blank" rel="noopener noreferrer">Brampton, L6P2H3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div28">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/GrwAAOSwPjpiJQDE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/GrwAAOSwPjpiJQDE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/oV0AAOSwZ3ZiJQDJ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/oV0AAOSwZ3ZiJQDJ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/gaming-cpu-case/1607872298 target="_blank" rel="noopener noreferrer">Gaming CPU CASE </a><br>Cool Master with extra Funs and DVD burner!</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Woodbridge%2CON%2CL4L%2CCanada" target="_blank" rel="noopener noreferrer">Woodbridge, L4L</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div29">
+		<a href="https://i.ebayimg.com/00/s/NTI2WDMzMA==/z/24cAAOSwPAViG44b/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTI2WDMzMA==/z/24cAAOSwPAViG44b/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NzE3WDI5Mg==/z/NNUAAOSwMu1iG44e/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NzE3WDI5Mg==/z/NNUAAOSwMu1iG44e/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDMwWDU3MA==/z/B0IAAOSwoDViG44p/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDMwWDU3MA==/z/B0IAAOSwoDViG44p/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/pc-case-dtx-mini-itx-compatible-htpc/1607009451 target="_blank" rel="noopener noreferrer">PC CASE DTX (MINI ITX COMPATIBLE) HTPC</a><br>This is a used DTX Case formerly used as an Acer PC. Compatible with mini ITX and DTX motherboards. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL7A" target="_blank" rel="noopener noreferrer">Brampton, L7A</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div30">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/JpYAAOSwh5BiK6f3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/JpYAAOSwh5BiK6f3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/k64AAOSwWHJiK6f5/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/k64AAOSwWHJiK6f5/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/computer-case-thermaltake-versa-h18-tempered-gl/1608481091 target="_blank" rel="noopener noreferrer">Computer case Thermaltake Versa H18 tempered gl</a><br>Change a computer case, don't need it anymore. No bending. Address: 33 Elm Dr, Mississauga</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Elm%2CDr%2C#1609%2CMississauga%2CON%2CL5B%2C4M2加拿大" target="_blank" rel="noopener noreferrer"> Mississauga, L5B4M2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div31">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/XKIAAOSw7FdiGVAE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/XKIAAOSw7FdiGVAE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/swMAAOSwYcliGU-J/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/swMAAOSwYcliGU-J/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/r0QAAOSwoyJiGU-X/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/r0QAAOSwoyJiGU-X/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/ECEAAOSwOC9iGU-l/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/ECEAAOSwOC9iGU-l/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/89EAAOSwk5RiGU~N/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/89EAAOSwk5RiGU~N/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/Jr8AAOSwJ9liGU~v/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/Jr8AAOSwJ9liGU~v/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/61gAAOSwCmliGVAV/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/61gAAOSwCmliGVAV/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/PasAAOSwpBhiGVA7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/PasAAOSwpBhiGVA7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/DjEAAOSwDW1iGVBe/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/DjEAAOSwDW1iGVBe/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/-YEAAOSwe81iGVBu/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/-YEAAOSwe81iGVBu/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/computer-case-450w-power-supply-dvd-writer-40-firm/1606833412 target="_blank" rel="noopener noreferrer">Computer case + 450W Power Supply + DVD Writer. $40. Firm.</a><br>If you see this ad, this item is available. Located in the QEW & 427 area. First come, first serve. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8W" target="_blank" rel="noopener noreferrer">Etobicoke, M8W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div32">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OG4AAOSw~5RiRxTT/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OG4AAOSw~5RiRxTT/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/F3AAAOSwhjNiRxS2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/F3AAAOSwhjNiRxS2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/iDsAAOSwX3NiRxS6/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/iDsAAOSwX3NiRxS6/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OWUAAOSw2hdiRxS-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OWUAAOSw2hdiRxS-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/vtsAAOSwx-tiRxTC/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/vtsAAOSwx-tiRxTC/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/6V0AAOSwHcRiRxTF/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/6V0AAOSwHcRiRxTF/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/J3AAAOSwTcNiRxTJ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/J3AAAOSwTcNiRxTJ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/lqEAAOSwexNiRxTM/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/lqEAAOSwexNiRxTM/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/cp8AAOSwMWliRxTQ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/cp8AAOSwMWliRxTQ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/7UUAAOSwfqpiR0WT/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/7UUAAOSwfqpiR0WT/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/great-pc-parts_-from-updated-audio-pc/1611125307 target="_blank" rel="noopener noreferrer">GREAT PC PARTS_ from updated audio PC</a><br>ANTEC 300 black gaming case_ with ASUS P5Q MB+ Q6600 + OCZ 4GB Ram $ 75 WD 80/500/500 GB SATA hdd's ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8V%2C1Y6" target="_blank" rel="noopener noreferrer">Etobicoke, M8V1Y6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div33">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/5psAAOSwh5RiIN38/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/5psAAOSwh5RiIN38/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/4PkAAOSwc5NiIN3-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/4PkAAOSwc5NiIN3-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/EpwAAOSwt~5iIN4A/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/EpwAAOSwt~5iIN4A/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/wAYAAOSwQ5hiIN4D/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/wAYAAOSwQ5hiIN4D/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/HyEAAOSwLEliIN4G/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/HyEAAOSwLEliIN4G/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/KW0AAOSwx29iIN4M/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/KW0AAOSwx29iIN4M/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/phantek-evolv-shift-itx-case/1607482261 target="_blank" rel="noopener noreferrer">phantek evolv shift ITX case</a><br>In perfect working condition, no chip or crack anywhere. Just a little dusty. Very good ITX case. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=8%2CMercer%2CStreet%2CToronto%2CON" target="_blank" rel="noopener noreferrer">Toronto</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div34">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/rsYAAOSwm3tiREcd/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/rsYAAOSwm3tiREcd/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/QlUAAOSwu4ViREcp/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/QlUAAOSwu4ViREcp/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/U5AAAOSwOMpiREcv/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/U5AAAOSwOMpiREcv/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/888AAOSwpw1iREc7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/888AAOSwpw1iREc7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/thermaltake-tt-gaming-pci-e-x16-3-0-extender-riser-cable-200mm/1610862722 target="_blank" rel="noopener noreferrer">Thermaltake TT Gaming PCI-E x16 3.0 Extender Riser Cable 200mm</a><br>The Thermaltake Gaming PCI-E 3.0 x16 riser cable is ideal for use in select gaming cases offering ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4J%2C1B3" target="_blank" rel="noopener noreferrer">Toronto, M4J1B3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div35">
+		<a href="https://i.ebayimg.com/00/s/Nzc0WDgwMA==/z/IN0AAOSwSi9hXNGB/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Nzc0WDgwMA==/z/IN0AAOSwSi9hXNGB/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDc5NA==/z/2cMAAOSwAiVhXNGF/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDc5NA==/z/2cMAAOSwAiVhXNGF/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM4OQ==/z/aNUAAOSwv2xhXNGG/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM4OQ==/z/aNUAAOSwv2xhXNGG/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDc5Mg==/z/MvUAAOSwZ0VhXNGN/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDc5Mg==/z/MvUAAOSwZ0VhXNGN/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDc5NA==/z/KKUAAOSw9hNhXNGU/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDc5NA==/z/KKUAAOSw9hNhXNGU/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/markham-york-region/gigabyte-ga-z87p-d3-for-z87-intel-lga-1150/1588526857 target="_blank" rel="noopener noreferrer">Gigabyte GA-Z87P-D3 For Z87 Intel LGA 1150 </a><br>Stock in boot loop Stock in boot loop Stock in boot loop Stock in boot loop Gigabyte GA-Z87P-D3 For ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Woodbridge%2CON%2CL4H%2C2A7%2CCanada" target="_blank" rel="noopener noreferrer">Woodbridge, L4H2A7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td>No Image</td>
+	<td>45</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/intel-cpus-xeon-i7-1366-x5687-i7-960-etc/1611061115 target="_blank" rel="noopener noreferrer">Intel cpus xeon i7 1366 X5687 i7-960 etc.</a><br>These xeon i7 equivalent processors will work both in X58 motherboards and 1P 2P server/workstation ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4C%2C3P4" target="_blank" rel="noopener noreferrer">Toronto, M4C3P4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div37">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYxMA==/z/HoAAAOSwmZhgFx2x/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYxMA==/z/HoAAAOSwmZhgFx2x/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDUzMA==/z/QrIAAOSwQpZgFx2-/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDUzMA==/z/QrIAAOSwQpZgFx2-/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTMwWDgwMA==/z/zU4AAOSwPPZgFx3C/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTMwWDgwMA==/z/zU4AAOSwPPZgFx3C/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDUzMA==/z/A1wAAOSw3qVgFx3F/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDUzMA==/z/A1wAAOSw3qVgFx3F/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTMwWDgwMA==/z/XwYAAOSwKq1gFx3J/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTMwWDgwMA==/z/XwYAAOSwKq1gFx3J/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTMwWDgwMA==/z/~woAAOSwM2ZgFx3M/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTMwWDgwMA==/z/~woAAOSwM2ZgFx3M/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDUzMA==/z/dgQAAOSwjwJgFx3Q/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDUzMA==/z/dgQAAOSwjwJgFx3Q/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/cougar-mx330-x-pc-computer-gaming-case-mid-tower-transparent-vi/1548912346 target="_blank" rel="noopener noreferrer">Cougar MX330-X PC Computer Gaming Case Mid Tower -Transparent Vi</a><br>NEW OPEN BOX - SEE the LAST PICTURE - FRONT GRILL HAS A SLIGHT DENT</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6Z%2C3H2" target="_blank" rel="noopener noreferrer">Brampton, L6Z3H2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div38">
+		<a href="https://i.ebayimg.com/00/s/NjEyWDYxMg==/z/vtwAAOSwsQxiSHwW/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjEyWDYxMg==/z/vtwAAOSwsQxiSHwW/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/corsair-carbide-cube-case-540/1611271961 target="_blank" rel="noopener noreferrer">Corsair carbide Cube case - 540</a><br>Cosair Carbide 540 Cube case - White. No fans included. Just the case. Used as my home computer for ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6H%2C5P5" target="_blank" rel="noopener noreferrer">Oakville, L6H5P5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div39">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYxNw==/z/KWoAAOSwl~ph9u-~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYxNw==/z/KWoAAOSwl~ph9u-~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzI2WDgwMA==/z/lLMAAOSwylBh9u-p/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzI2WDgwMA==/z/lLMAAOSwylBh9u-p/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDY5Mg==/z/k8YAAOSw8ZBh9u-s/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDY5Mg==/z/k8YAAOSw8ZBh9u-s/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ4Ng==/z/IE8AAOSwKPth9u-x/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ4Ng==/z/IE8AAOSwKPth9u-x/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM0MQ==/z/vOcAAOSwbvJh9u~~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM0MQ==/z/vOcAAOSwbvJh9u~~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ3NQ==/z/3h8AAOSw3yJh9u-4/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ3NQ==/z/3h8AAOSw3yJh9u-4/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/8qcAAOSw32Fh9u-m/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/8qcAAOSw32Fh9u-m/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Nzk2WDgwMA==/z/sT4AAOSw5jph9u-2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Nzk2WDgwMA==/z/sT4AAOSw5jph9u-2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MjY5WDgwMA==/z/lHwAAOSw4ORh9u-7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MjY5WDgwMA==/z/lHwAAOSw4ORh9u-7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/mississauga-peel-region/stationary-school-and-office-supplies-take-all-for-50/1603815512 target="_blank" rel="noopener noreferrer">Stationary School and Office Supplies (Take all for $50)</a><br>Take all items in photos for $50. Includes: 3 Pencil Cases - Finding Dory, Bubble Guppies and ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5R%2C3H3" target="_blank" rel="noopener noreferrer">Mississauga, L5R3H3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div40">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/0fAAAOSwpPNiP7WZ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/0fAAAOSwpPNiP7WZ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/6QkAAOSwhn5iP7Wa/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/6QkAAOSwhn5iP7Wa/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/VP0AAOSwsQxiP7Wb/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/VP0AAOSwsQxiP7Wb/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/MqgAAOSwLCliP7Wc/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/MqgAAOSwLCliP7Wc/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/city-of-toronto/fractal-design-focus-case-2-fans/1610435848 target="_blank" rel="noopener noreferrer">Fractal Design Focus case(2 fans)</a><br>Used computer case. Missing 2 expansion slot cover.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4Y0B6" target="_blank" rel="noopener noreferrer">Toronto, M4Y0B6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div41">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/j6oAAOSw~IBiRM66/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/j6oAAOSw~IBiRM66/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/wZUAAOSwcJNiRM6~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/wZUAAOSwcJNiRM6~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/BcIAAOSwrY5iRM7D/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/BcIAAOSwrY5iRM7D/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/o2wAAOSw8gFiRM7G/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/o2wAAOSw8gFiRM7G/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/J0IAAOSwyJRiRM7K/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/J0IAAOSwyJRiRM7K/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/6QcAAOSwbNdiRM7N/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/6QcAAOSwbNdiRM7N/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/6LEAAOSwI-RiRM7R/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/6LEAAOSwI-RiRM7R/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/FrUAAOSwUjtiRM7V/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/FrUAAOSwUjtiRM7V/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/kPIAAOSw9M9iRM7Y/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/kPIAAOSw9M9iRM7Y/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/markham-york-region/bitfenix-ghost-quiet-atx-mid-tower-computer-case/1610932710 target="_blank" rel="noopener noreferrer">Bitfenix - Ghost Quiet ATX Mid Tower Computer Case</a><br>Material Steel, plastic Motherboard Form Factor Mini-ITX, mATX, ATX Drive Bays - 3 x 5.25" - 4 x ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Woodbridge%2CON%2CL4H%2C0M7" target="_blank" rel="noopener noreferrer">Woodbridge, L4H0M7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div42">
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/qU0AAOSw~QNiRTAP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/qU0AAOSw~QNiRTAP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/DvMAAOSwlThiRTAM/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/DvMAAOSwlThiRTAM/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/RZEAAOSwWoBiSFc7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/RZEAAOSwWoBiSFc7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/CnsAAOSwyh1iSFc~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/CnsAAOSwyh1iSFc~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/bAEAAOSwkA9iSFdC/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/bAEAAOSwkA9iSFdC/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/corsair-c70-aluminum-computer-case-excellent-condition/1610968866 target="_blank" rel="noopener noreferrer">Corsair C70 aluminum computer case. Excellent condition</a><br>Rare Corsair C70 computer case. Used but in good condition. No dents, few scratches. Been sitting ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6P%2C0H7" target="_blank" rel="noopener noreferrer">Brampton, L6P0H7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div43">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/QDUAAOSwcY9iSbiu/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/QDUAAOSwcY9iSbiu/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/9~cAAOSw6~tiSbiw/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/9~cAAOSw6~tiSbiw/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/nzxt-computer-case/1611402629 target="_blank" rel="noopener noreferrer">NZXT Computer Case</a><br>Posted by Cameron in computer accessories, system components in Toronto (GTA), Mississauga / Peel ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5B%2C3Y9%2CCanada" target="_blank" rel="noopener noreferrer">Mississauga, L5B3Y9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div44">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/e78AAOSwf4xiQ4of/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/e78AAOSwf4xiQ4of/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/pm0AAOSwduRiQ4oh/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/pm0AAOSwduRiQ4oh/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/mini-itx-computer-case/1610818896 target="_blank" rel="noopener noreferrer">Mini itx computer case</a><br>The case is in pristine condition and is good for any mini itx case. Please contact me if you have ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6Y1H7" target="_blank" rel="noopener noreferrer">Brampton, L6Y1H7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div45">
+		<a href="https://i.ebayimg.com/00/s/Mjg4WDU3OQ==/z/u8gAAOSwnoViSG0g/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Mjg4WDU3OQ==/z/u8gAAOSwnoViSG0g/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NzQwWDczMg==/z/go8AAOSwxk5iSG0r/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NzQwWDczMg==/z/go8AAOSwxk5iSG0r/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NzYwWDc1NA==/z/l~gAAOSwAjtiSG0y/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NzYwWDc1NA==/z/l~gAAOSwAjtiSG0y/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/gigabyte-b450m-ds3h-rev-1-x-motherboard/1611260229 target="_blank" rel="noopener noreferrer">Gigabyte b450m DS3H (Rev 1.x) Motherboard</a><br>Upgraded to x570 3 weeks ago. 100% running. 1 x m2. slot</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6S%2C4T1" target="_blank" rel="noopener noreferrer">Brampton, L6S4T1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div46">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/icYAAOSwaJliH2GK/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/icYAAOSwaJliH2GK/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/cooler-master-case/1607351383 target="_blank" rel="noopener noreferrer">cooler master case</a><br>cooler master case. Posted in computer accessories, system components in City of Toronto. March 2, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4X1W5" target="_blank" rel="noopener noreferrer">Toronto, M4X1W5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div47">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM2MQ==/z/CHAAAOSwfTRiM~~Z/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM2MQ==/z/CHAAAOSwfTRiM~~Z/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM2MQ==/z/QAYAAOSw5iNiM~~c/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM2MQ==/z/QAYAAOSw5iNiM~~c/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM2MQ==/z/DjQAAOSw9eZiM~~d/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM2MQ==/z/DjQAAOSw9eZiM~~d/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gaming-case-rgb-asus-gt301-tuf/1609272762 target="_blank" rel="noopener noreferrer">Gaming Case RGB Asus GT301 TUF</a><br>TUF Gaming GT301 is a feature-packed case and made for the masses, the optimized compact case ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM6H%2C3Y3" target="_blank" rel="noopener noreferrer">Toronto, M6H3Y3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div48">
+		<a href="https://i.ebayimg.com/00/s/MTQ0MFgxMDgw/z/0GIAAOSwMbZiI78~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTQ0MFgxMDgw/z/0GIAAOSwMbZiI78~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTA4MFgxNDQw/z/qBUAAOSwqdhiI79G/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTA4MFgxNDQw/z/qBUAAOSwqdhiI79G/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/computer-case-deepcool-tesseract-bf-used-one-left/1607760243 target="_blank" rel="noopener noreferrer">Computer Case - DEEPCOOL TESSERACT BF (used) - ONE LEFT</a><br>Selling an used computer case DEEPCOOL TESSERACT BF. the condition is almost new. Why do you need ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM1V" target="_blank" rel="noopener noreferrer">Toronto, M1V</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div49">
+		<a href="https://i.ebayimg.com/00/s/NTk5WDgwMA==/z/hEIAAOSwz2lhLqtA/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTk5WDgwMA==/z/hEIAAOSwz2lhLqtA/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTk5WDgwMA==/z/GgIAAOSwZkFhLqtE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTk5WDgwMA==/z/GgIAAOSwZkFhLqtE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/gawAAOSwiKthLqsk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/gawAAOSwiKthLqsk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>55</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/used-antec-isk600-black-aluminum-plastic-mini-itx-computer-case/1583467899 target="_blank" rel="noopener noreferrer">Used Antec ISK600 Black Aluminum Plastic Mini-ITX Computer Case</a><br>Up for sale is a used very good condition Antec ISK600 Black Aluminum / Plastic Mini-ITX Tower ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL7A%2C0N5" target="_blank" rel="noopener noreferrer">Brampton, L7A0N5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div50">
+		<a href="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/VFwAAOSwW8diR01a/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/VFwAAOSwW8diR01a/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/QPcAAOSwmrNiR01f/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/QPcAAOSwmrNiR01f/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/eOYAAOSw~NRiR01r/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/eOYAAOSw~NRiR01r/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/IqMAAOSwPPViR01v/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjQwWDQ4MA==/z/IqMAAOSwPPViR01v/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/mississauga-peel-region/gigabyte-b365m-d3h-motherboard/1611157752 target="_blank" rel="noopener noreferrer">Gigabyte B365M D3H Motherboard.</a><br>New, Sealed.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5B%2C2C9" target="_blank" rel="noopener noreferrer">Mississauga, L5B2C9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div51">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/WtUAAOSwwERiOll5/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/WtUAAOSwwERiOll5/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/8ysAAOSwMcxiOlmE/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/8ysAAOSwMcxiOlmE/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/city-of-toronto/gaming-pc-case/1609906454 target="_blank" rel="noopener noreferrer">Gaming PC Case </a><br>Atx mobo compatible 2 White LED fans and 1 260mm fan on top</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4X1R3" target="_blank" rel="noopener noreferrer">Toronto, M4X1R3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div52">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/mB8AAOSwbFRiFu8~/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/mB8AAOSwbFRiFu8~/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/MOwAAOSwb~1iFu9A/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/MOwAAOSwb~1iFu9A/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/8gcAAOSwCwtiFu9C/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/8gcAAOSwCwtiFu9C/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/4YUAAOSwYTtiFu9E/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/4YUAAOSwYTtiFu9E/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/6KIAAOSwz49iFu9G/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/6KIAAOSwz49iFu9G/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/JUAAAOSwPAViFu9I/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/JUAAAOSwPAViFu9I/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/6EMAAOSwUIRiFu9K/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/6EMAAOSwUIRiFu9K/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/AsgAAOSwq0diFu9L/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/AsgAAOSwq0diFu9L/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/mississauga-peel-region/turtle-hard-drive-waterproof-case-size-19-inches-by-22inches/1606646471 target="_blank" rel="noopener noreferrer">Turtle Hard Drive Waterproof Case size 19 inches by 22inches </a><br>Turtle Hard Drive Waterproof Case size 19 inches by 22inches</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6R%2C1G1%2CCanada" target="_blank" rel="noopener noreferrer">Brampton, L6R1G1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div53">
+		<a href="https://i.ebayimg.com/00/s/MTAwOVg4Mjc=/z/DjsAAOSwLuZiDbRh/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTAwOVg4Mjc=/z/DjsAAOSwLuZiDbRh/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTExMlg4Mjc=/z/k-sAAOSw049iDbRj/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTExMlg4Mjc=/z/k-sAAOSw049iDbRj/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTEyNVg4Mjc=/z/bd8AAOSwmnpiDbRk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTEyNVg4Mjc=/z/bd8AAOSwmnpiDbRk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTEzNFg4MjY=/z/AtAAAOSwVC1iDbRk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTEzNFg4MjY=/z/AtAAAOSwVC1iDbRk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTEwN1g4Mjc=/z/iVEAAOSw58piDbRl/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTEwN1g4Mjc=/z/iVEAAOSw58piDbRl/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTE0Mlg4Mjc=/z/izwAAOSwSGliDbRm/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTE0Mlg4Mjc=/z/izwAAOSwSGliDbRm/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTEwNlg4Mjc=/z/QcoAAOSwfZBiDbRn/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTEwNlg4Mjc=/z/QcoAAOSwfZBiDbRn/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/vhQAAOSwc4liDbUG/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/vhQAAOSwc4liDbUG/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/JIcAAOSwniliDbR2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/JIcAAOSwniliDbR2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/qTQAAOSwGlJiDbR4/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/qTQAAOSwGlJiDbR4/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/city-of-toronto/golden-field-n-1-mini-itx-computer-case/1605830391 target="_blank" rel="noopener noreferrer">GOLDEN FIELD N-1 Mini ITX Computer Case</a><br>new never used GOLDEN FIELD N-1 Mini ITX Computer Case price is negotiable</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM1P3E9" target="_blank" rel="noopener noreferrer">Toronto, M1P3E9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div54">
+		<a href="https://i.ebayimg.com/00/s/NDAwWDQwMA==/z/JisAAOSwpuZiP-6S/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDAwWDQwMA==/z/JisAAOSwpuZiP-6S/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODU2WDY1Nw==/z/gdMAAOSwVP1iP-6T/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODU2WDY1Nw==/z/gdMAAOSwVP1iP-6T/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/fmkAAOSwyohiP-6U/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/fmkAAOSwyohiP-6U/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/inwin-301-mid-tower-pc-case/1610452363 target="_blank" rel="noopener noreferrer">InWin 301 Mid-tower PC case </a><br>InWin 301 mid tower case. In great condition, have original box and accessories needed. Can fit up ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL7A1S4" target="_blank" rel="noopener noreferrer">Brampton, L7A1S4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div55">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/I9kAAOSwCNBiBWav/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/I9kAAOSwCNBiBWav/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/VDEAAOSwSatiBWaw/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/VDEAAOSwSatiBWaw/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/BkEAAOSwk~FiBWax/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/BkEAAOSwk~FiBWax/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/0sUAAOSwjmdiBWay/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/0sUAAOSwjmdiBWay/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/JkgAAOSwruZiBWaz/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/JkgAAOSwruZiBWaz/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/K20AAOSw1tdiBWa1/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/K20AAOSw1tdiBWa1/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/UQYAAOSwHzRiBWa2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/UQYAAOSwHzRiBWa2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/T0wAAOSwADZiBWa3/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/T0wAAOSwADZiBWa3/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/OlkAAOSwOK1iBWa4/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/OlkAAOSwOK1iBWa4/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/cEwAAOSw0~JiBWa5/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/cEwAAOSw0~JiBWa5/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/phanteks-p400-black-and-red-pc-case/1605091142 target="_blank" rel="noopener noreferrer">Phanteks p400 black and red PC case</a><br>Phanteks p400 tempered glass, RGB Computer case Comes with one case fan Little dusty but nothing ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5M6C7" target="_blank" rel="noopener noreferrer">Mississauga, L5M6C7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div56">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/Fn4AAOSw38JhLq9P/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/Fn4AAOSw38JhLq9P/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/qaQAAOSw2V1hLq9L/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/qaQAAOSw2V1hLq9L/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/iU0AAOSwCSlhLq9M/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/iU0AAOSwCSlhLq9M/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/tn4AAOSw6-NhLq9O/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/tn4AAOSw6-NhLq9O/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/WIsAAOSwubVhLq9K/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/WIsAAOSwubVhLq9K/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/xjUAAOSw-GdhLq9I/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/xjUAAOSw-GdhLq9I/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/nzxt-h200-case-red/1583471806 target="_blank" rel="noopener noreferrer">NZXT H200 Case Red</a><br>Case is SOLD - other parts are still available below Case is in great condition, still has ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5A2Y8" target="_blank" rel="noopener noreferrer">Toronto, M5A2Y8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div57">
+		<a href="https://i.ebayimg.com/00/s/Njc5WDQyMg==/z/fQQAAOSwtbBiRiNI/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Njc5WDQyMg==/z/fQQAAOSwtbBiRiNI/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/GC8AAOSwoSRiRiNQ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/GC8AAOSwoSRiRiNQ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDU4WDgwMA==/z/muYAAOSwtO1iRiNX/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDU4WDgwMA==/z/muYAAOSwtO1iRiNX/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/slightly-used-inwin-chopin-mini-itx-tower-case-60/1611057752 target="_blank" rel="noopener noreferrer">Slightly Used InWin Chopin Mini ITX Tower Case -$60</a><br>Selling my slightly used In Win Chopin Case for $60. Comes with all cables and attached 150W PSU. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Meadowvale%2CRd%2C&%2CSheppard%2CAve%2CE%2CToronto%2CON%2CM1B%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M1B</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div58">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/OEoAAOSw9Fpg5zUd/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg5MDA=/z/OEoAAOSw9Fpg5zUd/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>65</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/city-of-toronto/high-frequency-key-fob-copy-guaranteed/1575419252 target="_blank" rel="noopener noreferrer">HIGH FREQUENCY KEY FOB COPY GUARANTEED!</a><br>We will make a identical copy of your fob. Everyone needs a spare in case you lose your original ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=47%2CCharles%2CSt%2CW%2CToronto%2CON%2CM4Y%2C2R4%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M4Y2R4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div59">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tKkAAOSwX3NiQ6sS/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tKkAAOSwX3NiQ6sS/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/shkAAOSwF5ViQ6sW/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/shkAAOSwF5ViQ6sW/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>70</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/oakville-halton-region/gigibyte-motherboard/1610835454 target="_blank" rel="noopener noreferrer">Gigibyte motherboard</a><br>Gigibyte b450M DS3H motherboard. Nothing wrong with it, just upgraded to intel cpu and needed a new ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=747%2CMullin%2CWay%2CBurlington%2CON" target="_blank" rel="noopener noreferrer">Burlington</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div60">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/AO4AAOSw8J5iPlnf/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/AO4AAOSw8J5iPlnf/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ObIAAOSw6YxiPlnj/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ObIAAOSw6YxiPlnj/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/~hIAAOSwHdJiPlnn/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/~hIAAOSwHdJiPlnn/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/yKcAAOSw9KtiPlnr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/yKcAAOSw9KtiPlnr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/PmoAAOSwO6ZiPlnw/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/PmoAAOSwO6ZiPlnw/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>70</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/corsair-carbide-series-100r-mid-tower-case/1610282462 target="_blank" rel="noopener noreferrer">Corsair Carbide Series 100R Mid-Tower Case</a><br>Great mid tower case, perfect condition. Comes with all screws. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=550%2CHopewell%2CAvenue%2CToronto%2CON" target="_blank" rel="noopener noreferrer">Toronto</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div61">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/KCIAAOSwwDZh5g~T/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/KCIAAOSwwDZh5g~T/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/-zQAAOSwAa5h5g~W/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/-zQAAOSwAa5h5g~W/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/RfUAAOSwmSlh5g~X/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/RfUAAOSwmSlh5g~X/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>70</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/thermaltake-riing-trio-20-rgb-200mm-case-fan-tt-premium-edition/1602314742 target="_blank" rel="noopener noreferrer">Thermaltake Riing Trio 20 RGB 200mm Case Fan TT Premium Edition</a><br>New condition includes all accessories.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM1V" target="_blank" rel="noopener noreferrer">Toronto, M1V</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div62">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/dLkAAOSwIV9iP43C/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/dLkAAOSwIV9iP43C/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDY1WDU2NA==/z/pSYAAOSwHWJiP43I/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDY1WDU2NA==/z/pSYAAOSwHWJiP43I/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/VNsAAOSwL25iP43h/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/VNsAAOSwL25iP43h/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>70</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/asus-h410m-a-prime-motherboard-lga1200-socket-intel-h410-chipset/1610414987 target="_blank" rel="noopener noreferrer">Asus H410M-A Prime Motherboard LGA1200 Socket Intel H410 Chipset</a><br>Motherboard in perfectly good condition and working completely perfectly. Reason I'm selling is ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=33%2CHowland%2CAvenue%2CToronto%2CON" target="_blank" rel="noopener noreferrer">Toronto</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div63">
+		<a href="https://i.ebayimg.com/00/s/NjcxWDgwMA==/z/EegAAOSwc~ZiK8b2/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjcxWDgwMA==/z/EegAAOSwc~ZiK8b2/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NTMzWDgwMA==/z/pIgAAOSwuJRiK8b5/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTMzWDgwMA==/z/pIgAAOSwuJRiK8b5/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDk4WDgwMA==/z/jXwAAOSwTJRiK8b9/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDk4WDgwMA==/z/jXwAAOSwTJRiK8b9/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Njc2WDgwMA==/z/X6wAAOSwtvZiK8cA/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Njc2WDgwMA==/z/X6wAAOSwtvZiK8cA/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Mjg2WDgwMA==/z/mN8AAOSwnftiK8cD/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Mjg2WDgwMA==/z/mN8AAOSwnftiK8cD/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MjIxWDgwMA==/z/KUEAAOSwtIhiK8cF/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MjIxWDgwMA==/z/KUEAAOSwtIhiK8cF/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzE0WDgwMA==/z/A2YAAOSwI15iK8cH/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzE0WDgwMA==/z/A2YAAOSwI15iK8cH/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Mjc2WDgwMA==/z/tUMAAOSwqsJiK8cJ/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Mjc2WDgwMA==/z/tUMAAOSwqsJiK8cJ/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MzU1WDgwMA==/z/HaYAAOSwlLBiK8cL/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzU1WDgwMA==/z/HaYAAOSwlLBiK8cL/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Nzc3WDgwMA==/z/FgIAAOSw-5tiK8cO/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Nzc3WDgwMA==/z/FgIAAOSw-5tiK8cO/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>74</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/msi-h410m-pro-proseries-10thgen-intel-core-lga-1200-socket-ddr4/1608498862 target="_blank" rel="noopener noreferrer">MSI H410M-PRO ProSeries 10thGen Intel Core,LGA 1200 Socket DDR4</a><br>MSI H410M-PRO ProSeries 10th Gen Intel Core, LGA 1200 Socket DDR4, USB Motherboard This is For ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5M%2C7Z6" target="_blank" rel="noopener noreferrer">Mississauga, L5M7Z6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div64">
+		<a href="https://i.ebayimg.com/00/s/MzA3WDQ1Mg==/z/~iUAAOSwyJNiKq6h/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzA3WDQ1Mg==/z/~iUAAOSwyJNiKq6h/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>80</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/hamilton/asus-p9x79-le-motheboard/1608404336 target="_blank" rel="noopener noreferrer">Asus  P9X79 LE  motheboard</a><br>Asus P9X79 LE motherboard LGA 2011 socket Board posts Has missing cpu pins, affects ram slots 4 out ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7P%2C4Y7" target="_blank" rel="noopener noreferrer">Burlington, L7P4Y7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div65">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ZGcAAOSwoZFiNiNm/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/ZGcAAOSwoZFiNiNm/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/4-MAAOSwUnJiNiNm/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/4-MAAOSwUnJiNiNm/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/V7QAAOSwBAJiNiNn/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/V7QAAOSwBAJiNiNn/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/7xMAAOSwM6NiNiNo/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/7xMAAOSwM6NiNiNo/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NzczWDgwMA==/z/HMsAAOSwZB1iNiNq/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NzczWDgwMA==/z/HMsAAOSwZB1iNiNq/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Nzg2WDgwMA==/z/vGgAAOSw6~tiNiNr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Nzg2WDgwMA==/z/vGgAAOSw6~tiNiNr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/Njc1WDgwMA==/z/SqAAAOSwpw1iNiNs/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/Njc1WDgwMA==/z/SqAAAOSwpw1iNiNs/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>85</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gigabyte-b450-m-ds3h-motherboard-nzxt-h500-atx-mid-tower-case/1609470323 target="_blank" rel="noopener noreferrer">Gigabyte B450 m Ds3h MotherBoard + Nzxt H500 ATX Mid Tower Case</a><br>Great condition. PURCHASE CASE AND GET A FREE MOTHERBOARD! You get what you see in pic. Price is ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Victoria%2CSt%2CToronto%2CON%2CM5E%2C1L4%2CCanada" target="_blank" rel="noopener noreferrer"> Toronto, M5E1L4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div66">
+		<a href="https://i.ebayimg.com/00/s/MzcyWDUwMA==/z/DoIAAOSwf5hhhKVP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzcyWDUwMA==/z/DoIAAOSwf5hhhKVP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/motherboard-gigabyte-h370m-d3h/1592820990 target="_blank" rel="noopener noreferrer">Motherboard GIGABYTE H370M D3H</a><br>in a good condition, *no I/O shield* Socket: LGA 1151 3 nvme slots 3 PCI-e slots 6 sata DDR4</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6H%2C6J6" target="_blank" rel="noopener noreferrer">Oakville, L6H6J6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div67">
+		<a href="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/JeMAAOSwJ59iSMDz/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MzYwWDgwMA==/z/JeMAAOSwJ59iSMDz/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/msi-gaming-plus-max-b450-motherboard/1611323340 target="_blank" rel="noopener noreferrer">MSI gaming plus max b450 motherboard</a><br>Used just over a year. Comes in original box with manual, screws, etc. $100 obo Specs follow: CPU ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Acala%2CCrescent%2CMississauga%2CON%2CL5A%2C3E3%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L5A3E3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div68">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/H7wAAOSwDnBiNjQ7/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/H7wAAOSwDnBiNjQ7/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/gigabyte-b450-itx-motherboard/1609482512 target="_blank" rel="noopener noreferrer">Gigabyte b450 itx motherboard </a><br>Gigabyte b450 itx motherboard . Posted in computer accessories, system components in Mississauga / ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6Y2Y3" target="_blank" rel="noopener noreferrer">Brampton, L6Y2Y3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div69">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM3OQ==/z/H0wAAOSw7QxiMIkc/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM3OQ==/z/H0wAAOSw7QxiMIkc/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM3OQ==/z/H1MAAOSw7QxiMIke/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM3OQ==/z/H1MAAOSw7QxiMIke/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/asus-h410m-a-intel-10th-gen-motherboard/1608930869 target="_blank" rel="noopener noreferrer">Asus h410m-a intel 10th gen motherboard</a><br>I have a Asus motherboard for sale for 10th gen intel chips. I bought it for a build but decided to ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM6E" target="_blank" rel="noopener noreferrer">Toronto, M6E</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td>No Image</td>
+	<td>110</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/retail-intel-lga1200-comet-lake-2c-processor-w-warranty/1610943794 target="_blank" rel="noopener noreferrer">Retail Intel LGA1200 Comet Lake 2c processor w/ warranty</a><br>Intel g5905 Comet Lake processor socket LGA1200 (10th generation, for 4xx and 5xx series ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4C%2C3X6" target="_blank" rel="noopener noreferrer">Toronto, M4C3X6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td>No Image</td>
+	<td>120</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/intel-i7-3930k-i7-5920k-unlocked-6-core-processors-2011/1611061302 target="_blank" rel="noopener noreferrer">Intel i7-3930K i7-5920K unlocked 6 core processors 2011</a><br>Intel i7-3930K six core socket 2011 unlocked processor - for X79 motherboards originally purchased ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4C%2C3P4" target="_blank" rel="noopener noreferrer">Toronto, M4C3P4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div72">
+		<a href="https://i.ebayimg.com/00/s/NTMxWDgwMA==/z/RTMAAOSwvmJiN6yr/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTMxWDgwMA==/z/RTMAAOSwvmJiN6yr/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/mZoAAOSwvvdiN6yp/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/mZoAAOSwvvdiN6yp/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/pmEAAOSwoZdiN6ym/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDYwMA==/z/pmEAAOSwoZdiN6ym/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tuYAAOSwf5tiN6yg/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tuYAAOSwf5tiN6yg/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OxQAAOSw4btiN6yd/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OxQAAOSw4btiN6yd/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/fdsAAOSw6Q1iN6ya/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/fdsAAOSw6Q1iN6ya/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2ygAAOSwFb9iN6yX/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/2ygAAOSwFb9iN6yX/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/xXgAAOSwMtdiN6yN/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/xXgAAOSwMtdiN6yN/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MjI5WDgwMA==/z/tV8AAOSwmdFiN6yK/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MjI5WDgwMA==/z/tV8AAOSwmdFiN6yK/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>120</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gigabyte-aorus-ga-ax370-gaming-5-am4-atx-motherboard/1609645184 target="_blank" rel="noopener noreferrer">GIGABYTE AORUS GA-AX370-Gaming 5 AM4 ATX Motherboard</a><br>GIGABYTE AORUS GA-AX370-Gaming 5 AM4 ATX Motherboard. Condition- Used. MOTHERBOARD & IO SHIELD ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=580%2CChristie%2CStreet%2CToronto%2CON" target="_blank" rel="noopener noreferrer">Toronto</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div73">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/mYcAAOSw5eViHxOO/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDQ1MA==/z/mYcAAOSw5eViHxOO/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/cLoAAOSw6K1iHxOP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NDUwWDgwMA==/z/cLoAAOSw6K1iHxOP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>125</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/new-msi-b450-gaming-plus-max-am4/1607345324 target="_blank" rel="noopener noreferrer">NEW MSI B450 Gaming Plus Max AM4</a><br>New in box MSI B450 Gaming Plus Max Supports 1st, 2nd and 3rd gen AMD Ryzen processors Retails for ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Council%2CRing%2CRd%2CMississauga%2CON%2CL5L%2C1L1%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L5L1L1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div74">
+		<a href="https://i.ebayimg.com/00/s/NTQ5WDgwMA==/z/mbIAAOSw7LxiQOxA/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NTQ5WDgwMA==/z/mbIAAOSw7LxiQOxA/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>130</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/brand-new-msi-z390-a-pro-gaming-motherboard/1610566065 target="_blank" rel="noopener noreferrer">Brand New MSI Z390-A PRO Gaming motherboard</a><br>Contact for more info</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM4C%2C1L5" target="_blank" rel="noopener noreferrer">Toronto, M4C1L5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div75">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/f1EAAOSwvCpiO4fj/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFg3NDA=/z/f1EAAOSwvCpiO4fj/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxNTcw/z/mpYAAOSwPLFiO4fn/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxNTcw/z/mpYAAOSwPLFiO4fn/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/FeYAAOSw1exiO4fk/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/FeYAAOSw1exiO4fk/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/O84AAOSwEv9iO4fl/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/O84AAOSwEv9iO4fl/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/oakville-halton-region/msi-z390-a-pro-gaming-motherboard/1610013318 target="_blank" rel="noopener noreferrer">MSI Z390-A PRO gaming motherboard</a><br>- Supports 9th / 8th Gen Intel Core processors for LGA 1151 socket - Supports DDR4 Memory, This ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6H7M7" target="_blank" rel="noopener noreferrer">Oakville, L6H7M7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div76">
+		<a href="https://i.ebayimg.com/00/s/ODAwWDM5OQ==/z/D7gAAOSwQ39iQPhA/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/ODAwWDM5OQ==/z/D7gAAOSwQ39iQPhA/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/city-of-toronto/msi-z390-gaming-pro-carbon-motherboard/1610572677 target="_blank" rel="noopener noreferrer">msi z390 gaming pro carbon motherboard</a><br>msi z390 gaming pro carbon motherboard, pickup around Scarborough</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brigadoon%2CCrescent%2CToronto%2CON%2CM1T%2C3C1加拿大" target="_blank" rel="noopener noreferrer"> Toronto, M1T3C1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div77">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/A5cAAOSw9M9iQaZn/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/A5cAAOSw9M9iQaZn/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/ek-quantum-momentum-rog-crosshair-viii-hero-d-rgb-x570/1610608405 target="_blank" rel="noopener noreferrer">EK-Quantum Momentum ROG Crosshair VIII Hero D-RGB x570</a><br>Water block for Dark Hero / Crosshair viii x570 motherboard and cpu. Comes with all screws and box. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL7A2E6" target="_blank" rel="noopener noreferrer">Brampton, L7A2E6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div78">
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/kGoAAOSwh2liDuRD/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/kGoAAOSwh2liDuRD/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/pcIAAOSwI5piDuRF/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/pcIAAOSwI5piDuRF/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/WlUAAOSwUBhiDuRG/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTIwMFgxNjAw/z/WlUAAOSwUBhiDuRG/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/asrock-z590-pro4/1602369295 target="_blank" rel="noopener noreferrer">ASRock Z590 PRO4</a><br>Selling an "ASRock Z590 PRO4 LGA 1200 Intel Z590 SATA 6Gb/s ATX" Intel Motherboard brand new and ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL4T" target="_blank" rel="noopener noreferrer">Mississauga, L4T</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div79">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/lmkAAOSw~y9iC3bs/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/lmkAAOSw~y9iC3bs/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/dUkAAOSwTYxiC3bv/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/dUkAAOSwTYxiC3bv/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/asrock-b550-phantom-gaming-4-motherboard/1605566474 target="_blank" rel="noopener noreferrer">ASRock B550 Phantom Gaming 4 Motherboard</a><br>New in Box/sealed</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5A" target="_blank" rel="noopener noreferrer">Toronto, M5A</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div80">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/BFMAAOSw8TRiHUMb/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/BFMAAOSw8TRiHUMb/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>170</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/auros-elite-b550-am4-ryzen-motherboard/1607190665 target="_blank" rel="noopener noreferrer">Auros elite b550 am4 ryzen motherboard </a><br>Brand new never opened. 30 dollars under msrp</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5M" target="_blank" rel="noopener noreferrer">Mississauga, L5M</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div81">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/bqsAAOSwwA5iJlwp/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/bqsAAOSwwA5iJlwp/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/1eYAAOSwZrBiJlwx/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/1eYAAOSwZrBiJlwx/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>180</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/gigabyte-x570-aorus-elite-wifi-motherboard-180/1608006362 target="_blank" rel="noopener noreferrer">Gigabyte X570 Aorus Elite Wifi Motherboard $180</a><br>Recently got back from Gigabyte RMA Still covered under warranty Will provide receipt from Canada ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM5T2B6" target="_blank" rel="noopener noreferrer">Toronto, M5T2B6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div82">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/sAsAAOSwFqRh~KMF/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/sAsAAOSwFqRh~KMF/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/GIoAAOSwnRFh~KMI/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/GIoAAOSwnRFh~KMI/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>180</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/motherboard-z490-msi-mpg-gaming-plus/1604321121 target="_blank" rel="noopener noreferrer">Motherboard Z490 MSI MPG GAMING PLUS</a><br>New. Only tested once or twice. Original MSRP $239.9 +Tax Now asking for $180 Newegg link: Check ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Toronto%2CON%2CM2J" target="_blank" rel="noopener noreferrer">Toronto, M2J</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div83">
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/t-UAAOSwqo9iLjKd/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/t-UAAOSwqo9iLjKd/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/0VgAAOSwtI9iLjKo/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/0VgAAOSwtI9iLjKo/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/x570-aorus-motherboard/1608721873 target="_blank" rel="noopener noreferrer">X570 Aorus Motherboard</a><br>I am going through my older computer equipment and posting everything that I will not be using ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7L4R7" target="_blank" rel="noopener noreferrer">Burlington, L7L4R7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div84">
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tYoAAOSwAyViNkPP/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/tYoAAOSwAyViNkPP/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/DKcAAOSwUjhiNkPT/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/DKcAAOSwUjhiNkPT/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/WJ8AAOSwpB1iNkPW/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/WJ8AAOSwpB1iNkPW/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ujoAAOSwOTliNkPa/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ujoAAOSwOTliNkPa/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1pMAAOSwEEpiNkPf/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1pMAAOSwEEpiNkPf/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/YxYAAOSwo1hiNkPi/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/YxYAAOSwo1hiNkPi/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1j0AAOSwnk9iNkPm/$_57.JPG"><img class="mySlides" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/1j0AAOSwnk9iNkPm/$_57.JPG" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/city-of-toronto/for-sale:-homebuilt-pc/1609493450 target="_blank" rel="noopener noreferrer">For Sale: Homebuilt PC</a><br>ASRock Z87 Extreme 4 motherboard 8GB DDR4 memory 3.2 GHz Intel i5-4430 CPU 160 GB hard disk running ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9W%2C4B3" target="_blank" rel="noopener noreferrer">Etobicoke, M9W4B3</a></td>
+</tr>
+</table></body>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kijiji Results</title>
+<style>
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+</style>
+</head>
+<body>
+<script>
+function sortTable(tableID, n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById(tableID);
+	switching = true;
+	dir = "asc";
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+					var cmpX=isNaN(parseInt(x.innerHTML))?x.innerText.toLowerCase():parseInt(x.innerHTML);
+					var cmpY=isNaN(parseInt(y.innerHTML))?y.innerText.toLowerCase():parseInt(y.innerHTML);
+	cmpX=(cmpX=='-')?0:cmpX;
+	cmpY=(cmpY=='-')?0:cmpY;
+			if (dir == "asc") {
+				if (cmpX > cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (cmpX < cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount ++;      
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+</script>
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table id="myTable">
+  <tr>
+   	<th>Del</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
+  </tr>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div0">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/046e0cbd-f53c-4068-a002-b562fc188dd3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/046e0cbd-f53c-4068-a002-b562fc188dd3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e0b5d360-c15f-4ba0-ae8a-aafd67c8bee9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e0b5d360-c15f-4ba0-ae8a-aafd67c8bee9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/hamilton/antec-computer-power-supply-450-watts/1627180382 target="_blank" rel="noopener noreferrer">Antec Computer Power Supply (450 Watts)</a><br>New Used Antec Power Supply 450 Watts Numerous Connectors for all Motherboard types and drives ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Burlington%2CON%2CL7R%2C2M3" target="_blank" rel="noopener noreferrer">Burlington, L7R2M3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div1">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4c/4c8d09ff-e3ec-49e9-a045-9714d5a58402?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4c/4c8d09ff-e3ec-49e9-a045-9714d5a58402?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8f/8f75ac71-9a36-4550-9fe8-98d9cd033a5f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8f/8f75ac71-9a36-4550-9fe8-98d9cd033a5f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/db/dbfe500d-8d81-42e1-b2ee-c56c91e0948d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/db/dbfe500d-8d81-42e1-b2ee-c56c91e0948d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/corsair-450-watt-cx450m-semi-modular-psu/1623316545 target="_blank" rel="noopener noreferrer">Corsair 450 Watt CX450M Semi Modular PSU</a><br>Opened up, dusted and cleaned the transformer inside. Price is firm.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5V%2C3A6" target="_blank" rel="noopener noreferrer">Mississauga, L5V3A6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div2">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/2715a8d4-922e-4d75-a092-7e6619654087?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/2715a8d4-922e-4d75-a092-7e6619654087?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/43/43ade83d-7269-492e-8cb6-b2fb346dc0a2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/43/43ade83d-7269-492e-8cb6-b2fb346dc0a2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/antec-smartpower-2-0-sp-450-450w-psu/1595803375 target="_blank" rel="noopener noreferrer">Antec SmartPower 2.0 SP-450 450W PSU</a><br>450-watt ATX12V v2.0 compliant, with dual+12V rails 4 SATA Connectors support Serial ATA drives ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9B%2C3M2" target="_blank" rel="noopener noreferrer">Etobicoke, M9B3M2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div3">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b19a345-f57e-447b-8e1e-bc1313f52720?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b19a345-f57e-447b-8e1e-bc1313f52720?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cd/cdf47617-d6dc-424b-b379-7f9150f0ea1b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cd/cdf47617-d6dc-424b-b379-7f9150f0ea1b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/82/824cfc66-f112-46cd-b257-86ba8468fa1e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/82/824cfc66-f112-46cd-b257-86ba8468fa1e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bc/bc5c464f-e2fc-42de-a443-9a039f7121c4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bc/bc5c464f-e2fc-42de-a443-9a039f7121c4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/deep-cool-da500-power-supply-psu-500w/1625928959 target="_blank" rel="noopener noreferrer">Deep Cool DA500 Power Supply PSU (500W)</a><br>I'm selling an 80PLUS Bronze certified 500W power supply PSU with a 120mm Silent Fan. Specs and ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6M%2C0K1" target="_blank" rel="noopener noreferrer">Oakville, L6M0K1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div4">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/25/25117870-bbb2-44ff-ab88-270e1af6180a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/25/25117870-bbb2-44ff-ab88-270e1af6180a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a6/a651681a-7785-4a16-b8cb-c81247c19179?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a6/a651681a-7785-4a16-b8cb-c81247c19179?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/650-w-psu-gold/1628533161 target="_blank" rel="noopener noreferrer">650 W PSU - Gold</a><br>Works perfectly 80 plus Gold. Pickup in Brampton.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6Y0M5" target="_blank" rel="noopener noreferrer">Brampton, L6Y0M5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div5">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/52/52a563f1-d48c-47ea-a21e-7b147f84cb83?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/52/52a563f1-d48c-47ea-a21e-7b147f84cb83?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>45</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/corsair-550-watt-powersupply/1626964828 target="_blank" rel="noopener noreferrer">Corsair 550 Watt Powersupply</a><br>Great condition, no issues. Corsair CX550M Semi-modular ATX Power supply. Can drop off same day ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6M3K5" target="_blank" rel="noopener noreferrer">Oakville, L6M3K5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div6">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7e2360e3-3734-47bc-ba36-f0ce9ab0fbe2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7e2360e3-3734-47bc-ba36-f0ce9ab0fbe2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5fc47867-d5ef-439e-833d-2ca90d5ed054?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5fc47867-d5ef-439e-833d-2ca90d5ed054?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/corsair-cp-9020122-na-cx-series-650-watt-80-plus-bronze-used/1629680777 target="_blank" rel="noopener noreferrer">Corsair CP-9020122-NA CX Series 650 Watt 80 Plus Bronze - Used</a><br>Great power supply for a mid range computer. I upgraded for a new graphics card so I no longer need ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Hamilton%2CON%2CL8K%2C5P6" target="_blank" rel="noopener noreferrer">Hamilton, L8K5P6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div7">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fc0674d3-d139-465f-8711-98b8fef3bc86?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fc0674d3-d139-465f-8711-98b8fef3bc86?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/new-power-supply-antec-neoeco-zen-gold-rated-700w/1624392539 target="_blank" rel="noopener noreferrer">New Power Supply - ANTEC NeoECO Zen GOLD rated 700W</a><br>Just like the title says. Brand new in the box, unopened with plastic wrap intact. This is a gold ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8V%2C0B2" target="_blank" rel="noopener noreferrer">Etobicoke, M8V0B2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div8">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/12/12d68b02-367a-4225-a091-1f980d25464e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/12/12d68b02-367a-4225-a091-1f980d25464e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/28/28b6c577-d5d5-4c31-aa59-8724594e12b0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/28/28b6c577-d5d5-4c31-aa59-8724594e12b0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/50/5051b1ad-3544-49de-87ea-20074675e4d3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/50/5051b1ad-3544-49de-87ea-20074675e4d3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/xfx-core-edition-pro650w-80-plus-bronze/1595801345 target="_blank" rel="noopener noreferrer">XFX Core Edition PRO650W 80 Plus Bronze</a><br>Coming with 4x PCI-E connectors, the XFX Core Edition PRO650W power supply allows you to build a ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9B%2C3M2" target="_blank" rel="noopener noreferrer">Etobicoke, M9B3M2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div9">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f6/f642764a-d0be-4c82-b25c-826cf44bbdc0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f6/f642764a-d0be-4c82-b25c-826cf44bbdc0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/be/bed7933d-767a-487b-8246-a53aeaa2e196?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/be/bed7933d-767a-487b-8246-a53aeaa2e196?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86f79f59-34f4-47b7-98bb-5b9dc424f19a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86f79f59-34f4-47b7-98bb-5b9dc424f19a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/bequiet-straight-power-10-gold-700w-power-supply-psu/1627122034 target="_blank" rel="noopener noreferrer">BeQuiet! Straight Power 10 Gold - 700W - Power Supply - PSU</a><br>I’m selling my perfect condition Be Quiet Straight Power 700 W PSU. - Used for 3 years - I have ALL ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6Y3N9" target="_blank" rel="noopener noreferrer">Brampton, L6Y3N9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div10">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/27460cd5-d4c3-48e8-81f9-aaa21691014a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/27460cd5-d4c3-48e8-81f9-aaa21691014a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e1/e1f047f2-6a7c-4e94-9b8c-eb70a40be12f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e1/e1f047f2-6a7c-4e94-9b8c-eb70a40be12f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/53f00dda-7523-4f3c-b8ea-47b55752cd55?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/53f00dda-7523-4f3c-b8ea-47b55752cd55?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/97/97b9dfc5-2ec6-4c6e-9291-8c18f12c32a9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/97/97b9dfc5-2ec6-4c6e-9291-8c18f12c32a9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5f2d2f88-c4de-4a21-ae57-45a467d5b467?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5f2d2f88-c4de-4a21-ae57-45a467d5b467?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e3/e3370510-54a8-4651-bfc6-ab7729055d5f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e3/e3370510-54a8-4651-bfc6-ab7729055d5f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/gamemax-750w-cpu-power-supply/1580629874 target="_blank" rel="noopener noreferrer">Gamemax 750w CPU Power Supply</a><br>Selling a brand new Gamemax 750w fully modular CPU Power Supply. Has RGB lighting with various ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9V%2C2G8%2CCanada" target="_blank" rel="noopener noreferrer">Etobicoke, M9V2G8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div11">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4d2423e8-6dc7-4483-8f95-2b2ca853c758?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4d2423e8-6dc7-4483-8f95-2b2ca853c758?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/cec74d22-dfd4-4097-87bb-9aa5c2a31e9e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/cec74d22-dfd4-4097-87bb-9aa5c2a31e9e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/059b2209-7673-4fb8-81d4-e405cee2e6fa?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/059b2209-7673-4fb8-81d4-e405cee2e6fa?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/evga-750w-atx-power-supply/1625002731 target="_blank" rel="noopener noreferrer">EVGA 750w ATX  Power  Supply</a><br>Bought about a year ago off of newegg for $80 before taxes and shipping. Was used for a year in a ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6V4T3" target="_blank" rel="noopener noreferrer">Brampton, L6V4T3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div12">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/7524527c-07ad-4a28-b4dd-aaf66e2b56ab?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/7524527c-07ad-4a28-b4dd-aaf66e2b56ab?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8ce845a7-2365-4aad-b4ee-70bbe13e3870?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8ce845a7-2365-4aad-b4ee-70bbe13e3870?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3b/3bb40d5b-70a8-42fe-b543-bba6e42cd78f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3b/3bb40d5b-70a8-42fe-b543-bba6e42cd78f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b2f0a7da-69fc-4a8d-b527-56e3b6514dc4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b2f0a7da-69fc-4a8d-b527-56e3b6514dc4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/919ef590-118e-4630-95ef-64db01b30977?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/919ef590-118e-4630-95ef-64db01b30977?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/corsair-power-supply-tx750w-750-watts/1620459255 target="_blank" rel="noopener noreferrer">Corsair Power Supply TX750W. 750 Watts.</a><br>If you see this ad, this item is available. Located in the QEW & 427 area. First come, first serve. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8W" target="_blank" rel="noopener noreferrer">Etobicoke, M8W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div13">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/767709cd-0b58-4223-bca9-963bf820009d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/767709cd-0b58-4223-bca9-963bf820009d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d5/d5cfec91-b4b0-4a3a-89be-00ce89f2078b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d5/d5cfec91-b4b0-4a3a-89be-00ce89f2078b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>65</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/rosewill-750w-power-supply-capstone-750m-65/1623634084 target="_blank" rel="noopener noreferrer">Rosewill 750W Power Supply capstone 750m 65$</a><br>Power Supply - Rosewill - Model: Capstone 750M 65$</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=72%2CWashington%2CAvenue%2COakville%2COntario" target="_blank" rel="noopener noreferrer">Oakville</a></td>
+</tr>
+</table></body>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+</html>

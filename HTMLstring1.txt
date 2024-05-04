@@ -88,9 +88,7 @@ img {
     <th onclick="sortTable('myTable', 3)">Description</th>
 	<th onclick="sortTable('myTable', 4)">City</th>
   </tr>
-
-`
-export const end = `<script>
+<script>
 var sliderObjects = [];
 createSliderObjects();
 

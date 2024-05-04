@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kijiji Results</title>
+<style>
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+</style>
+</head>
+<body>
+<script>
+function sortTable(tableID, n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById(tableID);
+	switching = true;
+	dir = "asc";
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+					var cmpX=isNaN(parseInt(x.innerHTML))?x.innerText.toLowerCase():parseInt(x.innerHTML);
+					var cmpY=isNaN(parseInt(y.innerHTML))?y.innerText.toLowerCase():parseInt(y.innerHTML);
+	cmpX=(cmpX=='-')?0:cmpX;
+	cmpY=(cmpY=='-')?0:cmpY;
+			if (dir == "asc") {
+				if (cmpX > cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (cmpX < cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount ++;      
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+</script>
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table id="myTable">
+  <tr>
+   	<th>Del</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
+  </tr>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div0">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c5ff0796-6597-4795-9cfd-e7f79f650260?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c5ff0796-6597-4795-9cfd-e7f79f650260?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/ca50ea6e-7ade-4e8c-866b-4f7ba24b76b6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/ca50ea6e-7ade-4e8c-866b-4f7ba24b76b6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>5</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/brand-new-thermaltake-dust-mesh-panel-magentic/1628766970 target="_blank" rel="noopener noreferrer">BRAND NEW Thermaltake Dust Mesh Panel Magentic </a><br>I ordered this last month for my thermaltake snow 71 PC case but it was the wrong size eventhough ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Meadowvale%2CTown%2CCentre%2CCir%2CMississauga%2CON%2CL5N%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L5N</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div1">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/55/5544c1eb-b172-41e7-b672-85a857734480?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/55/5544c1eb-b172-41e7-b672-85a857734480?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>5</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/veddha-case-fans-for-sale/1629413989 target="_blank" rel="noopener noreferrer">Veddha Case Fans for sale</a><br>I sell Veddha Case fans. I got around 50 of them. They have been used for a year. They are now ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9A%2C5G3" target="_blank" rel="noopener noreferrer">Etobicoke, M9A5G3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div2">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7d21e323-391f-4d5e-9677-11657224965f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7d21e323-391f-4d5e-9677-11657224965f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/af/af99a756-d757-4f82-bbfe-448426b892e3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/af/af99a756-d757-4f82-bbfe-448426b892e3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b4/b4444b83-291c-469b-81ee-7dd836a08d76?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b4/b4444b83-291c-469b-81ee-7dd836a08d76?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d3531fad-ea60-4269-a1fe-8953fe895740?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d3531fad-ea60-4269-a1fe-8953fe895740?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0d/0d1ed08c-6c63-4cfb-bce8-83dbf6531432?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0d/0d1ed08c-6c63-4cfb-bce8-83dbf6531432?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d0/d0928bdb-55d0-4254-8332-96ed2bcf7b46?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d0/d0928bdb-55d0-4254-8332-96ed2bcf7b46?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3a/3a89f2da-cb76-4bff-afe2-5ecac3d4c9ac?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3a/3a89f2da-cb76-4bff-afe2-5ecac3d4c9ac?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0f/0fe08d6b-5ebe-4439-9c13-dd2bba23890c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0f/0fe08d6b-5ebe-4439-9c13-dd2bba23890c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0f/0fd92efd-2eed-4221-a9f4-58e60a14504d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0f/0fd92efd-2eed-4221-a9f4-58e60a14504d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7d9ce36e-0f4b-4dd0-9a95-5566fda9373c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7d9ce36e-0f4b-4dd0-9a95-5566fda9373c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/computer-case-s-cooler-fan-ram-memory-graphic-cord-components/1602405051 target="_blank" rel="noopener noreferrer">COMPUTER CASE S,  COOLER FAN,RAM,MEMORY,GRAPHIC CORD, COMPONENTS</a><br>COMPUTER CASE COOLER FAN -COMPONENT 1.Case : Rose will Challenger Black Gaming ATX Mid Tower ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5B%2C2Z6" target="_blank" rel="noopener noreferrer">Mississauga, L5B2Z6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div3">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6d/6dfcb962-0e7c-4d4b-9f3b-c4bfd4c845d8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6d/6dfcb962-0e7c-4d4b-9f3b-c4bfd4c845d8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ea/ea22b5e8-55c4-459d-b55c-0c7d1a1abbb3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ea/ea22b5e8-55c4-459d-b55c-0c7d1a1abbb3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/273877a7-e890-42a8-b036-8552a90fa8c0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/273877a7-e890-42a8-b036-8552a90fa8c0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/37/371e89b7-c157-4e4a-8096-b5f4176c5e31?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/37/371e89b7-c157-4e4a-8096-b5f4176c5e31?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bb/bb508152-e240-4260-89e5-33a96582b2f6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bb/bb508152-e240-4260-89e5-33a96582b2f6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/pc-computer-case-preowned-micro-atx-power-and-reset-switches/1614063948 target="_blank" rel="noopener noreferrer">PC Computer Case Preowned Micro ATX Power and Reset Switches</a><br>Bampton ... PC Computer Case. Power and Reset switches-working USB and Audio front- not working ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=107%2CDarras%2CCourt%2CBrampton%2CON" target="_blank" rel="noopener noreferrer">Brampton</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div4">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/2778b903-2ff7-4550-90ca-efd0dda9ebe2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/2778b903-2ff7-4550-90ca-efd0dda9ebe2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c2/c2710f4e-4b9d-477d-b352-8e1b467680e0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c2/c2710f4e-4b9d-477d-b352-8e1b467680e0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/23/23ae89f1-04bd-464b-9b05-aa2ee6d5c0ae?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/23/23ae89f1-04bd-464b-9b05-aa2ee6d5c0ae?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/533f82a7-4457-416a-8d18-f08cf07f64ea?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/533f82a7-4457-416a-8d18-f08cf07f64ea?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/large-computer-case/1601505841 target="_blank" rel="noopener noreferrer">large computer case</a><br>Thermaltake computer case for sale , six hhd bays three drive bays</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Hamilton%2CON%2CL8P%2C3N4" target="_blank" rel="noopener noreferrer">Hamilton, L8P3N4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div5">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/1171cb94-0e19-405c-b0fd-411cd7f35ddf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/1171cb94-0e19-405c-b0fd-411cd7f35ddf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/61/619d41ec-a478-4799-addc-1aeefb2f5bea?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/61/619d41ec-a478-4799-addc-1aeefb2f5bea?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0f/0fcd3b85-1e20-4c44-97d1-4cf6afe7154d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0f/0fcd3b85-1e20-4c44-97d1-4cf6afe7154d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/22/22ede70e-23d2-43ba-be19-e0fbaf25f633?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/22/22ede70e-23d2-43ba-be19-e0fbaf25f633?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cb/cb525697-69d9-4cbd-8eaf-01cd4fa8f1f3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cb/cb525697-69d9-4cbd-8eaf-01cd4fa8f1f3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/mississauga-peel-region/luggage-briefcase-on-wheels/1599042107 target="_blank" rel="noopener noreferrer">Luggage - Briefcase on wheels</a><br>Used: business case on wheels (two wheels) black polyster Retractable telescopic trolley handle ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6W" target="_blank" rel="noopener noreferrer">Brampton, L6W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div6">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4a/4a4e22bc-a51d-4d46-994b-6386f5395d55?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4a/4a4e22bc-a51d-4d46-994b-6386f5395d55?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d961721e-bec0-4eeb-8ae3-aac834df0350?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d961721e-bec0-4eeb-8ae3-aac834df0350?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/29/29cdc7b6-1d01-4f4f-abf6-80d6407c941c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/29/29cdc7b6-1d01-4f4f-abf6-80d6407c941c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/14/14b11708-c442-481b-a5c5-16322f6fc5da?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/14/14b11708-c442-481b-a5c5-16322f6fc5da?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/8666e7c3-af13-4109-b6e1-4c16e396b4b0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/8666e7c3-af13-4109-b6e1-4c16e396b4b0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b688dfdc-8932-4f22-a60c-a19fcdf9ec0e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b688dfdc-8932-4f22-a60c-a19fcdf9ec0e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05e6280b-ed1c-48e0-84fc-784d77af8c45?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05e6280b-ed1c-48e0-84fc-784d77af8c45?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fc069ce0-cf95-4cda-8701-09d161678945?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fc069ce0-cf95-4cda-8701-09d161678945?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/27cf7871-1e30-4b3a-baa4-375bdf31933b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/27cf7871-1e30-4b3a-baa4-375bdf31933b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/43/43591ea3-fa2a-4fe5-b7f6-d80d30a7d26e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/43/43591ea3-fa2a-4fe5-b7f6-d80d30a7d26e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/rosewill-micro-atx-fbm-05-computer-case/1625094246 target="_blank" rel="noopener noreferrer">ROSEWILL Micro ATX FBM-05 Computer Case</a><br>Used this case for about 6 months then ended up upgrading as I was gifted a new case. Case is in ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9W" target="_blank" rel="noopener noreferrer">Etobicoke, M9W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div7">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7f/7fe432fd-0017-44a4-883d-fc260d80ad0f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7f/7fe432fd-0017-44a4-883d-fc260d80ad0f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5f5e0123-79b4-44e9-9237-6fe5b92426df?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5f5e0123-79b4-44e9-9237-6fe5b92426df?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/32/32988373-27a7-4684-bd89-7d60546835c0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/32/32988373-27a7-4684-bd89-7d60546835c0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a5/a5b7e36c-4d0d-479d-8127-ffc3057cfd79?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a5/a5b7e36c-4d0d-479d-8127-ffc3057cfd79?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ef/efbd86bf-c969-461f-99ce-e18fc7e38965?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ef/efbd86bf-c969-461f-99ce-e18fc7e38965?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/609f36df-6d5d-4c4f-a559-245a70762f73?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/609f36df-6d5d-4c4f-a559-245a70762f73?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/43/432c02e1-8591-435f-9a1e-4b1bf3f438ef?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/43/432c02e1-8591-435f-9a1e-4b1bf3f438ef?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/matx-case-all-aluminum-copper-colour-20-firm-available/1556195609 target="_blank" rel="noopener noreferrer">mATX case All Aluminum.  Copper Colour. $20 Firm. Available.</a><br>If you see this ad, this item is available. Located in the QEW & 427 area. mATX Computer case All ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8W" target="_blank" rel="noopener noreferrer">Etobicoke, M8W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div8">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/454033d6-029b-45b9-a0eb-c99b768f2c1f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/454033d6-029b-45b9-a0eb-c99b768f2c1f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/29/29918cdd-6111-4030-a622-5448de1f7dba?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/29/29918cdd-6111-4030-a622-5448de1f7dba?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/300w-power-supply/1622130530 target="_blank" rel="noopener noreferrer">300W Power supply</a><br>Its from an old AMD Athlon 64 x2 pc, the Pc stopped working so im selling its parts. I also have 2x ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6P" target="_blank" rel="noopener noreferrer">Brampton, L6P</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div9">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ef/ef44b69d-d10a-419f-bc01-d4303a8d7807?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ef/ef44b69d-d10a-419f-bc01-d4303a8d7807?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ba/ba343cbf-c28d-4349-b54d-9f7cbcb9c12e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ba/ba343cbf-c28d-4349-b54d-9f7cbcb9c12e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/91f8c012-c2d8-48cd-8eb5-373eb7672a22?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/91f8c012-c2d8-48cd-8eb5-373eb7672a22?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d6bf624-ece3-49d9-b8ef-d829655eb81c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d6bf624-ece3-49d9-b8ef-d829655eb81c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/77/77567945-cb0b-426c-bb80-a03d37e7ba41?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/77/77567945-cb0b-426c-bb80-a03d37e7ba41?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4dc716c7-0a6d-49ae-a2d3-660c6958a3e0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4dc716c7-0a6d-49ae-a2d3-660c6958a3e0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/69/6940c75a-fe2a-41b9-b98f-295fe1092814?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/69/6940c75a-fe2a-41b9-b98f-295fe1092814?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/94/94807ffd-20bd-404e-82c0-658f1cd19074?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/94/94807ffd-20bd-404e-82c0-658f1cd19074?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/parts-out-2x-legacy-pc-win-11-pro-installed-tested-10-20/1621073711 target="_blank" rel="noopener noreferrer">Parts out 2x Legacy PC Win 11 Pro installed/tested $10-$20</a><br>PC#1 Mobo Asus P5KPL-AM + CPU Intel C2D E7500 $20 RAM 4GB DDR2 $10 GPU Nvidia Quadro 600 1GB $10 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5V%2C1H5" target="_blank" rel="noopener noreferrer">Mississauga, L5V1H5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div10">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/02/0257209a-1a1c-4a90-a61e-77838e19c9bf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/02/0257209a-1a1c-4a90-a61e-77838e19c9bf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f1/f149dad8-93d8-420d-89c3-aa345f3dabd1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f1/f149dad8-93d8-420d-89c3-aa345f3dabd1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/lancool-pc-case/1622475104 target="_blank" rel="noopener noreferrer">Lancool PC case</a><br>Price negotiable if bought together with other things. Will deliver.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6M%2C4W5" target="_blank" rel="noopener noreferrer">Oakville, L6M4W5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div11">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d35f823a-e27c-4788-9be3-a9ae24472b40?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d35f823a-e27c-4788-9be3-a9ae24472b40?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e3/e395f205-773d-48dd-879a-07a3d1995518?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e3/e395f205-773d-48dd-879a-07a3d1995518?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/oakville-halton-region/thermaltake-case/1622475910 target="_blank" rel="noopener noreferrer">Thermaltake Case</a><br>Element T VK9000. Very big, so I don't mind delivering for an extra $5.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Oakville%2CON%2CL6M%2C4W5" target="_blank" rel="noopener noreferrer">Oakville, L6M4W5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div12">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe17f861-4cf6-4aca-b3d6-ada5743f45a0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe17f861-4cf6-4aca-b3d6-ada5743f45a0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/76f34646-03e2-4131-aa6e-396d3e15fce0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/76f34646-03e2-4131-aa6e-396d3e15fce0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/22/22a51022-2608-4f54-859f-eef49214bb61?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/22/22a51022-2608-4f54-859f-eef49214bb61?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>29</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/cooler-master-hyper-212-led/1623638553 target="_blank" rel="noopener noreferrer">Cooler Master Hyper 212 LED </a><br>Looking to sell a brand-new sealed CPU cooler. Bought extra just in case but have no use for it. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5W1W7" target="_blank" rel="noopener noreferrer">Mississauga, L5W1W7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div13">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b85920e-73d0-4f4b-97a8-b8662f319508?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b85920e-73d0-4f4b-97a8-b8662f319508?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ec/ec2a07fc-3dcf-4617-bf50-a569d9fe4b95?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ec/ec2a07fc-3dcf-4617-bf50-a569d9fe4b95?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85cc8dc7-47cd-4c43-8f68-676139755b38?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85cc8dc7-47cd-4c43-8f68-676139755b38?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/computer-cleaner/1628693107 target="_blank" rel="noopener noreferrer">Computer cleaner </a><br>Removing all hardwares and cleaning every smallest part of components.(PSU, Case, Case fans, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6Y" target="_blank" rel="noopener noreferrer">Brampton, L6Y</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div14">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/83/83cbc975-9c71-4758-8069-aec59d4397ec?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/83/83cbc975-9c71-4758-8069-aec59d4397ec?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/dd/dd3ec1db-1078-43ba-aca7-6cbf2e2391db?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/dd/dd3ec1db-1078-43ba-aca7-6cbf2e2391db?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31affdd8-5906-4f77-99e8-06f5564dccd8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31affdd8-5906-4f77-99e8-06f5564dccd8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d57944e-7909-43c2-9964-bba99b0fa41f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d57944e-7909-43c2-9964-bba99b0fa41f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/07/0775876f-5eb5-4a7f-88d3-e9fe5b4a9cf0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/07/0775876f-5eb5-4a7f-88d3-e9fe5b4a9cf0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2f/2f0b40a2-a487-4ad7-864e-73a73bfb5cfc?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2f/2f0b40a2-a487-4ad7-864e-73a73bfb5cfc?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/15/15708bbd-2b3c-452f-9c19-bceedd7ba86f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/15/15708bbd-2b3c-452f-9c19-bceedd7ba86f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/be/be71fd47-1442-42f9-b697-83863313b483?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/be/be71fd47-1442-42f9-b697-83863313b483?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7cc5f4ed-3660-4ada-bf3b-8b55778c080f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7cc5f4ed-3660-4ada-bf3b-8b55778c080f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e03a7add-709e-48dc-8123-b68fbaf7b9e1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e03a7add-709e-48dc-8123-b68fbaf7b9e1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/antec-piano-black-atx-computer-case-available-30-firm/1562059497 target="_blank" rel="noopener noreferrer">Antec Piano Black ATX computer case. Available. $30 Firm.</a><br>If you see this ad, this item is available. Located in the QEW & 427 area. Antec Black Obsidian ATX ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM8W" target="_blank" rel="noopener noreferrer">Etobicoke, M8W</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div15">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/766e8e61-7778-4646-bad8-9f1cb001aa2a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/766e8e61-7778-4646-bad8-9f1cb001aa2a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/77/77b976ca-dc0e-4a48-867c-fc90a56b7fea?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/77/77b976ca-dc0e-4a48-867c-fc90a56b7fea?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b0400bad-236b-4b12-9e5e-4dc087a41de6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b0400bad-236b-4b12-9e5e-4dc087a41de6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c5c1bbbd-7aa1-4e9b-a75a-87a74a1b3917?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c5c1bbbd-7aa1-4e9b-a75a-87a74a1b3917?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7c9c37a6-35f4-41d4-8381-b66cab951bcb?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7c9c37a6-35f4-41d4-8381-b66cab951bcb?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2a4bb87-2033-431c-bb3f-29a91481277e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2a4bb87-2033-431c-bb3f-29a91481277e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff5a7c7c-331f-4e22-a512-ba9cf0e46c9a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff5a7c7c-331f-4e22-a512-ba9cf0e46c9a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d2/d24676a5-3a95-4036-86e5-af07a8d3ebe1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d2/d24676a5-3a95-4036-86e5-af07a8d3ebe1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/micro-atx-pc-case/1629142599 target="_blank" rel="noopener noreferrer">micro atx pc case</a><br>deepcool matrex 30 micro atx case. Purchased at Canada computers in summer 2020. Still in amazing ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=70%2CFerncroft%2CPl%2CBrampton%2CL7A%2C2Z6" target="_blank" rel="noopener noreferrer">Brampton</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div16">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/41ab9ba3-993f-4152-847b-0a18c7f54669?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/41ab9ba3-993f-4152-847b-0a18c7f54669?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/antec-computer-case/1628036908 target="_blank" rel="noopener noreferrer">ANTEC computer case</a><br>Used case, door is vented not windowed.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Michael%2CPower%2CPl%2C#1503%2CEtobicoke%2CON%2CM9A%2C5G4%2CCanada" target="_blank" rel="noopener noreferrer"> Etobicoke, M9A5G4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div17">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-statics/images/c7/c79f2075-c5e7-41e0-be09-f50450dcd888?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-statics/images/c7/c79f2075-c5e7-41e0-be09-f50450dcd888?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-statics/images/43/4391b5f0-494d-44c6-a7c9-158431342c8e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-statics/images/43/4391b5f0-494d-44c6-a7c9-158431342c8e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/city-of-toronto/price-updated-coolermaster-masterbox-q300l/1618850711 target="_blank" rel="noopener noreferrer">Price updated!!! Coolermaster Masterbox Q300L</a><br>Selling my Coolermaster Masterbox Q300L mAtx case. Scratches on side panel, but other than that, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9A%2C4M5" target="_blank" rel="noopener noreferrer">Etobicoke, M9A4M5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div18">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fa/fa9edc6e-2962-4660-9af3-3aa43fcf7078?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fa/fa9edc6e-2962-4660-9af3-3aa43fcf7078?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/evga-500-br-80-bronze-power-supply/1629409846 target="_blank" rel="noopener noreferrer">EVGA 500 br 80+ bronze power supply</a><br>Downsizing case to mini itx so no need for this power supply, used but like new. Regularly cleaned ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5V1R7" target="_blank" rel="noopener noreferrer">Mississauga, L5V1R7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div19">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/62/62ac984d-a3c1-44b0-9c5e-588719a25fcf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/62/62ac984d-a3c1-44b0-9c5e-588719a25fcf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86e8e33b-c242-432f-af13-3ad162774653?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86e8e33b-c242-432f-af13-3ad162774653?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b22ee9a6-82a0-4129-9277-1c86a969e888?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b22ee9a6-82a0-4129-9277-1c86a969e888?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/mississauga-peel-region/ultra-m998-steel-computer-tower/1628567864 target="_blank" rel="noopener noreferrer">Ultra M998 Steel computer tower</a><br>Ultra M998 computer tower/case. Made mostly of steel construction so it's heavy. Very good ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5L%2C3Y3" target="_blank" rel="noopener noreferrer">Mississauga, L5L3Y3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div20">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/20/201427d9-aef0-4611-9873-49bd7a0c916f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/20/201427d9-aef0-4611-9873-49bd7a0c916f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/40-or-best-offer-for-one-last-desktop-computer-case/1598551302 target="_blank" rel="noopener noreferrer">$40 or best offer for one last desktop computer case</a><br>$40 or best offer for one last desktop computer case, do not have side cover and has a lot of ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9W%2C2A3" target="_blank" rel="noopener noreferrer">Etobicoke, M9W2A3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div21">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d25ffba-0c57-4e23-9cc0-755ee3d0759d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d25ffba-0c57-4e23-9cc0-755ee3d0759d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/cougar-qbx-itx-case/1627796251 target="_blank" rel="noopener noreferrer">Cougar QBX ITX Case</a><br>Good condition Cougar QBX ITX case.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Hamilton%2CON%2CL9G0E1" target="_blank" rel="noopener noreferrer">Hamilton, L9G0E1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div22">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/46/46c9bca1-dfe2-4f87-9ad5-a06fc57e5d55?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/46/46c9bca1-dfe2-4f87-9ad5-a06fc57e5d55?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1f/1feba65f-c7a3-4e10-a78d-0ea779274dfb?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1f/1feba65f-c7a3-4e10-a78d-0ea779274dfb?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/50/50a79bef-f6a8-4cb2-b791-95a17a27dfed?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/50/50a79bef-f6a8-4cb2-b791-95a17a27dfed?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/71/7170efba-397f-4944-91cc-1fb85e2005d4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/71/7170efba-397f-4944-91cc-1fb85e2005d4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/small-black-antec-computer-case-with-dvd-drive-front-sd-usb/1620028087 target="_blank" rel="noopener noreferrer">Small black antec computer case  with dvd drive, front sd & usb</a><br>Nice smaller case for computer no board or power supply has a dvd pdrive and front sd expansion ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL7A%2C3P9" target="_blank" rel="noopener noreferrer">Brampton, L7A3P9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div23">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/29/295f5d07-e0f7-407b-979d-f42dd4d8af53?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/29/295f5d07-e0f7-407b-979d-f42dd4d8af53?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/56/56bc0258-4d3c-47e6-9165-2890e4f35bbf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/56/56bc0258-4d3c-47e6-9165-2890e4f35bbf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b520b1c-d64b-45b8-8a24-7c9fd2e542c6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b520b1c-d64b-45b8-8a24-7c9fd2e542c6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/12/12da4119-8c69-467a-9213-9f3ddead583c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/12/12da4119-8c69-467a-9213-9f3ddead583c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/34/34911459-dd58-457e-9957-7f4b606f4f9d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/34/34911459-dd58-457e-9957-7f4b606f4f9d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/fractal-design-define-nano-s-pc-case/1616855698 target="_blank" rel="noopener noreferrer">Fractal Design Define Nano S PC case</a><br>see https://www.fractal-design.com/products/cases/define/define-nano-s/black/</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Eglinton%2CAve%2CW%2CMississauga%2COntario" target="_blank" rel="noopener noreferrer">Mississauga</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div24">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a0/a0f267b4-2cde-49ce-9c19-fc2115c7b893?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a0/a0f267b4-2cde-49ce-9c19-fc2115c7b893?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3e230fa6-f24f-4cab-a244-158ed67da1b5?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3e230fa6-f24f-4cab-a244-158ed67da1b5?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other/mississauga-peel-region/crypto-mining-rig-case-50/1625915113 target="_blank" rel="noopener noreferrer">Crypto mining rig case  $50</a><br>Mining rig purchased through Walmart. I paid 99.88 plus tax or 112.88. Get it for half off.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5B" target="_blank" rel="noopener noreferrer">Mississauga, L5B</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div25">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7ea0322f-038f-4bd3-96c2-9e87156ca950?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7ea0322f-038f-4bd3-96c2-9e87156ca950?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86f27ba5-fe5c-4fdf-bf11-a0012bd2e241?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86f27ba5-fe5c-4fdf-bf11-a0012bd2e241?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/pc-case-thermaltake-core-v21-and-500w-power-supply/1621906243 target="_blank" rel="noopener noreferrer">PC case Thermaltake Core V21 and 500w Power supply</a><br>Thermaltake Core V21 with 200mm RGB fan 500w Bronze Power Supply</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Hamilton%2CON%2CL9C%2C7P5" target="_blank" rel="noopener noreferrer">Hamilton, L9C7P5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div26">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/88/88823326-d6d3-4ec7-af64-f671025c4a2b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/88/88823326-d6d3-4ec7-af64-f671025c4a2b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ed/edae7322-915c-4a26-9b9b-0ab621439060?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ed/edae7322-915c-4a26-9b9b-0ab621439060?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/39/3962ca49-02f6-4c79-af65-4f0f6aac1a32?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/39/3962ca49-02f6-4c79-af65-4f0f6aac1a32?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/02/028a79ab-f265-4428-8c13-529311b28e6e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/02/028a79ab-f265-4428-8c13-529311b28e6e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/94/94e64381-8157-4b41-a0cb-ce76a0a30c2f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/94/94e64381-8157-4b41-a0cb-ce76a0a30c2f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4b/4ba62948-7b91-4480-8c59-579103123110?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4b/4ba62948-7b91-4480-8c59-579103123110?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b1/b1cc0eae-9df3-4fb8-a95b-c38036403f8d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b1/b1cc0eae-9df3-4fb8-a95b-c38036403f8d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/96001bd1-f8b8-47d0-ab3c-899e568cba40?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/96001bd1-f8b8-47d0-ab3c-899e568cba40?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/mississauga-peel-region/stationary-school-and-office-supplies-take-all-for-50/1603815512 target="_blank" rel="noopener noreferrer">Stationary School and Office Supplies (Take all for $50)</a><br>Take all items in photos for $50. Includes: 3 Pencil Cases - Finding Dory, Bubble Guppies and ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5R%2C3H3" target="_blank" rel="noopener noreferrer">Mississauga, L5R3H3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div27">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1e/1e146dbf-167f-4d33-b883-1d585c07cd49?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1e/1e146dbf-167f-4d33-b883-1d585c07cd49?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/de/de388ec5-c88b-4df3-8471-60064dd53513?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/de/de388ec5-c88b-4df3-8471-60064dd53513?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/11a4d711-8c1b-418f-959e-d84f4a7026fd?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/11a4d711-8c1b-418f-959e-d84f4a7026fd?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/city-of-toronto/computer-case/1626742661 target="_blank" rel="noopener noreferrer">Computer case</a><br>Computer case Antec Aluminum Advanced Super Tower Case (Black & Silver) Antec-exclusive three-layer ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Etobicoke%2CON%2CM9B%2C3T9" target="_blank" rel="noopener noreferrer">Etobicoke, M9B3T9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div28">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a9/a957cced-9e00-438a-9c03-db3bdb0b3c16?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a9/a957cced-9e00-438a-9c03-db3bdb0b3c16?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/91c4dd64-cd8e-4eca-928c-ddee0b003c84?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/91c4dd64-cd8e-4eca-928c-ddee0b003c84?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/06/0644ff11-d092-471a-9451-e5f2e4cf32f1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/06/0644ff11-d092-471a-9451-e5f2e4cf32f1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/pc-case-brand-new-in-unopened-box/1628544331 target="_blank" rel="noopener noreferrer">Pc case brand new in unopened box</a><br>Yes, it's available. specs on 3rd pic sealed in box 2 front fans included, no psu tear on box was ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Holburne%2CRd%2CMississauga%2CON%2CL5E%2C2L7%2CCanada%2CL5E2L7%2C" target="_blank" rel="noopener noreferrer"> Mississauga, L5E2L7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div29">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4de69593-f757-4870-ab3b-cf7f81330b50?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4de69593-f757-4870-ab3b-cf7f81330b50?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a9/a961f91f-24d9-4040-b13a-e8d8eec863f0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a9/a961f91f-24d9-4040-b13a-e8d8eec863f0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0b/0be3bba9-4788-4556-baf2-ee9365ea2178?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0b/0be3bba9-4788-4556-baf2-ee9365ea2178?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b9d771d-15c6-46b0-9f80-c326b8bf9435?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b9d771d-15c6-46b0-9f80-c326b8bf9435?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/corsair-600t-mid-tower-pc-case/1624231979 target="_blank" rel="noopener noreferrer">Corsair 600T Mid-Tower PC Case</a><br>Excellent case in its prime. Shoot me an offer. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5N%2C2T7%2CCanada" target="_blank" rel="noopener noreferrer">Mississauga, L5N2T7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div30">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4df933af-da6f-4ac9-b314-7f1908ee7fce?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4df933af-da6f-4ac9-b314-7f1908ee7fce?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/01/010e0729-d1cf-4d4e-8cc9-7a718f86be77?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/01/010e0729-d1cf-4d4e-8cc9-7a718f86be77?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/38/38bd8e81-f9fe-4620-b435-8cc21b3fefb0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/38/38bd8e81-f9fe-4620-b435-8cc21b3fefb0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>55</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/mississauga-peel-region/used-antec-isk600-black-aluminum-plastic-mini-itx-computer-case/1583467899 target="_blank" rel="noopener noreferrer">Used Antec ISK600 Black Aluminum Plastic Mini-ITX Computer Case</a><br>Up for sale is a used very good condition Antec ISK600 Black Aluminum / Plastic Mini-ITX Tower ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL7A%2C0N5" target="_blank" rel="noopener noreferrer">Brampton, L7A0N5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div31">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d7b91b2a-323f-4b82-929c-f815f65cff0e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d7b91b2a-323f-4b82-929c-f815f65cff0e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b966823-bcd5-49c3-8b2f-71fe52abc6ae?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b966823-bcd5-49c3-8b2f-71fe52abc6ae?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/96ea29e1-7a64-4f72-abd1-3cf312ee1688?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/96ea29e1-7a64-4f72-abd1-3cf312ee1688?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b64d50e-e6a3-4ac6-8373-28d02fdf96e3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b64d50e-e6a3-4ac6-8373-28d02fdf96e3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/gaming-system-components/1628775401 target="_blank" rel="noopener noreferrer">Gaming System Components</a><br>Full tower case, Cooler Master HAF (high air flow), near mint, casters, three fans - $60 Power ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Hamilton%2CON%2CL8S%2C2S6" target="_blank" rel="noopener noreferrer">Hamilton, L8S2S6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div32">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c540b1d6-84f2-45b2-8bea-982110c4764f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c540b1d6-84f2-45b2-8bea-982110c4764f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5bcccae0-0c6e-43a3-896f-9c95cc640dfe?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5bcccae0-0c6e-43a3-896f-9c95cc640dfe?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/hamilton/in-win-micro-computer-case/1624604853 target="_blank" rel="noopener noreferrer">In win micro computer case</a><br>Hi selling an inwin microatx computer case please make an offer</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=W%2C3rd%2CSt%2CHamilton%2CON%2CL9C%2C3J8%2CCanada" target="_blank" rel="noopener noreferrer"> Hamilton, L9C3J8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div33">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/76b8a92d-b3a9-4018-8953-a331382d2519?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/76b8a92d-b3a9-4018-8953-a331382d2519?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/87/872c88f2-3cd0-4094-827f-5de50936c496?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/87/872c88f2-3cd0-4094-827f-5de50936c496?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d1a55a21-33cf-47fd-9401-290c1d747684?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d1a55a21-33cf-47fd-9401-290c1d747684?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/nzxt-s340-mid-tower-computer-case-matte-black-red/1629785385 target="_blank" rel="noopener noreferrer">NZXT S340 Mid Tower Computer Case - Matte Black/Red</a><br>Selling mid tower PC case - NZXT S340 Mid Tower Case CA-S340MB-GR Matte Black/Red All internal ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Brampton%2CON%2CL6X%2C0K5" target="_blank" rel="noopener noreferrer">Brampton, L6X0K5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div34">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f1/f1c0ee29-441b-435d-95a2-6c0621accdd6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f1/f1c0ee29-441b-435d-95a2-6c0621accdd6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/604d3513-af69-4ec4-b075-c5013714408c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/604d3513-af69-4ec4-b075-c5013714408c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fa/fae73114-6a9b-40b5-9c72-c3518b8e7d69?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fa/fae73114-6a9b-40b5-9c72-c3518b8e7d69?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31a3d84e-91ed-4ede-9cf2-557d1155f038?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31a3d84e-91ed-4ede-9cf2-557d1155f038?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f1/f164cbc1-34d8-4062-bc93-98b5eb03e310?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f1/f164cbc1-34d8-4062-bc93-98b5eb03e310?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/cool-master-gaming-case/1617124676 target="_blank" rel="noopener noreferrer">Cool master gaming case</a><br>Masterbox MB320L ARGB Better after darkmirror</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Mississauga%2CON%2CL5V%2C2Z9" target="_blank" rel="noopener noreferrer">Mississauga, L5V2Z9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div35">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9c/9c5d9a98-751e-42e8-b514-6b7bb2efee12?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9c/9c5d9a98-751e-42e8-b514-6b7bb2efee12?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/aa/aadfe10f-000b-4051-8807-f6e3d7f151d3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/aa/aadfe10f-000b-4051-8807-f6e3d7f151d3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/mississauga-peel-region/noctua-nh-u12s-cpu-cooler/1628954539 target="_blank" rel="noopener noreferrer">Noctua NH-U12S Cpu cooler</a><br>Selling noctua tower cooler pretty much brand new tried using it in a itx case but turned out to be ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Fieldgate%2CDr%2CMississauga%2CON%2CL4X%2C2J7%2CCanada" target="_blank" rel="noopener noreferrer"> Mississauga, L4X2J7</a></td>
+</tr>
+</table></body>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+</html>

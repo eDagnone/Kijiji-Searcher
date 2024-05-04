@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kijiji Results</title>
+<style>
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+</style>
+</head>
+<body>
+<script>
+function sortTable(tableID, n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById(tableID);
+	switching = true;
+	dir = "asc";
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+					var cmpX=isNaN(parseInt(x.innerHTML))?x.innerText.toLowerCase():parseInt(x.innerHTML);
+					var cmpY=isNaN(parseInt(y.innerHTML))?y.innerText.toLowerCase():parseInt(y.innerHTML);
+	cmpX=(cmpX=='-')?0:cmpX;
+	cmpY=(cmpY=='-')?0:cmpY;
+			if (dir == "asc") {
+				if (cmpX > cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (cmpX < cmpY) {
+					shouldSwitch= true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount ++;      
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+</script>
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table id="myTable">
+  <tr>
+   	<th>Del</th>
+	<th>Image</th>
+    <th onclick="sortTable('myTable', 2)">Price</th>
+    <th onclick="sortTable('myTable', 3)">Description</th>
+	<th onclick="sortTable('myTable', 4)">City</th>
+  </tr>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div0">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05b05f36-72dd-413c-8595-2fcbfed658a1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05b05f36-72dd-413c-8595-2fcbfed658a1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d4/d439155f-2ab8-49e8-83b2-7dc65edf6ede?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d4/d439155f-2ab8-49e8-83b2-7dc65edf6ede?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d8/d824edb7-1841-4ab6-91f4-524703141411?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d8/d824edb7-1841-4ab6-91f4-524703141411?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9a/9a7cb720-b087-4f50-aece-310ebbaae089?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9a/9a7cb720-b087-4f50-aece-310ebbaae089?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/db/db6130f7-1799-4b14-9149-156febd78bc3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/db/db6130f7-1799-4b14-9149-156febd78bc3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6b/6bc3706e-c5b3-4402-b231-c1c87ed69063?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6b/6bc3706e-c5b3-4402-b231-c1c87ed69063?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/90c93566-32a0-417d-9e6e-7ba3e352cd66?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/90c93566-32a0-417d-9e6e-7ba3e352cd66?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>1</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-360/kitchener-waterloo/lots-of-great-authentic-original-xbox-and-360-games-for-sale/1631291836 target="_blank" rel="noopener noreferrer">Lots of Great Authentic Original Xbox and 360 Games for Sale!</a><br>Lots of Great Authentic Original Xbox and 360 Games for Sale! Hello Kijiji! I have for sale some ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2N%2C1C3" target="_blank" rel="noopener noreferrer">Kitchener, N2N1C3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div1">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9e/9e1a77cd-cdc8-4f96-a960-0f4c85315992?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9e/9e1a77cd-cdc8-4f96-a960-0f4c85315992?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>1</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-one/kitchener-waterloo/lots-of-great-xbox-one-xb1-games-for-sale-or-trade-new-and-used/1631292079 target="_blank" rel="noopener noreferrer">Lots of Great Xbox One XB1 Games For Sale or Trade NEW and USED!</a><br>Lots of Great Xbox One XB1 Games For Sale or Trade NEW and USED! Hello Kijiji! I have for sale a ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2N%2C1C3" target="_blank" rel="noopener noreferrer">Kitchener, N2N1C3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div2">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b06f17cd-2777-4062-968d-c878e82f0a9b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b06f17cd-2777-4062-968d-c878e82f0a9b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>1</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-sony-playstation-4/kitchener-waterloo/lots-of-great-playstation-4-ps4-games-for-sale-new-and-used/1631292049 target="_blank" rel="noopener noreferrer">Lots of Great Playstation 4 PS4 Games for Sale NEW and USED!</a><br>Lots of Great Playstation 4 PS4 Games for Sale NEW and USED! Hello Kijiji! I have for sale a huge ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2N%2C1C3" target="_blank" rel="noopener noreferrer">Kitchener, N2N1C3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div3">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e9/e981c5cf-4fc0-44f3-979f-d84959c0c727?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e9/e981c5cf-4fc0-44f3-979f-d84959c0c727?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/52/529293b4-50e8-4bee-baaf-8cd2754466a9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/52/529293b4-50e8-4bee-baaf-8cd2754466a9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/15/15f951f4-b70d-47d2-9f62-aa1726ee0c8a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/15/15f951f4-b70d-47d2-9f62-aa1726ee0c8a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>2</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-laptop-accessories/kitchener-waterloo/init-laptop-backpack/1626066528 target="_blank" rel="noopener noreferrer">Init laptop backpack</a><br>Sturdy laptop backpack with lots of space for other items in addition to your laptop. Has hip strap ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2T%2C2L1" target="_blank" rel="noopener noreferrer">Waterloo, N2T2L1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div4">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6f/6f11b0dd-1375-4d81-affa-636791ab5e7a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6f/6f11b0dd-1375-4d81-affa-636791ab5e7a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/35/354e131a-55ea-45df-bd6b-4109542a961c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/35/354e131a-55ea-45df-bd6b-4109542a961c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e1/e104bebc-077e-4c8d-864a-3a49651b2945?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e1/e104bebc-077e-4c8d-864a-3a49651b2945?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/51/51e330a3-3123-42ff-a8ab-750dd4812049?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/51/51e330a3-3123-42ff-a8ab-750dd4812049?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f9/f9a6921f-8a57-4995-90e2-ad4bb7c1d62d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f9/f9a6921f-8a57-4995-90e2-ad4bb7c1d62d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7d3c8983-4ddf-4e83-a3d9-4e38da193589?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7d3c8983-4ddf-4e83-a3d9-4e38da193589?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b3a4be16-b3d5-41b8-8400-66ebd38d5033?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b3a4be16-b3d5-41b8-8400-66ebd38d5033?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b99fcd9-7627-4a10-aff9-b02c85d50224?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b99fcd9-7627-4a10-aff9-b02c85d50224?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>2</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/video-games/1630004625 target="_blank" rel="noopener noreferrer">Video games</a><br>Game lot for sale. PS2 / Wii / XBox 360 Included.. - 10 Games (1 is a Multi Jam Pack) - Wii Remote ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2B%2C1X3" target="_blank" rel="noopener noreferrer">Kitchener, N2B1X3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div5">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/df/df8aa43c-c16c-43f8-a444-076132893615?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/df/df8aa43c-c16c-43f8-a444-076132893615?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8f/8f04fa83-ece4-4249-94fb-9a8ee07871b4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8f/8f04fa83-ece4-4249-94fb-9a8ee07871b4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/15/15184ef4-27c3-4e84-b629-4ca79629a8e6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/15/15184ef4-27c3-4e84-b629-4ca79629a8e6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0b/0b087d6a-9713-406c-b20a-b365b42c3afb?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0b/0b087d6a-9713-406c-b20a-b365b42c3afb?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c4/c44ec25c-2cbd-4151-8114-c6466c871742?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c4/c44ec25c-2cbd-4151-8114-c6466c871742?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/84/8469c975-7dc9-4e22-b44f-f46f4a796c21?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/84/8469c975-7dc9-4e22-b44f-f46f4a796c21?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cf86fae4-6c69-4084-99ad-7730433e2682?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cf86fae4-6c69-4084-99ad-7730433e2682?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8eb7b0f9-8b9c-4123-a764-7e785d2a92e0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8eb7b0f9-8b9c-4123-a764-7e785d2a92e0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>3</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/game-bundle-for-sale/1629474064 target="_blank" rel="noopener noreferrer">Game Bundle For Sale</a><br>Game lot for sale. PS2 / Wii / XBoxr 360 Included.. - 10 Games (1 is a Multi Jam Pack) - Wii Remote ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2B%2C1X3" target="_blank" rel="noopener noreferrer">Kitchener, N2B1X3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div6">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b142ac2-d042-45b5-8645-9001f6dfce01?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1b142ac2-d042-45b5-8645-9001f6dfce01?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6b/6bfd265d-9070-4477-9a1b-eb2d06014bc7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6b/6bfd265d-9070-4477-9a1b-eb2d06014bc7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/60805c4d-43fb-458b-873b-d2413900c5b2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/60805c4d-43fb-458b-873b-d2413900c5b2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bb/bb6b3218-a36d-44a6-aef2-7fb6dc708253?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bb/bb6b3218-a36d-44a6-aef2-7fb6dc708253?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/72/727d74d2-3d30-4813-bf13-2df59a253d1a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/72/727d74d2-3d30-4813-bf13-2df59a253d1a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/4595d0d7-a0d0-4a74-8344-14c8d6a70757?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/4595d0d7-a0d0-4a74-8344-14c8d6a70757?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d98454a-0900-4c31-9791-610adc00a06b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5d98454a-0900-4c31-9791-610adc00a06b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b625fdb9-6314-4d7a-bac5-bb4467d41c8c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b625fdb9-6314-4d7a-bac5-bb4467d41c8c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b35ebbc5-ee92-44bd-a11a-5f40c5f6efc8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b35ebbc5-ee92-44bd-a11a-5f40c5f6efc8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/61/6118315e-478a-4b11-8a5a-742f38e7a8a2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/61/6118315e-478a-4b11-8a5a-742f38e7a8a2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>5</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/lots-of-assorted-ac-plug-adapters-100-working-5-00-each/1229287964 target="_blank" rel="noopener noreferrer">Lots of Assorted AC Plug Adapters -100% working -$5.00 each</a><br>I am selling quite a number of Assorted AC Plug Adapters...like way more than I show in this ad ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2K4C5" target="_blank" rel="noopener noreferrer">Waterloo, N2K4C5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td>No Image</td>
+	<td>5</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/kitchener-waterloo/5-volt-power-adaptors/1613892608 target="_blank" rel="noopener noreferrer">5 volt power adaptor's</a><br>Lots of 5 volt power adaptor's Most 2 amp One is 1.2 amps $5 each</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L%2C1W6" target="_blank" rel="noopener noreferrer">Waterloo, N2L1W6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div8">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/34/34391f07-2b4e-47fd-9d18-c54c3edd6729?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/34/34391f07-2b4e-47fd-9d18-c54c3edd6729?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2ad4ed7-7ad5-47d7-8a3b-b3be6b5bb404?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2ad4ed7-7ad5-47d7-8a3b-b3be6b5bb404?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8ed612a4-0abd-4c25-8afa-4c66d13787c5?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8ed612a4-0abd-4c25-8afa-4c66d13787c5?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/105d847f-0d0f-4982-b189-1030752b6300?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/105d847f-0d0f-4982-b189-1030752b6300?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c59d815f-6357-45a5-aa9e-98afaf7aa9b9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c59d815f-6357-45a5-aa9e-98afaf7aa9b9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/06/060c8db2-d15a-4012-be97-03d42d23e263?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/06/060c8db2-d15a-4012-be97-03d42d23e263?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/856fcccd-2631-44ce-a436-af902cc6e05b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/856fcccd-2631-44ce-a436-af902cc6e05b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/67/672fb18b-3120-49a7-89d3-254746532e0c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/67/672fb18b-3120-49a7-89d3-254746532e0c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e2/e262e9c1-f5af-4c79-bafc-4c00fcf288a1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e2/e262e9c1-f5af-4c79-bafc-4c00fcf288a1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e0cf04a6-5f4d-4e9a-b3d1-b164a0507005?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e0cf04a6-5f4d-4e9a-b3d1-b164a0507005?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>5</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-pc-games/kitchener-waterloo/71-assorted-pc-computer-kids-games-for-windows-or-mac-5-ea/1573184181 target="_blank" rel="noopener noreferrer">71 Assorted PC Computer Kid's Games for Windows or Mac $5/ea</a><br>What a Great LARGE Lot of 71 Kids Assorted PC Computer Games for Children and Kids. Selling them ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=334%2CSchooner%2CCrescent%2CWaterloo%2COntario" target="_blank" rel="noopener noreferrer">Waterloo</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div9">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/23/23504ed6-c3ff-4187-b7af-c2cd14394e42?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/23/23504ed6-c3ff-4187-b7af-c2cd14394e42?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>5</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-video-tv-accessories/kitchener-waterloo/box-of-cable-wire/1590179107 target="_blank" rel="noopener noreferrer">Box of Cable Wire</a><br>Box of Cable Wire - Various lengths: long and short</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2T%2C2C7" target="_blank" rel="noopener noreferrer">Waterloo, N2T2C7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div10">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b6124f8c-ad2c-4f63-a394-90aaabcb4057?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b6124f8c-ad2c-4f63-a394-90aaabcb4057?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8b/8b86fc98-b514-4a55-bc9a-663797d28321?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8b/8b86fc98-b514-4a55-bc9a-663797d28321?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/06/066939f8-1016-4bc8-8dd2-da0d793d47ee?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/06/066939f8-1016-4bc8-8dd2-da0d793d47ee?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b6ac1ad7-7397-4c28-bf10-59f3af48662d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b6/b6ac1ad7-7397-4c28-bf10-59f3af48662d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1e/1e917b8c-146a-4600-8dba-c71574db919d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1e/1e917b8c-146a-4600-8dba-c71574db919d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>6</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-one/kitchener-waterloo/xbox-one-game-lot-pick-yours-halo-black-ops-forza-lego-far-cry/1600368817 target="_blank" rel="noopener noreferrer">Xbox One Game lot Pick Yours HALO Black Ops Forza LEGO Far Cry</a><br>All cases and disc are in very good condition. Price is firm. May not have manual, map, CD or other ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div11">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5bafab7b-717c-4b92-bc37-dc9651466324?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5bafab7b-717c-4b92-bc37-dc9651466324?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cb/cbeb2fc1-7053-4ef5-abb6-7f376875e5e3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cb/cbeb2fc1-7053-4ef5-abb6-7f376875e5e3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/57f960cb-c5b7-4c00-bb86-de69be5bd6df?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/57f960cb-c5b7-4c00-bb86-de69be5bd6df?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>7</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/sharp-scientific-calculator-with-original-packaging/1619688340 target="_blank" rel="noopener noreferrer">Sharp Scientific Calculator with original packaging</a><br>Best of all, the battery still has life so you confirm this great calculator has a lot of life left ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L%2C4T5%2CCanada" target="_blank" rel="noopener noreferrer">Waterloo, N2L4T5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div12">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cfbf5a0c-91c9-475b-b698-b8299453c6d4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cf/cfbf5a0c-91c9-475b-b698-b8299453c6d4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c3/c3048b74-6010-4f2f-95b2-e4ebd8efcf06?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c3/c3048b74-6010-4f2f-95b2-e4ebd8efcf06?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe5b2a98-2be7-409f-a857-0832936b87a1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe5b2a98-2be7-409f-a857-0832936b87a1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/14/14749d29-7eb3-436a-8637-610e0ebb9d8f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/14/14749d29-7eb3-436a-8637-610e0ebb9d8f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/83/83df1903-568a-4e6e-a757-c3da3ee7e920?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/83/83df1903-568a-4e6e-a757-c3da3ee7e920?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/53d161c1-469f-4115-bdc4-989b5548bda6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/53d161c1-469f-4115-bdc4-989b5548bda6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/0464e044-9709-4617-a2cf-0ad19528208b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/0464e044-9709-4617-a2cf-0ad19528208b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/36/36815eb1-71e0-488a-b478-61988813fbfb?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/36/36815eb1-71e0-488a-b478-61988813fbfb?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e07ce482-c2f5-4ba2-8674-7a1924c4908f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e0/e07ce482-c2f5-4ba2-8674-7a1924c4908f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>8</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-sony-playstation-4/kitchener-waterloo/sony-playstation-4-ps4-game-lot-2-nba-fifa-skyrim-lego-dark-soul/1600368199 target="_blank" rel="noopener noreferrer">Sony PlayStation 4 PS4 Game lot 2 NBA FIFA SKYRIM LEGO Dark Soul</a><br>All cases and disc are in very good condition. Lowest price in the market, please no bargaining on ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div13">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/09/09f65ff7-1b0b-48b2-9437-1a47946b07df?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/09/09f65ff7-1b0b-48b2-9437-1a47946b07df?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a7/a7fc030f-9343-4050-b4aa-f65c9a30aec7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a7/a7fc030f-9343-4050-b4aa-f65c9a30aec7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/48/48352343-ed0b-49ce-939d-d41445126755?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/48/48352343-ed0b-49ce-939d-d41445126755?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d8/d892c8ad-eb6d-4984-88ab-6ac96fb09c40?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d8/d892c8ad-eb6d-4984-88ab-6ac96fb09c40?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d6/d616018e-8fcf-40c9-a6ea-e090f67affcf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d6/d616018e-8fcf-40c9-a6ea-e090f67affcf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/42/4298c066-961a-4312-9d8b-775c6e7c712c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/42/4298c066-961a-4312-9d8b-775c6e7c712c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/04fe3674-6716-4e2a-9a78-ae82e11e9d55?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/04fe3674-6716-4e2a-9a78-ae82e11e9d55?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/87/87f534da-a5ea-4cc6-bf67-d69e71178fd5?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/87/87f534da-a5ea-4cc6-bf67-d69e71178fd5?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fce4ecd9-9ea0-4d2b-90fd-659dbc46b916?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fce4ecd9-9ea0-4d2b-90fd-659dbc46b916?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/63/63b14f14-9eb1-48cc-902c-4abbcde9025a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/63/63b14f14-9eb1-48cc-902c-4abbcde9025a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>8</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-sony-playstation-4/kitchener-waterloo/sony-playstation-4-ps4-game-lot-1-horizon-nhl-nfl-21-gta5-lego/1601974296 target="_blank" rel="noopener noreferrer">Sony PlayStation 4 PS4 Game lot 1 Horizon NHL NFL 21 GTA5 LEGO</a><br>All cases and disc are in very good condition. Lowest price in the market, please no bargaining on ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div14">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/5718bd7c-fd3f-4e4c-8016-c03910719f9e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/5718bd7c-fd3f-4e4c-8016-c03910719f9e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/iphone-12-13-pro-max-cases-10-for-them-all/1628183932 target="_blank" rel="noopener noreferrer">iPhone 12/13 pro max cases $10 for them all!</a><br>Hey there I have 3 iPhone 12/13 Pro max cases for sale. Looking to get $10 for the lot , 2 of them ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2E" target="_blank" rel="noopener noreferrer">Kitchener, N2E</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div15">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d6/d6b5cdcd-376e-4f60-9d9c-780f3bf3c216?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d6/d6b5cdcd-376e-4f60-9d9c-780f3bf3c216?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85b399e6-a366-4a07-af92-471cfd5fffa8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85b399e6-a366-4a07-af92-471cfd5fffa8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-networking-cables-and-connectors/kitchener-waterloo/lot-of-5-composite-rca-cables/1628146160 target="_blank" rel="noopener noreferrer">Lot of 5 composite RCA cables</a><br>5 composite RCA cables of various lengths</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L6E6" target="_blank" rel="noopener noreferrer">Waterloo, N2L6E6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div16">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f8/f81fb8f1-e285-4ec3-b77e-57db4e368279?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f8/f81fb8f1-e285-4ec3-b77e-57db4e368279?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-other-computer-products/kitchener-waterloo/desktop-computer-tower-stand-with-wheels/1630774006 target="_blank" rel="noopener noreferrer">desktop computer tower stand with wheels</a><br>adjustable slot sidth to fit tower box size. sponge-like material on inside wall, providing contact ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V" target="_blank" rel="noopener noreferrer">Waterloo, N2V</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div17">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fb/fb9f4d4e-74ee-468e-84d0-adc82b9ccf75?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fb/fb9f4d4e-74ee-468e-84d0-adc82b9ccf75?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/70/708509f7-2f67-424a-944a-4ee9eed950c6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/70/708509f7-2f67-424a-944a-4ee9eed950c6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/46/468e23ec-55c9-4964-b3ac-ff07adb009bf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/46/468e23ec-55c9-4964-b3ac-ff07adb009bf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/93/936b367b-aedd-406a-b2d2-c951a45334e7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/93/936b367b-aedd-406a-b2d2-c951a45334e7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/27e95452-e6d3-4085-a946-e0a3c527a964?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/27/27e95452-e6d3-4085-a946-e0a3c527a964?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>10</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/ubio-labs-20w-usb-c-fast-charger-cable-apple-iphone-ipad-ipod/1593507655 target="_blank" rel="noopener noreferrer">Ubio Labs 20W USB-C Fast Charger Cable Apple iPhone iPad iPod</a><br>$15 each set, or $20 for 2 sets. Ubio Labs 20W USB-C Fast Charge Bundle for Apple iPhone iPad Like ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div18">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b295b563-a4ac-4c91-affe-e528c290f93a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b295b563-a4ac-4c91-affe-e528c290f93a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/78/78646318-0aee-4a46-a706-d415a03c7115?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/78/78646318-0aee-4a46-a706-d415a03c7115?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0b/0b238a84-a016-42f9-bb3c-efc92daa8067?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0b/0b238a84-a016-42f9-bb3c-efc92daa8067?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/56/56e47648-8767-498f-aea2-32185db26e30?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/56/56e47648-8767-498f-aea2-32185db26e30?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3e15afef-f52d-4117-ba63-110a60666407?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3e15afef-f52d-4117-ba63-110a60666407?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31853e00-1e59-45aa-9af4-34265cddac75?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31853e00-1e59-45aa-9af4-34265cddac75?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-video-tv-accessories/kitchener-waterloo/lot-of-coax-cables-splitters-connectors-hdtv-installation/1627981069 target="_blank" rel="noopener noreferrer">Lot of  COAX cables,splitters & connectors-HDTV installation</a><br>Lot of 11 RG59 and RG6 Coax cables of various lengths 5 quick release COAX cables 4 cable splitters ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L6E6" target="_blank" rel="noopener noreferrer">Waterloo, N2L6E6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div19">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a3/a3704d45-4fe9-463c-b2c8-c639809ece78?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a3/a3704d45-4fe9-463c-b2c8-c639809ece78?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/speaker-wire-cable-for-stereo-surround-home-theater-55-ft/1595802369 target="_blank" rel="noopener noreferrer">SPEAKER WIRE Cable for Stereo Surround Home Theater-55 FT</a><br>Lots of SPEAKER WIRE for Front, Center, Rear for Home Stereo Surround Theater. One 1 piece of 24 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H%2C1L9" target="_blank" rel="noopener noreferrer">Kitchener, N2H1L9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div20">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/75712c01-d2e2-4f53-ac40-b25aabeeb2c5?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/75712c01-d2e2-4f53-ac40-b25aabeeb2c5?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/30/302105a0-106e-42f0-a22a-d6918822c45d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/30/302105a0-106e-42f0-a22a-d6918822c45d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f8/f820f14b-d91c-477f-9b05-aa75740e8cf6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f8/f820f14b-d91c-477f-9b05-aa75740e8cf6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0c/0ca1dfb6-d8ac-4851-a89e-272eb0009612?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0c/0ca1dfb6-d8ac-4851-a89e-272eb0009612?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3e2e1728-4180-4f96-992c-9356fb8ce4c4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3e2e1728-4180-4f96-992c-9356fb8ce4c4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4d42b82b-d9ef-4603-9b33-3603c379cb58?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4d/4d42b82b-d9ef-4603-9b33-3603c379cb58?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/af/af8bd1b6-53f3-44d3-837d-09b8fc5ca605?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/af/af8bd1b6-53f3-44d3-837d-09b8fc5ca605?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/lot-of-2-20w-iphone-ipad-fast-charger-lightning-cable-ubio-labs/1617388001 target="_blank" rel="noopener noreferrer">Lot of 2 20W iPhone iPad Fast Charger Lightning Cable Ubio Labs</a><br>Two sets for $15, fast chargers with indication light. Price is firm. Ubio Labs 20W USB-C Fast ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div21">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f9/f9665a1b-c8f7-4cd8-894d-f46bc1a8a139?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f9/f9665a1b-c8f7-4cd8-894d-f46bc1a8a139?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-laptop-accessories/kitchener-waterloo/laptop-bag/1631540049 target="_blank" rel="noopener noreferrer">Laptop Bag</a><br>Laptop Bag Lots of pockets for storage</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H%2C4N8" target="_blank" rel="noopener noreferrer">Kitchener, N2H4N8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div22">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0e/0e0bf821-289c-4c1f-8673-4a9f945adc02?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0e/0e0bf821-289c-4c1f-8673-4a9f945adc02?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/00/00a199aa-6fe7-4e21-88cd-135a59d67e7e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/00/00a199aa-6fe7-4e21-88cd-135a59d67e7e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/91efcd20-6b27-4fc5-a18c-136bc7940203?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/91/91efcd20-6b27-4fc5-a18c-136bc7940203?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cc/ccaee956-9dd4-4909-bd8d-f924e7c3d5b7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cc/ccaee956-9dd4-4909-bd8d-f924e7c3d5b7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff376f7a-d22d-4f01-919e-b0c3a76e65bb?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff376f7a-d22d-4f01-919e-b0c3a76e65bb?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7a/7afbddf3-8f77-4d14-b975-57033a49df26?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7a/7afbddf3-8f77-4d14-b975-57033a49df26?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-networking-cables-and-connectors/kitchener-waterloo/lot-of-5-serial-cables-db25-m-m/1628143582 target="_blank" rel="noopener noreferrer">Lot of 5 serial cables DB25 M/M</a><br>Various lengths DB serial Male to Male</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L6E6" target="_blank" rel="noopener noreferrer">Waterloo, N2L6E6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div23">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2405e27-5e61-49c0-ac62-629329519e61?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2405e27-5e61-49c0-ac62-629329519e61?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-sony-playstation-4/kitchener-waterloo/ps4-games-for-sale/1631252743 target="_blank" rel="noopener noreferrer">Ps4 games for sale.</a><br>Ps4 games for sale. All in great condition $15 per game or $140 for the lot.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2K%2C3Y7" target="_blank" rel="noopener noreferrer">Waterloo, N2K3Y7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div24">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/12/120514b6-2e47-409e-bd55-54bc2d1a85db?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/12/120514b6-2e47-409e-bd55-54bc2d1a85db?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-one/kitchener-waterloo/fosmon-dual-slot-xbox-one-x-s-dual-high-speed-controller-charger/1584090663 target="_blank" rel="noopener noreferrer">Fosmon Dual Slot Xbox One/X/S Dual High-Speed Controller charger</a><br>Fosmon Dual Slot Xbox One/One X/One S Dual PRO High-Speed Controller Charger Brand / Model: Fosmon ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2M" target="_blank" rel="noopener noreferrer">Kitchener, N2M</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div25">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5bd6c393-70a3-4703-8ba4-2abb441c2adc?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5bd6c393-70a3-4703-8ba4-2abb441c2adc?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/69/69e14210-77b6-46aa-9f73-916032b7fa7b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/69/69e14210-77b6-46aa-9f73-916032b7fa7b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>15</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-ds/kitchener-waterloo/drawn-to-life-nintendo-ds-cib/1630990655 target="_blank" rel="noopener noreferrer">Drawn to Life (Nintendo DS) CIB</a><br>Includes box, game cartridge, instructions and various inserts. Everything is in very good ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2J%2C2R6" target="_blank" rel="noopener noreferrer">Waterloo, N2J2R6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div26">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c4/c40cc508-fa82-4b9d-9991-f5a46ba3bb05?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c4/c40cc508-fa82-4b9d-9991-f5a46ba3bb05?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/60e5e6a1-5aa7-456d-b6c0-ad8faac391c6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/60e5e6a1-5aa7-456d-b6c0-ad8faac391c6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/41fc09d0-748d-4d9b-b22f-4a1ab61ce9fc?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/41/41fc09d0-748d-4d9b-b22f-4a1ab61ce9fc?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/458a5422-9c99-41e5-ab0f-e332e50c0e7d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/458a5422-9c99-41e5-ab0f-e332e50c0e7d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/92/92987e7d-c792-4f9f-8a74-78e3d359a2c4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/92/92987e7d-c792-4f9f-8a74-78e3d359a2c4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c0/c037dcbb-2e1b-4b4b-98a7-585a33ee2aa6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c0/c037dcbb-2e1b-4b4b-98a7-585a33ee2aa6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a1/a1889e72-998e-474d-8ba1-d583aa8c1cc7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a1/a1889e72-998e-474d-8ba1-d583aa8c1cc7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9c/9c2f0ebb-3ad6-49a6-905a-77d604ccf297?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9c/9c2f0ebb-3ad6-49a6-905a-77d604ccf297?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7c357fab-b3fc-414c-9584-1e169076e6e1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7c/7c357fab-b3fc-414c-9584-1e169076e6e1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-ds/kitchener-waterloo/4-nintendo-ds-video-games/1627823768 target="_blank" rel="noopener noreferrer">4 Nintendo DS Video Games</a><br>Selling four Nintendo DS video games, mostly kiddy games. $20 for the lot.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2E2R8" target="_blank" rel="noopener noreferrer">Kitchener, N2E2R8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div27">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/8b/8be4958d-bbae-4acd-bb03-302a205c09bb?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-dealer-ads/images/8b/8be4958d-bbae-4acd-bb03-302a205c09bb?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-wii/kitchener-waterloo/nintendo-wii-game-lot/1629587886 target="_blank" rel="noopener noreferrer">Nintendo wii game lot</a><br>Price all conplete with manuals</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Chestnut%2CSt%2CKitchener%2CON%2CN2H%2C1T6%2CCanada" target="_blank" rel="noopener noreferrer"> Kitchener, N2H1T6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div28">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d9b652da-097a-4a33-8566-1e4abc7fd306?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d9b652da-097a-4a33-8566-1e4abc7fd306?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-wii-u/kitchener-waterloo/wii-wii-u-gamecube-xbox-one-ps5-games/1624486078 target="_blank" rel="noopener noreferrer">Wii, Wii U, GameCube, Xbox one ps5 games!</a><br>5$ off if buying 2, 10$ off buying 3, 20$ off for 4 Get the lot for 160 instead of the value of 225 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Barrel%2CYards%2CBoulevard%2CWaterloo%2CON" target="_blank" rel="noopener noreferrer">Waterloo</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div29">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b0111dec-9135-47f8-8422-a93c27c0ce5e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b0111dec-9135-47f8-8422-a93c27c0ce5e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-360/kitchener-waterloo/assorted-360-items/1631581883 target="_blank" rel="noopener noreferrer">Assorted 360 Items</a><br>Taking 20 for the lot O.B.O for each item. Contact for details!</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=King%2CSt%2CN%2CWaterloo%2CON%2CN2J%2C4L6%2CCanada" target="_blank" rel="noopener noreferrer"> Waterloo, N2J4L6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div30">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9d/9d9de588-3360-4a81-a929-a489d6d76204?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9d/9d9de588-3360-4a81-a929-a489d6d76204?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ac/ac96f01e-2800-40dc-b32c-3ea1a9c0aecb?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ac/ac96f01e-2800-40dc-b32c-3ea1a9c0aecb?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b08f588a-3e7f-405c-8d6d-a9ffeabcf76e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b0/b08f588a-3e7f-405c-8d6d-a9ffeabcf76e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/32/321896d3-e83a-455b-9276-c474241381e2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/32/321896d3-e83a-455b-9276-c474241381e2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/32/32d889bc-1c3c-421f-b346-f30029ccc5b8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/32/32d889bc-1c3c-421f-b346-f30029ccc5b8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c9/c9743102-6dca-4d12-b9bc-3294f4186aaf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c9/c9743102-6dca-4d12-b9bc-3294f4186aaf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>20</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/sony-alarm-clock/1599340567 target="_blank" rel="noopener noreferrer">Sony Alarm Clock</a><br>I have for sale a Sony alarm clock brand new in box. Has many functions. It's a clock radio, has ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L%2C1W6" target="_blank" rel="noopener noreferrer">Waterloo, N2L1W6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div31">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/73/739402eb-f4cc-48bd-a8c6-c641689b3e1b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/73/739402eb-f4cc-48bd-a8c6-c641689b3e1b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/50-lot-duracell-aaa-battery-triple-a-1-5v-dc-tested-expire-2026/1493941879 target="_blank" rel="noopener noreferrer">50 Lot! DURACELL AAA Battery Triple A 1.5V DC Tested Expire 2026</a><br>Was for a project, only used once. All tested over 1.5V, most are brand new out of package. Expire ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7%2CCanada" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div32">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/80/80339332-7902-45db-ab5e-20a8d566b741?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/80/80339332-7902-45db-ab5e-20a8d566b741?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6a/6a90f350-c8c7-4663-aee5-73128231a6c4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6a/6a90f350-c8c7-4663-aee5-73128231a6c4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5e/5e8e6522-8e12-4ac4-a8ea-56d6b2ef7330?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5e/5e8e6522-8e12-4ac4-a8ea-56d6b2ef7330?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-ipad-tablet-accessories/kitchener-waterloo/10-lot-wall-charger-usb-plug-5v-1a-power-adapter-phone-tablet/1442084665 target="_blank" rel="noopener noreferrer">10 Lot! Wall Charger USB Plug 5V 1A Power Adapter Phone Tablet</a><br>Was for a project, don't need them anymore. All in good working condition. USB charge cables ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7%2CCanada" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div33">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/67/67882d31-a6b9-458e-bc9e-b6fa25c41671?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/67/67882d31-a6b9-458e-bc9e-b6fa25c41671?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-laptop-accessories/kitchener-waterloo/laptop-backpack/1563783323 target="_blank" rel="noopener noreferrer">Laptop backpack</a><br>Brand new never used - has lots of space Asking 25 Check out my other ads!</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2A%2C1N4" target="_blank" rel="noopener noreferrer">Kitchener, N2A1N4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div34">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c8/c8290cd6-3646-4fa2-885d-54ec31aaba30?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c8/c8290cd6-3646-4fa2-885d-54ec31aaba30?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b1/b1ea6310-714e-4772-bc43-d059ff2f1039?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b1/b1ea6310-714e-4772-bc43-d059ff2f1039?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-sony-playstation-4/kitchener-waterloo/playstation-4-games-complete:-dark-souls-horizon-and-nier/1630051990 target="_blank" rel="noopener noreferrer">Playstation 4 Games Complete: Dark Souls, Horizon, and Nier</a><br>PS4 Games for sale individually or as a lot: Dark Souls Remastered - $20 Dark Souls 3: The Fire ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H%2C4K1" target="_blank" rel="noopener noreferrer">Kitchener, N2H4K1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div35">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/105d65fb-8cd3-46f6-932d-7a75d474c3db?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/105d65fb-8cd3-46f6-932d-7a75d474c3db?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-networking-cables-and-connectors/kitchener-waterloo/apc-cable-organizer-1u/1626767426 target="_blank" rel="noopener noreferrer">APC CABLE ORGANIZER 1U</a><br>New in box 10 available Can do bulk price.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2J%2C1C7" target="_blank" rel="noopener noreferrer">Waterloo, N2J1C7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div36">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/35/3542e473-cd1c-43e1-acac-7676175c5e5d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/35/3542e473-cd1c-43e1-acac-7676175c5e5d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/93/934ef532-447e-4058-acae-2129fbe7e3d0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/93/934ef532-447e-4058-acae-2129fbe7e3d0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>25</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/kitchener-waterloo/cisco-1000-base-t-sfp-transceiver-module/1626771251 target="_blank" rel="noopener noreferrer">CISCO 1000 BASE T SFP  TRANSCEIVER MODULE</a><br>New in box 8 available Bulk price available</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2J%2C1C7" target="_blank" rel="noopener noreferrer">Waterloo, N2J1C7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div37">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/89/8982522b-5fee-4104-924c-32498067619c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/89/8982522b-5fee-4104-924c-32498067619c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ffa14dda-abab-44d0-afd9-c3c708578d33?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ffa14dda-abab-44d0-afd9-c3c708578d33?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/454a27ca-ae7f-4a12-b682-423b34ded05c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/45/454a27ca-ae7f-4a12-b682-423b34ded05c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/23/23429a0e-77f7-4c24-9c7d-a04e66a540a6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/23/23429a0e-77f7-4c24-9c7d-a04e66a540a6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d35e83fe-2e2f-41af-8102-8091ba626963?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d35e83fe-2e2f-41af-8102-8091ba626963?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/95/9539341a-815b-491b-887a-ae9b828d823f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/95/9539341a-815b-491b-887a-ae9b828d823f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/sega-genesis-games-w-manuals-lot-2-30-outrun-2019-football/1631325634 target="_blank" rel="noopener noreferrer">Sega genesis games w/ manuals lot (2) $30! Outrun 2019 football</a><br>Sega genesis games with manuals lot(2) $30! All authentic and in excellent working condition. Sega ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H2G5" target="_blank" rel="noopener noreferrer">Kitchener, N2H2G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div38">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/90423bd6-05f5-46a6-8a9a-bc55ba112285?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/90423bd6-05f5-46a6-8a9a-bc55ba112285?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c3/c3831f4e-96a5-4de6-8aef-fda1ab899b1a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c3/c3831f4e-96a5-4de6-8aef-fda1ab899b1a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a1/a12d9fa7-d7d1-4239-944e-76ac01607154?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a1/a12d9fa7-d7d1-4239-944e-76ac01607154?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ad/ad03af00-7429-4633-85cb-898a9339144d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ad/ad03af00-7429-4633-85cb-898a9339144d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d99821b7-e695-4719-89ed-d73746cce0a0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d99821b7-e695-4719-89ed-d73746cce0a0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/33/33f4bf07-2625-4292-8e99-9c73460c926f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/33/33f4bf07-2625-4292-8e99-9c73460c926f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/playstation-2-games-lot-5-30-ps2-games/1631449759 target="_blank" rel="noopener noreferrer">PlayStation 2 games lot (5) $30! Ps2 games </a><br>PlayStation 2 games lot (5) $30! All authentic and in excellent working condition. Complete ps2 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H2G5" target="_blank" rel="noopener noreferrer">Kitchener, N2H2G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div39">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3f/3f95d2e1-4e53-42b6-a72a-a100cac9fbea?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3f/3f95d2e1-4e53-42b6-a72a-a100cac9fbea?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/58/58ca0696-d81d-4367-8595-f23a80aadaa6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/58/58ca0696-d81d-4367-8595-f23a80aadaa6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d7256e38-76bf-44ea-b62c-00bcc1027b07?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d7256e38-76bf-44ea-b62c-00bcc1027b07?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9bea3cf7-178c-400c-b82c-8ddc749c18bc?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9bea3cf7-178c-400c-b82c-8ddc749c18bc?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/99/99b93d85-0d56-4de8-96ab-c54e4749c959?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/99/99b93d85-0d56-4de8-96ab-c54e4749c959?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/73/73cd0954-b8b4-4cba-99b8-f8be0ce0044e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/73/73cd0954-b8b4-4cba-99b8-f8be0ce0044e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/5391fce0-fe4d-42a1-a202-454cd0e48b7d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/5391fce0-fe4d-42a1-a202-454cd0e48b7d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8c6dc8ce-c446-4358-9867-d5764109ff0d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8c6dc8ce-c446-4358-9867-d5764109ff0d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/30/30a6129f-624d-44c4-93c1-71bdb858f45d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/30/30a6129f-624d-44c4-93c1-71bdb858f45d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/908786ec-88d1-40f8-8c0d-ebe8171ceb83?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/908786ec-88d1-40f8-8c0d-ebe8171ceb83?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/gameboy-advance-games-lot-3-30-gba-games-sonic-tony-hawk-2/1631324981 target="_blank" rel="noopener noreferrer">Gameboy advance games lot (3) $30! Gba games sonic tony hawk 2</a><br>Gameboy advance games lot (3) $30! All authentic and in excellent working condition. Gba games (3): ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H2G5" target="_blank" rel="noopener noreferrer">Kitchener, N2H2G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div40">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e6/e61d913d-1d31-4f3b-a841-f70747893bf3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e6/e61d913d-1d31-4f3b-a841-f70747893bf3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/67/67ecb3e2-3777-4f0c-8561-bc22f589a596?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/67/67ecb3e2-3777-4f0c-8561-bc22f589a596?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/605a08f4-8a76-4abb-8c35-54b6ed484495?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/60/605a08f4-8a76-4abb-8c35-54b6ed484495?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/10931a5d-df23-4869-a554-5150e62436c1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/10931a5d-df23-4869-a554-5150e62436c1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fc499b9d-0947-4a7e-bd0e-5c6e5fd60396?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fc/fc499b9d-0947-4a7e-bd0e-5c6e5fd60396?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-switch/kitchener-waterloo/nintendo-switch-ns-video-game-lot-japanese-spyro-reignited/1600367202 target="_blank" rel="noopener noreferrer">Nintendo Switch NS Video Game Lot Japanese Spyro Reignited</a><br>All cases and cartridges are in very good condition. All price are firm. Title and price list: 1-2 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V%2C2V7" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div41">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8e9cf05a-b061-448c-9e95-776608c7f054?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8e/8e9cf05a-b061-448c-9e95-776608c7f054?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1bf83d70-dc27-4386-a29c-f06ed291ff6a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1b/1bf83d70-dc27-4386-a29c-f06ed291ff6a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-video-games-consoles-other/kitchener-waterloo/mind-craft-ballon-lot/1626260933 target="_blank" rel="noopener noreferrer">Mind Craft Ballon lot</a><br>Mind craft Ballon lot 8 balloons per pack, 17 packs total. 136 Balloons! paid $4 a bag plus tax & ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=29%2CPaulander%2CDrive%2CKitchener%2CON" target="_blank" rel="noopener noreferrer">Kitchener</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div42">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/47/479d3d3c-ac68-4b05-9192-31d11f24b338?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/47/479d3d3c-ac68-4b05-9192-31d11f24b338?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/57eec2ac-4542-4016-a885-a1527afab045?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/57eec2ac-4542-4016-a885-a1527afab045?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>30</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-mice-keyboards-webcam/kitchener-waterloo/razer-arctosa-gaming-keyboard/1629771378 target="_blank" rel="noopener noreferrer">Razer Arctosa Gaming Keyboard</a><br>Bought many years ago probably my firat gaming keyboard. Have since upgraded many times since. ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=28%2CHeins%2CAve%2CKitchener%2CON%2CN2G%2C1Z8%2CCanada" target="_blank" rel="noopener noreferrer"> Kitchener, N2G1Z8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div43">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7e90ffaa-ec40-4da6-92e4-4039abb99a35?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7e90ffaa-ec40-4da6-92e4-4039abb99a35?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/57387e7e-fe55-41b1-909b-107dcd37c627?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/57387e7e-fe55-41b1-909b-107dcd37c627?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/lot-of-seven-ipad-screen-protectors/1631465985 target="_blank" rel="noopener noreferrer">Lot of seven IPad Screen Protectors</a><br>Seven IPad Air/Pro (2019) screen protectors, 2.5D tempered glass 10.5" being sold as a lot, $5 each ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2M%2C2C9" target="_blank" rel="noopener noreferrer">Kitchener, N2M2C9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div44">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86157e25-98f1-4de4-950c-1dd7498deea7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/86/86157e25-98f1-4de4-950c-1dd7498deea7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-video-games-consoles-other/kitchener-waterloo/gaming-guide-books/1608746280 target="_blank" rel="noopener noreferrer">Gaming guide books</a><br>lot of gaming guide books 35.00 will not sell individually</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2A%2C4E4" target="_blank" rel="noopener noreferrer">Kitchener, N2A4E4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div45">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2862aba-ea56-4367-85d9-72d917de5009?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2862aba-ea56-4367-85d9-72d917de5009?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/96367b0d-a808-4233-842f-1f91b5ad1621?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/96367b0d-a808-4233-842f-1f91b5ad1621?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3ee543d1-4768-43d6-a895-fcd1b7b260cc?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3e/3ee543d1-4768-43d6-a895-fcd1b7b260cc?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/78/7895fcbf-3d3e-4ac5-8bae-8ed90e2f14ce?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/78/7895fcbf-3d3e-4ac5-8bae-8ed90e2f14ce?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>35</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-sony-playstation-4/kitchener-waterloo/lot-of-5-ps4-games/1631399406 target="_blank" rel="noopener noreferrer">Lot of 5 PS4 games</a><br>Lot of 5 PS4 Playstation 4 Games: - Detroit: Becoming Human - Knack - Shadow of the Tomb Raider: ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2M%2C5G6%2CCanada" target="_blank" rel="noopener noreferrer">Kitchener, N2M5G6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div46">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d13b06fb-e351-46ab-9fba-42b9d713ae3f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d13b06fb-e351-46ab-9fba-42b9d713ae3f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b677160-c0ae-4ed4-af5e-bc7bd651d534?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b677160-c0ae-4ed4-af5e-bc7bd651d534?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/100bf661-bf71-4cc4-b58a-ff54c78535bd?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/100bf661-bf71-4cc4-b58a-ff54c78535bd?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c5ace99b-e2f2-4699-b520-30be79377a44?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c5/c5ace99b-e2f2-4699-b520-30be79377a44?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/68/68d3eea3-1a66-4be6-8e8a-4ee7b1531b9b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/68/68d3eea3-1a66-4be6-8e8a-4ee7b1531b9b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/62/6221d97c-b335-4a07-829f-4cd5e4f2da31?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/62/6221d97c-b335-4a07-829f-4cd5e4f2da31?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff398128-b887-4213-8535-ea0b9674a877?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ff398128-b887-4213-8535-ea0b9674a877?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8f/8f67e866-45dc-4a74-9c61-341267ab3a0f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8f/8f67e866-45dc-4a74-9c61-341267ab3a0f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a7/a71bbd26-faa6-40fb-92fd-aa875dc4003c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a7/a71bbd26-faa6-40fb-92fd-aa875dc4003c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/electronics-lot/1630177941 target="_blank" rel="noopener noreferrer">Electronics lot</a><br>4 speaker's: 2 Small JVC & 2 large Sony SS-C35's. 1 White-Westinghouse AM/FM Radio / CD player. 1 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Spadina%2CRd%2CE%2CKitchener%2CON%2CN2M%2C3Z9%2CCanada" target="_blank" rel="noopener noreferrer"> Kitchener, N2M3Z9</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div47">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5b331ce8-1054-4cad-883f-c3e7fa97fc35?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5b331ce8-1054-4cad-883f-c3e7fa97fc35?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9d/9d1838d7-53b0-42c5-9fd4-02a456ad46ec?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9d/9d1838d7-53b0-42c5-9fd4-02a456ad46ec?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/78/787f1176-6973-49e3-96f6-3d4e37d2c8b9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/78/787f1176-6973-49e3-96f6-3d4e37d2c8b9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/kitchener-waterloo/2gb-of-rambus-memory-sticks/1556717908 target="_blank" rel="noopener noreferrer">2GB of Rambus memory sticks</a><br>4x 512 MB RAMBUS sticks for a 1st generation Intel P4 system. $50 for the lot OBO.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2B%2C2B3" target="_blank" rel="noopener noreferrer">Kitchener, N2B2B3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div48">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e48f7deb-75b4-4303-b3e8-b592cb53dc0a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e48f7deb-75b4-4303-b3e8-b592cb53dc0a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/5762ab8c-d31a-44c5-a9d9-735474ecfe7e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/57/5762ab8c-d31a-44c5-a9d9-735474ecfe7e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a2/a2b2b159-e822-4314-b316-fd759a76e48f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a2/a2b2b159-e822-4314-b316-fd759a76e48f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-360/kitchener-waterloo/xbox-360-game-lot/1631631080 target="_blank" rel="noopener noreferrer">Xbox 360 game lot </a><br>Check the pictures for list for game titles Lots id good games All games in mint condition Xbox ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2G1G4" target="_blank" rel="noopener noreferrer">Kitchener, N2G1G4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div49">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2e69ed1-625f-481f-893d-96defc355467?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f2/f2e69ed1-625f-481f-893d-96defc355467?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9a/9afc1cbe-e263-4345-8b48-31f11f212ff7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9a/9afc1cbe-e263-4345-8b48-31f11f212ff7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c0/c0ed4c0c-e2fa-4bf1-8aaf-ee8a19eaf6e8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c0/c0ed4c0c-e2fa-4bf1-8aaf-ee8a19eaf6e8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-video-games-consoles-other/kitchener-waterloo/nintendo-smash-brothers-backpack/1590638171 target="_blank" rel="noopener noreferrer">Nintendo Smash Brothers Backpack </a><br>Like new condition Lots of room/dividers</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2E1P4" target="_blank" rel="noopener noreferrer">Kitchener, N2E1P4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div50">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c9/c9adae16-b4b4-4296-8140-903ded9369c7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c9/c9adae16-b4b4-4296-8140-903ded9369c7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e5/e513df9a-e78d-460a-82e2-cb4b750d63b1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e5/e513df9a-e78d-460a-82e2-cb4b750d63b1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c9/c904788a-f73b-4a94-b96a-09ff83aee5bd?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c9/c904788a-f73b-4a94-b96a-09ff83aee5bd?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ffea6136-93fa-46fe-94de-9e859ad99804?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ff/ffea6136-93fa-46fe-94de-9e859ad99804?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85556035-137c-4bbd-8eb8-135def9e36cf?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/85/85556035-137c-4bbd-8eb8-135def9e36cf?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/69/69887c75-d70c-4ab0-956d-ba7d8de9825f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/69/69887c75-d70c-4ab0-956d-ba7d8de9825f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5b2b5c27-3d08-44bb-ae9e-1a68b0e2e422?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5b/5b2b5c27-3d08-44bb-ae9e-1a68b0e2e422?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6d/6db5ebe3-4d00-4902-9ba7-5ab0576d6c4a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6d/6db5ebe3-4d00-4902-9ba7-5ab0576d6c4a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/1047c813-1aba-4232-85d7-0e3bf7d2c675?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/10/1047c813-1aba-4232-85d7-0e3bf7d2c675?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/63/632fea70-5471-4a6c-a4a2-6507571dd5f8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/63/632fea70-5471-4a6c-a4a2-6507571dd5f8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-360/kitchener-waterloo/xbox-360-games-lot-11-40-fable-risen-perfect-dark-two-worlds/1631325988 target="_blank" rel="noopener noreferrer">Xbox 360 games lot (11) $40! Fable risen perfect dark two worlds</a><br>Xbox 360 game lot (11) $40! All games are in excellent working condition and complete. Xbox 360 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H2G5" target="_blank" rel="noopener noreferrer">Kitchener, N2H2G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div51">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5de10109-8404-43a3-884d-7c38d18d1894?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5d/5de10109-8404-43a3-884d-7c38d18d1894?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c1/c1bc49c2-9637-47bf-8823-233122e2da9c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c1/c1bc49c2-9637-47bf-8823-233122e2da9c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b5/b512bd2a-4812-4815-910f-d72cf6dbf687?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b5/b512bd2a-4812-4815-910f-d72cf6dbf687?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-360/kitchener-waterloo/xbox-360-game-lot/1631006557 target="_blank" rel="noopener noreferrer">Xbox 360 game lot </a><br>See all the titles in the picture Asking for 40$</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2M3M1" target="_blank" rel="noopener noreferrer">Kitchener, N2M3M1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div52">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e7/e7ef4e51-bb06-486c-aa8a-1a3db76a2462?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e7/e7ef4e51-bb06-486c-aa8a-1a3db76a2462?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4b/4b1e8b58-7bec-4306-bae0-c49cc02cb7a6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4b/4b1e8b58-7bec-4306-bae0-c49cc02cb7a6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3b/3b0a099e-cf29-4347-9e96-4ccaaa20b9e0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3b/3b0a099e-cf29-4347-9e96-4ccaaa20b9e0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-video-tv-accessories/kitchener-waterloo/himedia-tv-box-8-core-64-bit/1629868323 target="_blank" rel="noopener noreferrer">Himedia TV Box 8 core-64 bit</a><br>Himedia TV Box 8 core-64 bit with two USB ports/SD Slot working order - will need to be updated</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2B%2C2Z2" target="_blank" rel="noopener noreferrer">Kitchener, N2B2Z2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div53">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/dd/ddc001f8-929a-4989-b31b-90efb5a208f9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/dd/ddc001f8-929a-4989-b31b-90efb5a208f9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7dfbadf0-d62c-44cb-8074-540850bafacd?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7d/7dfbadf0-d62c-44cb-8074-540850bafacd?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>40</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-ds/kitchener-waterloo/kingdom-hearts-re:coded-nintendo-ds-cib/1630991616 target="_blank" rel="noopener noreferrer">Kingdom Hearts Re:Coded (Nintendo DS) CIB</a><br>Includes box, instructions, various inserts, and the game cartridge itself. Everything is in very ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2J%2C2R6" target="_blank" rel="noopener noreferrer">Waterloo, N2J2R6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div54">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ed/ed6c72c3-b1d5-4e47-893c-0fb04a76eff0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ed/ed6c72c3-b1d5-4e47-893c-0fb04a76eff0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/14/14335758-305f-4b3d-b1f4-cdb9a758b16a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/14/14335758-305f-4b3d-b1f4-cdb9a758b16a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d76ec7ef-b6e7-4cfd-815f-94944f121a15?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d7/d76ec7ef-b6e7-4cfd-815f-94944f121a15?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7ed62a46-c3f4-46bb-b540-7ae9f29b67e6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7e/7ed62a46-c3f4-46bb-b540-7ae9f29b67e6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a4/a4947647-4a59-4ba6-84f2-e0df5bcdf22d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a4/a4947647-4a59-4ba6-84f2-e0df5bcdf22d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/90ace913-6d4b-4f33-9be8-4c74a74967a7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/90/90ace913-6d4b-4f33-9be8-4c74a74967a7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/01/01206ff7-000c-46cb-ad19-83e60c793fe9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/01/01206ff7-000c-46cb-ad19-83e60c793fe9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-laptops/kitchener-waterloo/laptop-bag-targus-15-5-top-load-office-supplies/1623616419 target="_blank" rel="noopener noreferrer">Laptop Bag - Targus - 15.5" Top load - Office Supplies</a><br>Clever capacity With lots of space and designated pockets and compartments for your laptop, tablet, ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L%2C4V2" target="_blank" rel="noopener noreferrer">Waterloo, N2L4V2</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div55">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ac/ac9987f2-2464-4d45-9268-4fe493beb950?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ac/ac9987f2-2464-4d45-9268-4fe493beb950?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3a/3a803e51-4cb3-4c47-a56e-3370e1405344?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/3a/3a803e51-4cb3-4c47-a56e-3370e1405344?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-servers/kitchener-waterloo/quantum-ultrium-3-400-800gb-data-cartridges/1456711961 target="_blank" rel="noopener noreferrer">Quantum Ultrium 3 400/800GB data cartridges</a><br>For sale is a lot of 5 Quantum Ultrium LTO 3 400/800 GB data cartridges - all new and still in ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2B%2C2T1" target="_blank" rel="noopener noreferrer">Kitchener, N2B2T1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div56">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/30/30e77c43-195f-4ddf-9d3a-faabd76f6f66?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/30/30e77c43-195f-4ddf-9d3a-faabd76f6f66?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-wii/kitchener-waterloo/wii-konami-dance-matts-2-with-game/1629077787 target="_blank" rel="noopener noreferrer">Wii konami dance matts ×2 with game</a><br>Lots of fun on 2 dance mats and dance central 2 game. Great condition!! Great for laughs</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=243%2CGrey%2CSilo%2CRoad%2CWaterloo%2CON" target="_blank" rel="noopener noreferrer">Waterloo</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div57">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/75a5f514-ea32-4eb3-aba4-2d976f4042af?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/75/75a5f514-ea32-4eb3-aba4-2d976f4042af?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31100c29-f7c4-4cbc-a677-a2910352eadc?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/31/31100c29-f7c4-4cbc-a677-a2910352eadc?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/ceb90a7d-a94d-46a6-96f2-89e516c16d46?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/ceb90a7d-a94d-46a6-96f2-89e516c16d46?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5a/5a4a988e-ebd7-47dc-93fe-96bc205b8719?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5a/5a4a988e-ebd7-47dc-93fe-96bc205b8719?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bf/bf5229ee-8dfb-4cfa-acbc-3d001ec5206c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/bf/bf5229ee-8dfb-4cfa-acbc-3d001ec5206c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b37dee7f-7612-4041-aa9a-62601e21dc1d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b3/b37dee7f-7612-4041-aa9a-62601e21dc1d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/40/40af8a69-d380-444f-87df-b93faa4ed8a4?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/40/40af8a69-d380-444f-87df-b93faa4ed8a4?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2c/2cc76f8c-d540-4c5d-8ea4-fa8fa4d33cf9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2c/2cc76f8c-d540-4c5d-8ea4-fa8fa4d33cf9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e458b0bc-0ac4-4417-9102-a96d7273bbd3?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e458b0bc-0ac4-4417-9102-a96d7273bbd3?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8a/8a60d5cd-f06f-4fec-ba78-544710c25a9c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8a/8a60d5cd-f06f-4fec-ba78-544710c25a9c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-playstation-3/kitchener-waterloo/8-playstation-3-video-games/1627821054 target="_blank" rel="noopener noreferrer">8 PlayStation 3 Video Games</a><br>Selling a collection of PS3 video games. Eight in total, $50 for the lot. Would consider selling ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2E2R8" target="_blank" rel="noopener noreferrer">Kitchener, N2E2R8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div58">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/80/80eb8721-7776-4a25-b47f-59b880194d25?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/80/80eb8721-7776-4a25-b47f-59b880194d25?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>50</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-networking/kitchener-waterloo/horizontal-cable-organizer/1626769600 target="_blank" rel="noopener noreferrer">HORIZONTAL CABLE ORGANIZER</a><br>New in box 10 available Bulk buy available $50.00 each</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2J%2C1C7" target="_blank" rel="noopener noreferrer">Waterloo, N2J1C7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div59">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/22/22ddae0e-25c1-4c42-92e6-d0b15089c5ae?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/22/22ddae0e-25c1-4c42-92e6-d0b15089c5ae?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/17/17d53a22-360c-49c9-9839-e1d89934fb8e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/17/17d53a22-360c-49c9-9839-e1d89934fb8e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e8/e8fb87bb-0bda-450e-9c34-756446936e46?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e8/e8fb87bb-0bda-450e-9c34-756446936e46?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/766b6cc1-5ba1-4ca5-b3f7-a5de95420b23?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/76/766b6cc1-5ba1-4ca5-b3f7-a5de95420b23?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/ce985e5f-db4f-4910-8775-0aaf233bca53?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/ce985e5f-db4f-4910-8775-0aaf233bca53?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0c/0c61cad0-c00e-4aa5-be95-f9375691a7e2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/0c/0c61cad0-c00e-4aa5-be95-f9375691a7e2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>60</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/atari-2600-games-lot-13-60-atari-video-games/1631325350 target="_blank" rel="noopener noreferrer">Atari 2600 games lot (13) $60! Atari video games</a><br>Atari 2600 video games lot (13) $60! Untested Atari 2600 games (13): -Astroblast -missile command ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H2G5" target="_blank" rel="noopener noreferrer">Kitchener, N2H2G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div60">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ec/ecadb80b-b327-4d32-87b3-f32379d1a667?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ec/ecadb80b-b327-4d32-87b3-f32379d1a667?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/28/280551b4-c5f0-4a21-82fa-76977e7d3a35?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/28/280551b4-c5f0-4a21-82fa-76977e7d3a35?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b5aa85f-9b2d-410a-affa-599a30ad22d0?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b5aa85f-9b2d-410a-affa-599a30ad22d0?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4450d21a-bd1b-4997-a4a7-5bfbe068ee14?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4450d21a-bd1b-4997-a4a7-5bfbe068ee14?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>75</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-laptop-accessories/kitchener-waterloo/leather-laptop-bag-bugatti/1627487235 target="_blank" rel="noopener noreferrer">Leather Laptop Bag (Bugatti)</a><br>17” Expandable with lots of pockets and compartments .</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2A4M7" target="_blank" rel="noopener noreferrer">Kitchener, N2A4M7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div61">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe43267f-a0e0-4405-b223-9583caf37f4b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe43267f-a0e0-4405-b223-9583caf37f4b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/960849cc-c609-409a-a7d8-691cefe174f6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/96/960849cc-c609-409a-a7d8-691cefe174f6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>80</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/mario-pinball-land-game-boy-advanced/1630990292 target="_blank" rel="noopener noreferrer">Mario Pinball Land (Game Boy Advanced)</a><br>Mario Pinball Land for GBA. Includes box, cartridge, instructions and various paper inserts. All is ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2J%2C2R6" target="_blank" rel="noopener noreferrer">Waterloo, N2J2R6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div62">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/81/8123c615-5304-44f2-9b53-d94b2aab0107?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/81/8123c615-5304-44f2-9b53-d94b2aab0107?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a0/a0f7be10-4042-4b0b-9b02-02c6dd3ffaf9?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/a0/a0f7be10-4042-4b0b-9b02-02c6dd3ffaf9?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/ce6d86de-5135-43d6-bbdd-fc6553bce076?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ce/ce6d86de-5135-43d6-bbdd-fc6553bce076?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>85</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/c922-pro-hd-stream-webcam/1627858239 target="_blank" rel="noopener noreferrer">C922 PRO HD STREAM WEBCAM</a><br>Brand new, 10/10 condition it’s never touched or used. Selling it because I already have a lot of ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L5W6" target="_blank" rel="noopener noreferrer">Waterloo, N2L5W6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div63">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2d/2d4b9897-68ca-4882-ac1e-9aaead8edd6a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2d/2d4b9897-68ca-4882-ac1e-9aaead8edd6a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/68/68373ca9-92f0-46aa-9385-c0a92dcc2133?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/68/68373ca9-92f0-46aa-9385-c0a92dcc2133?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>95</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-components/kitchener-waterloo/evga-rtx-nvlink-sli-bridge-for-rtx-3090-3090-ti4-slot-spacing/1631181362 target="_blank" rel="noopener noreferrer">EVGA  RTX NVLink SLI Bridge for RTX 3090, 3090 TI4-Slot Spacing</a><br>Mint like new with receipt box and warranty sells for 150 after tax</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=141%2CMaitland%2CStreet%2CKitchener%2CON" target="_blank" rel="noopener noreferrer">Kitchener</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div64">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/81/8131f190-b419-4cc7-8e09-895bd1597d9f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/81/8131f190-b419-4cc7-8e09-895bd1597d9f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b81d434-198d-4bf8-8bd1-cd148b3692b6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9b/9b81d434-198d-4bf8-8bd1-cd148b3692b6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-laptops/kitchener-waterloo/laptops-large-selection-by-business/1630324178 target="_blank" rel="noopener noreferrer">Laptops - Large Selection - By Business!!!</a><br>We have a lot of Laptops for sale! - Wiped/Cleaned Data for next user! - Cleaned with cleaning ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2G2K8" target="_blank" rel="noopener noreferrer">Kitchener, N2G2K8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div65">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/58/58ba15f8-3941-47e0-bcd1-0271022bc11c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/58/58ba15f8-3941-47e0-bcd1-0271022bc11c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e41f6997-8f77-4d8d-a1fa-cbcccf40d48d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e41f6997-8f77-4d8d-a1fa-cbcccf40d48d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>100</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-mice-keyboards-webcam/kitchener-waterloo/razer-power-up-bundle-v2/1615377075 target="_blank" rel="noopener noreferrer">Razer Power Up Bundle V2 </a><br>Got it a as gift and do not need it. Unopened box. Please see attached pictures for what is ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Foxglove%2CCrescent%2CKitchener%2CON%2CN2E%2C3Y7%2CCanada" target="_blank" rel="noopener noreferrer"> Kitchener, N2E3Y7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div66">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f7/f7942b06-7dd5-4a6e-ba3e-c34f64a0e61b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f7/f7942b06-7dd5-4a6e-ba3e-c34f64a0e61b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/40/40e7f660-50f2-4cdf-95d4-17b21bfce2ee?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/40/40e7f660-50f2-4cdf-95d4-17b21bfce2ee?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05ba5538-bff9-49e8-b788-ad094f1aa848?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/05/05ba5538-bff9-49e8-b788-ad094f1aa848?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2e/2e502177-2706-4fc0-9b63-e6d9171a33da?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2e/2e502177-2706-4fc0-9b63-e6d9171a33da?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/00/000ebbb1-4197-441c-b21a-13d8e1ff71fa?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/00/000ebbb1-4197-441c-b21a-13d8e1ff71fa?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/80/80e7eda2-2f67-42cb-8239-362dee0031f1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/80/80e7eda2-2f67-42cb-8239-362dee0031f1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6d/6d7c21b4-daa4-470e-a53c-20d1ef24566c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/6d/6d7c21b4-daa4-470e-a53c-20d1ef24566c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/53b13fdf-4316-415a-9f7c-8c361079536f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/53/53b13fdf-4316-415a-9f7c-8c361079536f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/aa/aaa5f59f-be47-45f6-8d1e-ef9daac00d25?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/aa/aaa5f59f-be47-45f6-8d1e-ef9daac00d25?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>125</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/topping-e30-dac-hi-res-ak4493-32bit-768khz-dsd512-hifi-xmos-xu20/1629608518 target="_blank" rel="noopener noreferrer">TOPPING E30 DAC Hi-Res AK4493 32Bit/768kHz DSD512 HiFi XMOS XU20</a><br>Lots of great reviews for this on Amazon, where it sells for over $180 https://a.co/d/bBiszCk</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2G%2C3S1" target="_blank" rel="noopener noreferrer">Kitchener, N2G3S1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div67">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/48/48521390-404e-42ab-af0d-0234827d9c93?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/48/48521390-404e-42ab-af0d-0234827d9c93?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ed/edc165bc-d039-4edb-9dcf-c4113f304afd?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ed/edc165bc-d039-4edb-9dcf-c4113f304afd?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/09/09374d2b-24de-4436-bc88-36015145667c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/09/09374d2b-24de-4436-bc88-36015145667c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fa/fa936f3a-1091-4d03-b7c7-280170f2c537?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fa/fa936f3a-1091-4d03-b7c7-280170f2c537?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cc/cc162e8b-1f0a-4645-a541-2e4fcd8bbb44?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cc/cc162e8b-1f0a-4645-a541-2e4fcd8bbb44?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>149</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-computer-networking/kitchener-waterloo/50-lot-aruba-ap-93h-300mbps-wifi-enterprise-access-point-ap/1350655318 target="_blank" rel="noopener noreferrer">50 LOT! ARUBA AP-93H 300Mbps WiFi Enterprise Access Point AP</a><br>Removed from working condition. Each unit contains one AP, one Mounting bracket. Power on test ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2V2V7" target="_blank" rel="noopener noreferrer">Waterloo, N2V2V7</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div68">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e6/e6b1f639-430e-48d5-949c-9589f48ae97d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e6/e6b1f639-430e-48d5-949c-9589f48ae97d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/ca073b6c-6495-4b2c-99d8-0551bfc9e6b6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/ca073b6c-6495-4b2c-99d8-0551bfc9e6b6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9c/9c308c2b-d2ed-408d-914c-0b8310643fb2?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/9c/9c308c2b-d2ed-408d-914c-0b8310643fb2?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c3/c3ecd21a-49a4-420f-bd44-6b76ef38f66d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c3/c3ecd21a-49a4-420f-bd44-6b76ef38f66d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c1/c1906811-075e-4706-a9ff-796af55adc25?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c1/c1906811-075e-4706-a9ff-796af55adc25?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e46f6ec3-e559-4e55-a8da-6bb153b8b373?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/e4/e46f6ec3-e559-4e55-a8da-6bb153b8b373?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/08/0829f8bf-77df-4726-a7db-afcf7ebb0ba6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/08/0829f8bf-77df-4726-a7db-afcf7ebb0ba6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/kitchener-waterloo/computer-parts-bundle/1625808153 target="_blank" rel="noopener noreferrer">Computer Parts Bundle</a><br>Trying to clear up some space! Would prefer to sell as a lot, but I've included individual values ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L%2C2W6" target="_blank" rel="noopener noreferrer">Waterloo, N2L2W6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div69">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1d/1d1a3154-118b-4972-9026-f5c095abf9c6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1d/1d1a3154-118b-4972-9026-f5c095abf9c6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/omron-my4-12vdc-relay-automation/1549379439 target="_blank" rel="noopener noreferrer">OMRON MY4 12VDC RELAY AUTOMATION</a><br>Lot of 28 relays, perfect working condition. $150 for all</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2G%2C2M1" target="_blank" rel="noopener noreferrer">Kitchener, N2G2M1</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div70">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/11bda119-8452-47d7-883e-04b424bba964?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/11/11bda119-8452-47d7-883e-04b424bba964?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-nintendo-ds/kitchener-waterloo/various-nintendo-3ds-games/1627517808 target="_blank" rel="noopener noreferrer">Various Nintendo 3DS Games</a><br>Selling various 3DS games. Will sell individually or as a whole lot. Message with offers.</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2G2S6" target="_blank" rel="noopener noreferrer">Kitchener, N2G2S6</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div71">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/74/743644df-d81a-413b-a3e5-984b12aa9af8?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/74/743644df-d81a-413b-a3e5-984b12aa9af8?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/19/19d50aa6-e9e1-4bdf-aae2-3c75d7f35603?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/19/19d50aa6-e9e1-4bdf-aae2-3c75d7f35603?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4e/4e23300f-524b-425b-b340-0044765e90dd?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4e/4e23300f-524b-425b-b340-0044765e90dd?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d3ef44a7-4b31-432e-bb9c-2c1771fca85b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d3/d3ef44a7-4b31-432e-bb9c-2c1771fca85b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d9f688ee-8d40-4bfa-9f39-04c3f15ec05c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d9/d9f688ee-8d40-4bfa-9f39-04c3f15ec05c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d10b70cb-c7f1-43b0-b589-b0c190d3e06a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d1/d10b70cb-c7f1-43b0-b589-b0c190d3e06a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>150</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-general-electronics/kitchener-waterloo/reliable-4k-tv-box-bundle-kw/1628796417 target="_blank" rel="noopener noreferrer">★★★ Reliable 4K TV Box Bundle @KW</a><br>BEST TV BOX DEALS IN TOWN. HUNDREDS BOXES SOLD. High-performance box with strong WIFI. Reliable 4K ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2P%2C2K4" target="_blank" rel="noopener noreferrer">Kitchener, N2P2K4</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div72">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1e/1e566d75-6c22-4e57-937a-528d32033bda?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/1e/1e566d75-6c22-4e57-937a-528d32033bda?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/cae50146-a311-4c9f-836b-4bc8aba6ea52?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/cae50146-a311-4c9f-836b-4bc8aba6ea52?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4467df3a-c37e-483a-9aa3-600ccb6a0246?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4467df3a-c37e-483a-9aa3-600ccb6a0246?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b53cafa-dbcc-47f4-8866-5797cf64d130?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/7b/7b53cafa-dbcc-47f4-8866-5797cf64d130?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4465a040-3615-4e2b-ad32-3a06e6b98134?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/44/4465a040-3615-4e2b-ad32-3a06e6b98134?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ee/eea85ed0-2bd1-4609-98a8-c5352fb97a06?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ee/eea85ed0-2bd1-4609-98a8-c5352fb97a06?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-desktop-computers/kitchener-waterloo/dell-i7-4th-gen-desktop-with-keyboard-mouse/1631538104 target="_blank" rel="noopener noreferrer">Dell i7 4th Gen Desktop with keyboard mouse </a><br>Dell desktop I7 4790 4th gen 8gb Ram 500gb Harddisk Power cable Keybord mouse Lots of usb ports 1x ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L6E3" target="_blank" rel="noopener noreferrer">Waterloo, N2L6E3</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div73">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f8/f8e1a2a2-6734-4856-b75e-72f2f67b8f9e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f8/f8e1a2a2-6734-4856-b75e-72f2f67b8f9e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8c65887e-0844-4693-9aff-80848241658e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8c/8c65887e-0844-4693-9aff-80848241658e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/64/6477c0ed-946f-4e05-9202-62359ed35b5c?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/64/6477c0ed-946f-4e05-9202-62359ed35b5c?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/nintendo-64-console-and-game-lot-tested/1620952194 target="_blank" rel="noopener noreferrer">Nintendo 64 - Console and Game lot tested
+</a><br>Working Nintendo 64 w/jumper pack, power adapter, audio video cable 3 Working controllers with 1 ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2N" target="_blank" rel="noopener noreferrer">Kitchener, N2N</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td>No Image</td>
+	<td>200</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-xbox-360/kitchener-waterloo/xbox-360-bulk-games-ask-200/1631216845 target="_blank" rel="noopener noreferrer">Xbox 360 - bulk Games - ask 200$</a><br>Clearing some closet room, trying to sell off my xbox 360 games. Asking 200$ for the whole box of ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2G%2C1B8" target="_blank" rel="noopener noreferrer">Kitchener, N2G1B8</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div75">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe1dc968-2f9d-41f2-ab38-2dd10d835d67?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/fe/fe1dc968-2f9d-41f2-ab38-2dd10d835d67?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c8/c8221fe6-0df9-45ec-9bba-a517589b55aa?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/c8/c8221fe6-0df9-45ec-9bba-a517589b55aa?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/99/99dda8c3-17c6-4152-8808-b723d270908b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/99/99dda8c3-17c6-4152-8808-b723d270908b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/042b1f0e-7631-4d89-85c3-efa08e68d85d?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/04/042b1f0e-7631-4d89-85c3-efa08e68d85d?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cd/cd4cdeb9-d8bc-4570-8304-8b4f774639e7?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/cd/cd4cdeb9-d8bc-4570-8304-8b4f774639e7?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/64/646b4366-761b-45ea-91c9-bdeac1b83bda?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/64/646b4366-761b-45ea-91c9-bdeac1b83bda?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/99/99e9ea90-573d-4585-b7db-f8f38825dbb1?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/99/99e9ea90-573d-4585-b7db-f8f38825dbb1?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d8/d86d39fb-2cd5-4b9d-b144-d44f30770b68?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/d8/d86d39fb-2cd5-4b9d-b144-d44f30770b68?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ea/eab538dc-f7da-44f9-be01-83496661ee5e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ea/eab538dc-f7da-44f9-be01-83496661ee5e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5c/5c32a3c2-ad7e-4fec-9969-664a17d87c9a?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5c/5c32a3c2-ad7e-4fec-9969-664a17d87c9a?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>220</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/nintendo-nes-lot/1627508263 target="_blank" rel="noopener noreferrer">NINTENDO NES LOT</a><br>Nintendo NES001 Control Deck System lot + 7 games two controllers 1 duck Hunt gun Nintendo NES good ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CCanada%2CN2E1Z3%2C" target="_blank" rel="noopener noreferrer">Kitchener</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div76">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f5/f58a2798-50ec-4de7-9bde-ab50edbbc0b5?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/f5/f58a2798-50ec-4de7-9bde-ab50edbbc0b5?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/dd/dd44f9bc-46cd-491a-8496-519f61c7db68?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/dd/dd44f9bc-46cd-491a-8496-519f61c7db68?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2e/2eb5a4e8-23db-459f-aec5-2c625a45383e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/2e/2eb5a4e8-23db-459f-aec5-2c625a45383e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/98/9806d18e-7b2c-4ac7-a941-b6ea187978aa?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/98/9806d18e-7b2c-4ac7-a941-b6ea187978aa?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5a/5ae16d60-98c8-4528-8ac8-47fcc55b656b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5a/5ae16d60-98c8-4528-8ac8-47fcc55b656b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5f9d8fc1-dbbf-4e35-8133-21326520845e?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/5f/5f9d8fc1-dbbf-4e35-8133-21326520845e?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/ca47a5b2-619c-46f0-9e22-ae70282ec888?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/ca/ca47a5b2-619c-46f0-9e22-ae70282ec888?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4f/4f9a1aad-b300-4874-88b5-a1bf88c1af86?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/4f/4f9a1aad-b300-4874-88b5-a1bf88c1af86?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/07/073b1f28-3b04-4618-aeec-d9303de57294?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/07/073b1f28-3b04-4618-aeec-d9303de57294?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/25/25a79a7a-0afb-4214-a5e5-d2db5b69ef7b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/25/25a79a7a-0afb-4214-a5e5-d2db5b69ef7b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>275</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-old-video-games/kitchener-waterloo/complete-sega-genesis-games-lot-18-275-cib-sega-games/1631327037 target="_blank" rel="noopener noreferrer">Complete sega genesis games lot (18) $275! Cib sega games</a><br>Complete sega genesis games lot (18) $275! All authentic and in excellent working condition. $500+ ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Kitchener%2CON%2CN2H2G5" target="_blank" rel="noopener noreferrer">Kitchener, N2H2G5</a></td>
+</tr>
+<tr>
+	<td><input type="button" value="X" onclick="deleteRow(this)"/></td>
+	<td><div class="w3-content w3-display-container slider" id="div77">
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b2e1f921-a2af-49ac-8390-3a2ae8fb4238?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b2/b2e1f921-a2af-49ac-8390-3a2ae8fb4238?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8d/8df0e0f0-f558-4da3-96ad-e1014d28285b?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/8d/8df0e0f0-f558-4da3-96ad-e1014d28285b?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/81/814e6bbf-ce83-43af-92c7-944c3aaf8a3f?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/81/814e6bbf-ce83-43af-92c7-944c3aaf8a3f?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/72/725977e5-e66c-4fda-9eca-1013d2c20362?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/72/725977e5-e66c-4fda-9eca-1013d2c20362?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a href="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/65/65ed4bdd-ff55-47a3-9439-30a4590dade6?rule=kijijica-200-jpg"><img class="mySlides" src="https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/65/65ed4bdd-ff55-47a3-9439-30a4590dade6?rule=kijijica-200-jpg" alt="No Image" height="300" style="max-width:400px"></a>
+		<a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+		<a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+	</div></td>
+	<td>280</td>
+	<td><a href=microsoft-edge:https://www.kijiji.ca/v-monitors/kitchener-waterloo/dell-24-inch-monitor-p2422h/1625079365 target="_blank" rel="noopener noreferrer">Dell 24 inch monitor (P2422H)</a><br>Mint condition, box included. 1. Security-lock slot | 2. Power connector | 3. HDMI port | 4. Stand ...</td>
+	<td><a style="color:black; text-decoration:none" href=https://www.google.com/maps/dir/?api=1&origin=Mississauga%2CON%2CL5K%2C2H2&destination=Waterloo%2CON%2CN2L3W9" target="_blank" rel="noopener noreferrer">Waterloo, N2L3W9</a></td>
+</tr>
+</table></body>
+<script>
+var sliderObjects = [];
+createSliderObjects();
+
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  $.each(sliderObjects, function(i, item) {
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+</html>
