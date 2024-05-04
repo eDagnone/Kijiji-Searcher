@@ -8,7 +8,7 @@
     "fs": "^0.0.1-security",
     "is-docker": "^2.2.1",
     "is-wsl": "^2.2.0",
-    "kijiji-scraper": "^4.0.4",
+    "kijiji-scraper": "^6.3.6",
     "open": "^7.4.2",
     "punycode": "^2.3.1",
     "util": "^0.12.5"

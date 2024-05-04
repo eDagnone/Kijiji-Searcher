@@ -13,6 +13,7 @@ const util = require('util');
 const { exec } = require('child_process');
 const path = require('path');
 const config = require('./config');
+const { isNull } = require("util");
 //==============================================
 
 //Reverse Search Structure:
@@ -179,6 +180,8 @@ function showOutput(ShownAds){
 		
 		
 		for (let i = 0; i < ShownAds.length; ++i) { //For all shown ads
+			var displayLocation = ""
+			var mapsURL = ""
 			//Object.keys(ShownAds[i]).forEach((prop)=> console.log(prop))
 			
 			//Open as Browser tabs
@@ -201,24 +204,25 @@ function showOutput(ShownAds){
 			//console.log(ShownAds[i].metCriteria.tags)
 
 			//Address Crap (Organized as "City, postal Code" for filtering)
-			var locString = ShownAds[i].attributes.location.replace(/[A-Z]{2,3}, Canada,/g, 'ON,')
-			let displayLocation = locString
-			locInfo = locString.match(/[, ]?((\w* )?(\w*)), [A-Z]{2,3} (\w\d\w[ ]?(\d\w\d)?)/);
-			if (!locInfo){
-				for(let j = 0; j < cities.length; j++){
-					if(ShownAds[i].attributes.location.includes(cities[j])){
-						displayLocation = cities[j]
+			if (ShownAds[i].attributes.location !== undefined){
+				var locString = ShownAds[i].attributes.location.replace(/[A-Z]{2,3}, Canada,/g, 'ON,')
+				displayLocation = locString
+				locInfo = locString.match(/[, ]?((\w* )?(\w*)), [A-Z]{2,3} (\w\d\w[ ]?(\d\w\d)?)/);
+				if (!locInfo){
+					for(let j = 0; j < cities.length; j++){
+						if(ShownAds[i].attributes.location.includes(cities[j])){
+							displayLocation = cities[j]
+						}
 					}
+				}else{
+					var city = locInfo[1]
+					var postalCode = locInfo[4]
+					displayLocation = city + ", " + postalCode.replace(" ", "")
 				}
-			}else{
-				var city = locInfo[1]
-				var postalCode = locInfo[4]
-				displayLocation = city + ", " + postalCode.replace(" ", "")
+				var apiLocation = ShownAds[i].attributes.location.replace(/ /g, "%2C").replace(/,/g, "")
+				mapsURL = "https://www.google.com/maps/dir/?api=1&origin=" + apiStartLocation + "&destination=" + apiLocation
 			}
-			
-			var apiLocation = ShownAds[i].attributes.location.replace(/ /g, "%2C").replace(/,/g, "")
-			var mapsURL = "https://www.google.com/maps/dir/?api=1&origin=" + apiStartLocation + "&destination=" + apiLocation
-			
+						
 			//Generate CSV
 			CSVstream.write('\n"' + ShownAds[i].attributes.price + '","' + ShownAds[i].title.replace('"', '""') + '"');
 			CSVstream.write(',"' + ShownAds[i].url + '"');
@@ -301,7 +305,8 @@ function RunSearches(searches, callback){
 	for (let si = 0; si < searches.length; ++si) {
 		var options = {
 			minResults: -1,
-			maxResults: -1
+			maxResults: -1,
+			scrapeResultDetails: !config.minimizeAPIcalls
 		};
 
 		var params = {
@@ -338,12 +343,12 @@ function RunSearches(searches, callback){
 										if (evaluatedAds[j].url == ads[i].url || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].description == ads[i].description) || (evaluatedAds[j].title == ads[i].title & evaluatedAds[j].attributes.location == ads[i].attributes.location)){ //eliminate duplicates
 											continue AdLoop;
 										}
-									}										
+									}	
 									if(CityMatch(cities, ads[i].attributes.location) & //City name filter
 									(!(ads[i].title.toLowerCase().includes("sold")) | !config.removeSoldTitle)){ //"sold" is not in title (or we don't care about it)
 										for (ci = 0; ci < searches[si].criteria.length & ads[i].metCriteria === undefined; ++ci){  //For all criteria blocks in the search from the json file
-											if (!((searches[si].criteria[ci].MaxPrice*config.priceMultiplier < ads[i].attributes.price) || ads[i].attributes.price === undefined) & //Price Filter
-											(orTagMatch(searches[si].criteria[ci].tags, config.mytags_OR) & andTagMatch(searches[si].criteria[ci].tags, config.mytags_AND))){ //AND/OR tag filter
+											if (searches[si].criteria[ci].MaxPrice*config.priceMultiplier <= ads[i].attributes.price | ads[i].attributes.price === undefined){ //Price Filter
+												if (orTagMatch(searches[si].criteria[ci].tags, config.mytags_OR) & andTagMatch(searches[si].criteria[ci].tags, config.mytags_AND)){ //AND/OR tag filter
 													//Get adText
 													var adText = ads[i].title
 													if(searches[si].criteria[ci].filter != "title"){
@@ -395,7 +400,7 @@ function RunSearches(searches, callback){
 															});
 														}
 													}										
-												
+												}
 											}
 										} //End of CriteriaLoop
 										if(ads[i].metCriteria !== undefined){ //If it met some criteria
@@ -462,11 +467,11 @@ function andTagMatch(searchTags, myTags_AND){
 //Compares cities list to adLocation
 function CityMatch(cities, adLocation){
 	
-	if(!cities.length){
-	return true
+	if(!cities.length | adLocation === undefined){
+		return true
 	} else {
 		for (let j = 0; j < cities.length; ++j) { //For cities searched for
-			if (adLocation.includes(cities[j])) {
+			if (adLocation.mapAddress.includes(cities[j])) {
 				return true											
 			}
 		}
