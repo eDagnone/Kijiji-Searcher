@@ -9,11 +9,10 @@ To run,
 */
 const kijiji = require("kijiji-scraper");
 const fs = require('fs');
-const util = require('util');
 const { exec } = require('child_process');
 const path = require('path');
 const config = require('./config');
-const { isNull } = require("util");
+
 //==============================================
 
 //Reverse Search Structure:
@@ -237,7 +236,13 @@ function showOutput(ShownAds){
 			//Images
 			if(ShownAds[i].images !== undefined){ 
 				if(ShownAds[i].images.length == 0){
-					HTMLstream.write('\n\t<td>No Image</td>')
+					if(ShownAds[i].image !== ''){
+						HTMLstream.write('\n\t<td><div class="w3-content w3-display-container slider" id="div' + i + '">')
+						HTMLstream.write('\n\t\t<a href="'+ShownAds[i].image + '"><img class="mySlides" src="' + ShownAds[i].image + '" alt="No Image" height="300" style="max-width:400px"></a>')
+						HTMLstream.write('\n\t</div></td>')
+					} else {
+						HTMLstream.write('\n\t<td>No Image</td>')
+					}
 				}
 				else {
 					HTMLstream.write('\n\t<td><div class="w3-content w3-display-container slider" id="div' + i + '">')

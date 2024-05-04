@@ -4,7 +4,7 @@ const config = {
 	mytags_AND: ["computer", "catchall"],
 	//cities: ["Waterloo", "Kitchener", "Kitchener / Waterloo"], //Set to empty to remove constraint
 	cities: ["Ancaster", "Hamilton", "Burlington", "Dundas", "Milton", "Oakville", "Mississauga", "Brampton", "Etobicoke", "Vaughan", "Maple", "Woodbridge", "Toronto", "York", "Scarborough", "Markham", "Thornhill", "Richmond Hill"], //Set to empty to remove constraint
-	priceMultiplier: 1, 							//Multiply all max prices by this
+	priceMultiplier: 0.3, 							//Multiply all max prices by this
 	maxVisits: 500, 								//Maximum number of views an ad can have before being filtered out
 	removeSoldTitle: true, 							//Remove ads with "sold" in the title
 	noFiltering: false, 							//Accept all scraped ads
